@@ -3,7 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import { Reducers } from "../../redux/types";
-import { deleteKapal, getAllKapal, postKapal } from "../../redux/actions";
+import {
+  deleteKapal,
+  getAllKapal,
+  getTypeKapal,
+  getTypeSurvey,
+  postKapal
+} from "../../redux/actions";
 import { documentTitle } from "../../utils";
 
 const Component = () => {
@@ -16,6 +22,8 @@ const Component = () => {
 
   useEffect(() => {
     dispatch(getAllKapal());
+    dispatch(getTypeSurvey());
+    dispatch(getTypeKapal());
   }, [dispatch]);
 
   const _addKapal = useCallback(
@@ -70,15 +78,29 @@ const Component = () => {
               <input
                 type="text"
                 name="name"
-                placeholder="name"
+                placeholder="Nama Kapal"
                 ref={register}
               />
+            </div>
+            <div>
+              {!kapalState.typeKapal.isLoading ? (
+                <select name="kapal_type" ref={register}>
+                  <option value="">--pilih--</option>
+                  {kapalState.typeKapal.list.map((item, index) => (
+                    <option key={index} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <p>loading...</p>
+              )}
             </div>
             <div>
               <input
                 type="text"
                 name="length_oa"
-                placeholder="length_oa"
+                placeholder="length_oa (Satuan Meter)"
                 ref={register}
               />
             </div>
@@ -86,7 +108,7 @@ const Component = () => {
               <input
                 type="text"
                 name="length_pp"
-                placeholder="length_pp"
+                placeholder="length_pp (Satuan Meter)"
                 ref={register}
               />
             </div>
@@ -94,7 +116,7 @@ const Component = () => {
               <input
                 type="text"
                 name="breadth"
-                placeholder="breadth"
+                placeholder="breadth (Satuan Meter)"
                 ref={register}
               />
             </div>
@@ -102,7 +124,7 @@ const Component = () => {
               <input
                 type="text"
                 name="depth"
-                placeholder="depth"
+                placeholder="depth (Satuan Meter)"
                 ref={register}
               />
             </div>
@@ -110,7 +132,7 @@ const Component = () => {
               <input
                 type="text"
                 name="draft"
-                placeholder="draft"
+                placeholder="draft (Satuan Meter)"
                 ref={register}
               />
             </div>
@@ -118,7 +140,7 @@ const Component = () => {
               <input
                 type="text"
                 name="gross_tonnage"
-                placeholder="gross_tonnage"
+                placeholder="gross_tonnage (Satuan Meter)"
                 ref={register}
               />
             </div>
@@ -126,9 +148,23 @@ const Component = () => {
               <input
                 type="text"
                 name="class"
-                placeholder="class"
+                placeholder="Nama Perusahaan"
                 ref={register}
               />
+            </div>
+            <div>
+              {!kapalState.typeSurvey.isLoading ? (
+                <select name="survey_type" ref={register}>
+                  <option value="">--pilih--</option>
+                  {kapalState.typeSurvey.list.map((item, index) => (
+                    <option key={index} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <p>loading...</p>
+              )}
             </div>
 
             <div>

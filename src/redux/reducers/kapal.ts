@@ -5,6 +5,12 @@ import {
   GET_ALL_KAPAL_ERROR,
   GET_ALL_KAPAL_PENDING,
   GET_ALL_KAPAL_SUCCESS,
+  GET_TYPE_KAPAL_ERROR,
+  GET_TYPE_KAPAL_PENDING,
+  GET_TYPE_KAPAL_SUCCESS,
+  GET_TYPE_SURVEY_ERROR,
+  GET_TYPE_SURVEY_PENDING,
+  GET_TYPE_SURVEY_SUCCESS,
   POST_KAPAL_ERROR,
   POST_KAPAL_PENDING,
   POST_KAPAL_SUCCESS
@@ -25,6 +31,14 @@ const initialState: KapalState = {
   },
   deleteKapal: {
     isLoading: false
+  },
+  typeKapal: {
+    isLoading: false,
+    list: []
+  },
+  typeSurvey: {
+    isLoading: false,
+    list: []
   }
 };
 
@@ -84,6 +98,44 @@ export default (state = initialState, { type, payload }: Action) => {
       return {
         ...state,
         deleteKapal: { ...state.deleteKapal, isLoading: false }
+      };
+
+    // get type kapal
+    case GET_TYPE_KAPAL_PENDING:
+      return {
+        ...state,
+        typeKapal: { ...state.typeKapal, isLoading: true }
+      };
+    case GET_TYPE_KAPAL_SUCCESS:
+      return {
+        ...state,
+        typeKapal: { ...state.typeKapal, isLoading: false, list: payload.data }
+      };
+    case GET_TYPE_KAPAL_ERROR:
+      return {
+        ...state,
+        typeKapal: { ...state.typeKapal, isLoading: false }
+      };
+
+    // get type survey
+    case GET_TYPE_SURVEY_PENDING:
+      return {
+        ...state,
+        typeSurvey: { ...state.typeSurvey, isLoading: true }
+      };
+    case GET_TYPE_SURVEY_SUCCESS:
+      return {
+        ...state,
+        typeSurvey: {
+          ...state.typeSurvey,
+          isLoading: false,
+          list: payload.data
+        }
+      };
+    case GET_TYPE_SURVEY_ERROR:
+      return {
+        ...state,
+        typeSurvey: { ...state.typeSurvey, isLoading: false }
       };
 
     default:

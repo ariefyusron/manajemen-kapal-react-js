@@ -26,6 +26,14 @@ const api = {
   deleteKapal: (id: string) =>
     host.delete(`kapal/${id}`, {
       headers: { Authorization: token }
+    }),
+  getTypeKapal: () =>
+    host.get("kapal-type", {
+      headers: { Authorization: token }
+    }),
+  getTypeSurvey: () =>
+    host.get("survey-type", {
+      headers: { Authorization: token }
     })
 };
 

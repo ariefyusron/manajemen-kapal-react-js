@@ -49,4 +49,12 @@ export interface KapalState {
   deleteKapal: {
     isLoading: boolean;
   };
+  typeKapal: {
+    isLoading: boolean;
+    list: any[];
+  };
+  typeSurvey: {
+    isLoading: boolean;
+    list: any[];
+  };
 }
