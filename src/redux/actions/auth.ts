@@ -6,6 +6,8 @@ export const POST_LOGIN_PENDING = "POST_LOGIN_PENDING";
 export const POST_LOGIN_SUCCESS = "POST_LOGIN_SUCCESS";
 export const POST_LOGIN_ERROR = "POST_LOGIN_ERROR";
 
+export const HANDLE_LOGOUT = "HANDLE_LOGOUT";
+
 export const postLogin = (
   form: {
     username: string;
@@ -21,7 +23,7 @@ export const postLogin = (
       payload: { data: res.data }
     });
     localStorage.setItem("token", res.data.token);
-    localStorage.setItem("token", res.data.is_admin);
+    localStorage.setItem("is_admin", res.data.is_admin);
     cb();
   } catch (err) {
     if (err.response) {
@@ -33,4 +35,11 @@ export const postLogin = (
       dispatch({ type: POST_LOGIN_ERROR });
     }
   }
+};
+
+export const handleLogout = (cb: () => void) => async (dispatch: Dispatch) => {
+  dispatch({ type: HANDLE_LOGOUT });
+  localStorage.removeItem("token");
+  localStorage.removeItem("is_admin");
+  cb();
 };
