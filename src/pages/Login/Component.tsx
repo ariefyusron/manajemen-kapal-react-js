@@ -17,7 +17,7 @@ const Component = () => {
 
   const _handleLogin = useCallback(
     form => {
-      dispatch(postLogin(form, () => history.push("/standar-tarif")));
+      dispatch(postLogin(form, () => history.push("/dashboard")));
     },
     [dispatch, history]
   );
