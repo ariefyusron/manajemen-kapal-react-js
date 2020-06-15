@@ -40,6 +40,7 @@ const Component = () => {
           <input
             type="text"
             name="username"
+            placeholder="username"
             ref={register({ required: true })}
           />
           {_renderError(errors.username, "Username is required")}
@@ -49,6 +50,7 @@ const Component = () => {
           <input
             type="password"
             name="password"
+            placeholder="password"
             ref={register({ required: true, minLength: 8 })}
           />
           {_renderError(errors.password, "Password min 8")}

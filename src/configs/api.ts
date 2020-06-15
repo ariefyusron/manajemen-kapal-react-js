@@ -8,7 +8,12 @@ const host = axios.create({
 
 const api = {
   postLogin: (form: { username: string; password: string }) =>
-    host.post("user/login", form)
+    host.post("user/login", form),
+  postRegister: (form: {
+    username: string;
+    password: string;
+    is_admin: boolean;
+  }) => host.post("user/register", form)
 };
 
 export default api;

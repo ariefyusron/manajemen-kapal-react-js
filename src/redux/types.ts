@@ -27,4 +27,8 @@ export interface AuthState {
     isLoading: boolean;
     error: string;
   };
+  register: {
+    isLoading: boolean;
+    error: string;
+  };
 }
