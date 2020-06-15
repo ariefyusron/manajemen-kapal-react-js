@@ -19,6 +19,7 @@ export interface Action {
 // combine reducers
 export interface Reducers {
   auth: AuthState;
+  kapal: KapalState;
 }
 
 // reducers
@@ -30,5 +31,19 @@ export interface AuthState {
   register: {
     isLoading: boolean;
     error: string;
+  };
+}
+
+export interface KapalState {
+  kapal: {
+    isLoading: boolean;
+    list: any[];
+  };
+  detailKapal: {
+    isLoading: boolean;
+    data: any;
+  };
+  addKapal: {
+    isLoading: false;
   };
 }
