@@ -22,6 +22,10 @@ const api = {
   postKapal: (form: any) =>
     host.post("kapal", form, {
       headers: { Authorization: token }
+    }),
+  deleteKapal: (id: string) =>
+    host.delete(`kapal/${id}`, {
+      headers: { Authorization: token }
     })
 };
 

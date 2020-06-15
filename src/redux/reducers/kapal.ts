@@ -1,4 +1,7 @@
 import {
+  DELETE_KAPAL_ERROR,
+  DELETE_KAPAL_PENDING,
+  DELETE_KAPAL_SUCCESS,
   GET_ALL_KAPAL_ERROR,
   GET_ALL_KAPAL_PENDING,
   GET_ALL_KAPAL_SUCCESS,
@@ -18,6 +21,9 @@ const initialState: KapalState = {
     data: {}
   },
   addKapal: {
+    isLoading: false
+  },
+  deleteKapal: {
     isLoading: false
   }
 };
@@ -57,6 +63,27 @@ export default (state = initialState, { type, payload }: Action) => {
       return {
         ...state,
         addKapal: { ...state.addKapal, isLoading: false }
+      };
+
+    // delete kapal
+    case DELETE_KAPAL_PENDING:
+      return {
+        ...state,
+        deleteKapal: { ...state.deleteKapal, isLoading: true }
+      };
+    case DELETE_KAPAL_SUCCESS:
+      return {
+        ...state,
+        deleteKapal: { ...state.deleteKapal, isLoading: false },
+        kapal: {
+          ...state.kapal,
+          list: state.kapal.list.filter(item => item.id !== payload.data)
+        }
+      };
+    case DELETE_KAPAL_ERROR:
+      return {
+        ...state,
+        deleteKapal: { ...state.deleteKapal, isLoading: false }
       };
 
     default:

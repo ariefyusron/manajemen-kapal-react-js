@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 
 import { Reducers } from "../../redux/types";
-import { getAllKapal, postKapal } from "../../redux/actions";
+import { deleteKapal, getAllKapal, postKapal } from "../../redux/actions";
 import { documentTitle } from "../../utils";
 
 const Component = () => {
@@ -45,7 +45,12 @@ const Component = () => {
                   <button type="button">edit</button>
                 </td>
                 <td>
-                  <button type="button">delete</button>
+                  <button
+                    type="button"
+                    onClick={() => dispatch(deleteKapal(item.id))}
+                  >
+                    delete
+                  </button>
                 </td>
               </tr>
             ))}

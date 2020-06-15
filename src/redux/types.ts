@@ -44,6 +44,9 @@ export interface KapalState {
     data: any;
   };
   addKapal: {
-    isLoading: false;
+    isLoading: boolean;
+  };
+  deleteKapal: {
+    isLoading: boolean;
   };
 }
