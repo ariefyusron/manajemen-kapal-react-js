@@ -7,7 +7,8 @@ const host = axios.create({
 // type body
 
 const api = {
-  getSeasons: () => host.get("seasons")
+  postLogin: (form: { username: string; password: string }) =>
+    host.post("user/login", form)
 };
 
 export default api;

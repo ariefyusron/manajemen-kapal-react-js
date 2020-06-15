@@ -18,16 +18,13 @@ export interface Action {
 
 // combine reducers
 export interface Reducers {
-  home: HomeState;
-  detail: DetailState;
+  auth: AuthState;
 }
 
 // reducers
-export interface HomeState {
-  count: number;
-}
-
-export interface DetailState {
-  data: [];
-  isLoading: boolean;
+export interface AuthState {
+  login: {
+    isLoading: boolean;
+    error: string;
+  };
 }
