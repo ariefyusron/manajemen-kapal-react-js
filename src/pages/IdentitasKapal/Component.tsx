@@ -37,7 +37,7 @@ const Component = () => {
 
   return (
     <Container>
-      <Row style={{ marginBottom: 10 }}>
+      <Row style={{ marginBottom: 10, marginTop: 10 }}>
         <Col>
           <h1>Identitas Kapal</h1>
         </Col>
