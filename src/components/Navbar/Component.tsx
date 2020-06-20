@@ -1,18 +1,21 @@
 import React, { memo } from "react";
 import { useHistory } from "react-router-dom";
 
-import { Button } from "..";
-
 const Component = () => {
   const history = useHistory();
 
   return (
     <div>
-      <Button onPress={() => history.push("/dashboard")}>Standar tarif</Button>
+      <button type="button" onClick={() => history.push("/dashboard")}>
+        Standar tarif
+      </button>
       <br />
-      <Button onPress={() => history.push("/dashboard/identitas-kapal")}>
+      <button
+        type="button"
+        onClick={() => history.push("/dashboard/identitas-kapal")}
+      >
         Identitas Kapal
-      </Button>
+      </button>
     </div>
   );
 };
