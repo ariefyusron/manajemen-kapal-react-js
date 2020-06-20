@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { Navbar } from "../components";
+import { Col, Navbar, Row, Topbar } from "../components";
 
 // screens
 import StandarTarif from "../pages/StandarTarif";
@@ -11,26 +11,24 @@ const App = () => {
   const match = useRouteMatch();
   return (
     <Switch>
-      <div style={{ display: "flex" }}>
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            justifyContent: "center",
-            paddingTop: 50
-          }}
-        >
-          <Navbar />
+      <>
+        <Topbar />
+        <div className="container-fluid">
+          <Row>
+            <Col size={2}>
+              <Navbar />
+            </Col>
+            <Col size={10}>
+              <Route path={match.path} exact>
+                <StandarTarif />
+              </Route>
+              <Route path={`${match.path}/identitas-kapal`}>
+                <IdentitasKapal />
+              </Route>
+            </Col>
+          </Row>
         </div>
-        <div style={{ flex: 4 }}>
-          <Route path={match.path} exact>
-            <StandarTarif />
-          </Route>
-          <Route path={`${match.path}/identitas-kapal`}>
-            <IdentitasKapal />
-          </Route>
-        </div>
-      </div>
+      </>
     </Switch>
   );
 };

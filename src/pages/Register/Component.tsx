@@ -31,7 +31,7 @@ const Component = () => {
     isShow && <div className="invalid-feedback">{message}</div>;
 
   return (
-    <Container className="login">
+    <Container className="register">
       <Row justifyContent="center" style={{ paddingTop: 200 }}>
         <Col size={6}>
           <Card title="Register Admin">
