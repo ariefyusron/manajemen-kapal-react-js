@@ -11,7 +11,8 @@ const Component = ({ children, size, className }: Props) => (
 );
 
 Component.defaultProps = {
-  size: 12
+  size: 12,
+  className: ""
 };
 
 export default memo(Component);

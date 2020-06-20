@@ -1,0 +1,6 @@
+@import "../sass/color";
+
+.sidebar {
+  border-right: 1px solid $black01;
+  height: calc(100vh - 70px);
+}

@@ -1,7 +1,8 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { Col, Navbar, Row, Topbar } from "../components";
+import "./styles.scss";
+import { Col, Row, Sidebar, Topbar } from "../components";
 
 // screens
 import StandarTarif from "../pages/StandarTarif";
@@ -15,8 +16,8 @@ const App = () => {
         <Topbar />
         <div className="container-fluid">
           <Row>
-            <Col size={2}>
-              <Navbar />
+            <Col size={2} className="sidebar">
+              <Sidebar />
             </Col>
             <Col size={10}>
               <Route path={match.path} exact>

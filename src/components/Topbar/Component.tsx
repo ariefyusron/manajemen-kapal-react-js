@@ -9,18 +9,26 @@ const Component = () => {
   const dispatch = useDispatch();
 
   return (
-    <nav className="navbar sticky-top navbar-dark bg-dark">
-      <span className="navbar-brand mb-0 h1" onClick={() => history.push("/")}>
-        Home
-      </span>
-      <button
-        className="btn btn-link my-2 my-sm-0"
-        type="button"
-        style={{ color: "white", textDecoration: "underline" }}
-        onClick={() => dispatch(handleLogout(() => history.push("/login")))}
-      >
-        Logout
-      </button>
+    <nav
+      className="navbar sticky-top navbar-dark bg-dark"
+      style={{ height: 70 }}
+    >
+      <div className="container-fluid">
+        <span
+          className="navbar-brand mb-0 h1"
+          onClick={() => history.push("/")}
+        >
+          Home
+        </span>
+        <button
+          className="btn btn-link my-2 my-sm-0"
+          type="button"
+          style={{ color: "white", textDecoration: "underline" }}
+          onClick={() => dispatch(handleLogout(() => history.push("/login")))}
+        >
+          Logout
+        </button>
+      </div>
     </nav>
   );
 };

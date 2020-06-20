@@ -8,8 +8,8 @@ interface Props {
 }
 
 const Component = ({ children, className }: Props) => (
-  <Row className={className}>
-    <Col>{children}</Col>
+  <Row>
+    <Col className={className}>{children}</Col>
   </Row>
 );
 
