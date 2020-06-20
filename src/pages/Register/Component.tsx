@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postRegister } from "../../redux/actions";
 import { Reducers } from "../../redux/types";
 import { documentTitle } from "../../utils";
+import { Card, Col, Container, Row } from "../../components";
 
 const Component = () => {
   documentTitle("Register - Admin");
@@ -19,7 +20,7 @@ const Component = () => {
     form => {
       dispatch(
         postRegister({ username: form.username, password: form.password }, () =>
-          history.push("/standar-tarif")
+          history.push("/dashboard")
         )
       );
     },
@@ -27,60 +28,93 @@ const Component = () => {
   );
 
   const _renderError = (isShow: boolean, message: string) =>
-    isShow && (
-      <div>
-        <p>{message}</p>
-      </div>
-    );
+    isShow && <div className="invalid-feedback">{message}</div>;
 
   return (
-    <div>
-      <h1>Register Admin</h1>
+    <Container className="login">
+      <Row justifyContent="center" style={{ paddingTop: 200 }}>
+        <Col size={6}>
+          <Card title="Register Admin">
+            <Row>
+              <Col>
+                <Row>
+                  <Col>
+                    {authState.register.error && (
+                      <div className="alert alert-danger" role="alert">
+                        {authState.register.error}
+                      </div>
+                    )}
+                  </Col>
+                </Row>
 
-      {_renderError(authState.register.error !== "", authState.register.error)}
+                <Row>
+                  <Col>
+                    <form onSubmit={handleSubmit(_handleRegister)}>
+                      <div className="form-group">
+                        <label>Username</label>
+                        <input
+                          className={`form-control${
+                            errors.username ? " is-invalid" : ""
+                          }`}
+                          type="text"
+                          name="username"
+                          placeholder="username"
+                          ref={register({ required: true })}
+                        />
+                        {_renderError(errors.username, "Username is required")}
+                      </div>
 
-      <form onSubmit={handleSubmit(_handleRegister)}>
-        <div>
-          <input
-            type="text"
-            name="username"
-            placeholder="username"
-            ref={register({ required: true })}
-          />
-          {_renderError(errors.username, "Username is required")}
-        </div>
+                      <div className="form-group">
+                        <label>Password</label>
+                        <input
+                          className={`form-control${
+                            errors.password ? " is-invalid" : ""
+                          }`}
+                          type="password"
+                          name="password"
+                          placeholder="password"
+                          ref={register({ required: true, minLength: 8 })}
+                        />
+                        {_renderError(errors.password, "Password min 8")}
+                      </div>
 
-        <div>
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            ref={register({ required: true, minLength: 8 })}
-          />
-          {_renderError(errors.password, "Password min 8")}
-        </div>
+                      <div className="form-group">
+                        <label>Password</label>
+                        <input
+                          className={`form-control${
+                            errors.password_confirm ? " is-invalid" : ""
+                          }`}
+                          type="password"
+                          name="password_confirm"
+                          placeholder="password confirm"
+                          ref={register({
+                            required: true,
+                            minLength: 8,
+                            validate: value => value === getValues("password")
+                          })}
+                        />
+                        {_renderError(
+                          errors.password_confirm,
+                          "Password invalid"
+                        )}
+                      </div>
 
-        <div>
-          <input
-            type="password"
-            name="password_confirm"
-            placeholder="password confirm"
-            ref={register({
-              required: true,
-              minLength: 8,
-              validate: value => value === getValues("password")
-            })}
-          />
-          {_renderError(errors.password_confirm, "Password invalid")}
-        </div>
-
-        <div>
-          <button type="submit" onClick={handleSubmit(_handleRegister)}>
-            Daftar
-          </button>
-        </div>
-      </form>
-    </div>
+                      <button
+                        type="submit"
+                        onClick={handleSubmit(_handleRegister)}
+                        className="btn btn-primary"
+                      >
+                        Daftar
+                      </button>
+                    </form>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
