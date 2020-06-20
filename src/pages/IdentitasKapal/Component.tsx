@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import Modal from "react-bootstrap/Modal";
 
 import { Reducers } from "../../redux/types";
 import {
@@ -11,6 +12,7 @@ import {
   postKapal
 } from "../../redux/actions";
 import { documentTitle } from "../../utils";
+import { Col, Container, Row } from "../../components";
 
 const Component = () => {
   documentTitle("Identitas Kapal");
@@ -34,57 +36,92 @@ const Component = () => {
   );
 
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ flex: 1 }}>
-        <h1>Identitas Kapal</h1>
-        <button type="button" onClick={() => setModalAdd(true)}>
-          Add kapal
-        </button>
-        <br />
-        <br />
+    <Container>
+      <Row style={{ marginBottom: 10 }}>
+        <Col>
+          <h1>Identitas Kapal</h1>
+        </Col>
+      </Row>
 
-        {!kapalState.kapal.isLoading ? (
-          <table>
-            {kapalState.kapal.list.map((item, index) => (
-              <tr key={index}>
-                <td>{`${index + 1}.`}</td>
-                <td>{item.name}</td>
-                <td>
-                  <button type="button">edit</button>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    onClick={() => dispatch(deleteKapal(item.id))}
-                  >
-                    delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </table>
-        ) : (
-          <p>loading.div....</p>
-        )}
-      </div>
+      <Row justifyContent="end">
+        <Col size={2}>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => setModalAdd(true)}
+            style={{ width: "100%", marginBottom: 5 }}
+          >
+            Add
+          </button>
+        </Col>
+      </Row>
 
-      {modalAdd && (
-        <div style={{ flex: 1 }}>
-          <h1>Form Add Kapal</h1>
-          <br />
-          <br />
+      <Row>
+        <Col>
+          {!kapalState.kapal.isLoading ? (
+            <table className="table">
+              <thead className="thead-light">
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Nama Kapal</th>
+                  <th scope="col">Nama Perusahaan</th>
+                  <th scope="col">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {kapalState.kapal.list.map((item, index) => (
+                  <tr key={index}>
+                    <th scope="row">{`${index + 1}.`}</th>
+                    <td>{item.name}</td>
+                    <td>{item.class}</td>
+                    <td>
+                      <button type="button" className="btn btn-success">
+                        edit
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        style={{ marginLeft: 15 }}
+                        onClick={() => dispatch(deleteKapal(item.id))}
+                      >
+                        delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>loading.div....</p>
+          )}
+        </Col>
+      </Row>
+
+      <Modal show={modalAdd} onHide={() => setModalAdd(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Kapal</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <form onSubmit={handleSubmit(_addKapal)}>
-            <div>
+            <div className="form-group">
+              <label>Nama Kapal</label>
               <input
+                className="form-control"
                 type="text"
                 name="name"
                 placeholder="Nama Kapal"
                 ref={register}
               />
             </div>
-            <div>
+
+            <div className="form-group">
+              <label>Tipe Kapal</label>
               {!kapalState.typeKapal.isLoading ? (
-                <select name="kapal_type" ref={register}>
+                <select
+                  className="form-control"
+                  name="kapal_type"
+                  ref={register}
+                >
                   <option value="">--pilih--</option>
                   {kapalState.typeKapal.list.map((item, index) => (
                     <option key={index} value={item.id}>
@@ -96,65 +133,92 @@ const Component = () => {
                 <p>loading...</p>
               )}
             </div>
-            <div>
+
+            <div className="form-group">
+              <label>Length OA</label>
               <input
+                className="form-control"
                 type="text"
                 name="length_oa"
                 placeholder="length_oa (Satuan Meter)"
                 ref={register}
               />
             </div>
-            <div>
+
+            <div className="form-group">
+              <label>Length PP</label>
               <input
+                className="form-control"
                 type="text"
                 name="length_pp"
                 placeholder="length_pp (Satuan Meter)"
                 ref={register}
               />
             </div>
-            <div>
+
+            <div className="form-group">
+              <label>Breadth</label>
               <input
+                className="form-control"
                 type="text"
                 name="breadth"
                 placeholder="breadth (Satuan Meter)"
                 ref={register}
               />
             </div>
-            <div>
+
+            <div className="form-group">
+              <label>Depth</label>
               <input
+                className="form-control"
                 type="text"
                 name="depth"
                 placeholder="depth (Satuan Meter)"
                 ref={register}
               />
             </div>
-            <div>
+
+            <div className="form-group">
+              <label>Draft</label>
               <input
+                className="form-control"
                 type="text"
                 name="draft"
                 placeholder="draft (Satuan Meter)"
                 ref={register}
               />
             </div>
-            <div>
+
+            <div className="form-group">
+              <label>Gross Tonnage</label>
               <input
+                className="form-control"
                 type="text"
                 name="gross_tonnage"
                 placeholder="gross_tonnage (Satuan Meter)"
                 ref={register}
               />
             </div>
-            <div>
+
+            <div className="form-group">
+              <label>Nama Perusahaan</label>
               <input
+                className="form-control"
                 type="text"
                 name="class"
                 placeholder="Nama Perusahaan"
                 ref={register}
               />
             </div>
-            <div>
+
+            <div className="form-group">
+              <label>Tipe Survey</label>
               {!kapalState.typeSurvey.isLoading ? (
-                <select name="survey_type" ref={register}>
+                <select
+                  className="form-control"
+                  name="survey_type"
+                  ref={register}
+                >
                   <option value="">--pilih--</option>
                   {kapalState.typeSurvey.list.map((item, index) => (
                     <option key={index} value={item.id}>
@@ -166,19 +230,26 @@ const Component = () => {
                 <p>loading...</p>
               )}
             </div>
-
-            <div>
-              <button type="button" onClick={() => setModalAdd(false)}>
-                Close
-              </button>
-              <button type="button" onClick={handleSubmit(_addKapal)}>
-                Add
-              </button>
-            </div>
           </form>
-        </div>
-      )}
-    </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => setModalAdd(false)}
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleSubmit(_addKapal)}
+          >
+            Submit
+          </button>
+        </Modal.Footer>
+      </Modal>
+    </Container>
   );
 };
 
