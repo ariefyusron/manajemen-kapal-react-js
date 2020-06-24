@@ -5,5 +5,6 @@ import Row from "./Row";
 import Col from "./Col";
 import Card from "./Card";
 import Topbar from "./Topbar";
+import FormType from "./FormType";
 
-export { InfiniteScroll, Sidebar, Container, Row, Col, Card, Topbar };
+export { InfiniteScroll, Sidebar, Container, Row, Col, Card, Topbar, FormType };

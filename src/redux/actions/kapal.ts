@@ -26,6 +26,11 @@ export const GET_TYPE_KAPAL_PENDING = "GET_TYPE_KAPAL_PENDING";
 export const GET_TYPE_KAPAL_SUCCESS = "GET_TYPE_KAPAL_SUCCESS";
 export const GET_TYPE_KAPAL_ERROR = "GET_TYPE_KAPAL_ERROR";
 
+// post type kapal
+export const POST_TYPE_KAPAL_PENDING = "POST_TYPE_KAPAL_PENDING";
+export const POST_TYPE_KAPAL_SUCCESS = "POST_TYPE_KAPAL_SUCCESS";
+export const POST_TYPE_KAPAL_ERROR = "POST_TYPE_KAPAL_ERROR";
+
 // type survey
 export const GET_TYPE_SURVEY_PENDING = "GET_TYPE_SURVEY_PENDING";
 export const GET_TYPE_SURVEY_SUCCESS = "GET_TYPE_SURVEY_SUCCESS";
@@ -133,6 +138,29 @@ export const getTypeKapal = () => async (dispatch: Dispatch) => {
       });
     } else {
       dispatch({ type: GET_TYPE_KAPAL_ERROR });
+    }
+  }
+};
+
+export const postTypeKapal = (form: any, cb: () => void) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch({ type: POST_TYPE_KAPAL_PENDING });
+    const res = await API.postTypeKapal(form);
+    dispatch({
+      type: POST_TYPE_KAPAL_SUCCESS,
+      payload: { data: res.data }
+    });
+    cb();
+  } catch (err) {
+    if (err.response) {
+      dispatch({
+        type: POST_TYPE_KAPAL_ERROR,
+        payload: { data: err.response.data }
+      });
+    } else {
+      dispatch({ type: POST_TYPE_KAPAL_ERROR });
     }
   }
 };

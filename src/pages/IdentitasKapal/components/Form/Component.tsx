@@ -11,9 +11,10 @@ interface Props {
   onHide?: () => void;
   data?: any;
   id?: number;
+  title: string;
 }
 
-const Component = ({ isShow, onHide, data, id }: Props) => {
+const Component = ({ isShow, onHide, data, id, title }: Props) => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
 
@@ -33,7 +34,7 @@ const Component = ({ isShow, onHide, data, id }: Props) => {
   return (
     <Modal show={isShow} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Add Kapal</Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={handleSubmit(_handleSubmit)}>

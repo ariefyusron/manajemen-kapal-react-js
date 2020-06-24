@@ -16,7 +16,10 @@ import {
   PATCH_KAPAL_SUCCESS,
   POST_KAPAL_ERROR,
   POST_KAPAL_PENDING,
-  POST_KAPAL_SUCCESS
+  POST_KAPAL_SUCCESS,
+  POST_TYPE_KAPAL_ERROR,
+  POST_TYPE_KAPAL_PENDING,
+  POST_TYPE_KAPAL_SUCCESS
 } from "../actions";
 import { Action, KapalState } from "../types";
 
@@ -143,6 +146,27 @@ export default (state = initialState, { type, payload }: Action) => {
         typeKapal: { ...state.typeKapal, isLoading: false, list: payload.data }
       };
     case GET_TYPE_KAPAL_ERROR:
+      return {
+        ...state,
+        typeKapal: { ...state.typeKapal, isLoading: false }
+      };
+
+    // post type kapal
+    case POST_TYPE_KAPAL_PENDING:
+      return {
+        ...state,
+        typeKapal: { ...state.typeKapal, isLoading: true }
+      };
+    case POST_TYPE_KAPAL_SUCCESS:
+      return {
+        ...state,
+        typeKapal: {
+          ...state.typeKapal,
+          isLoading: false,
+          list: [payload.data, ...state.typeKapal.list]
+        }
+      };
+    case POST_TYPE_KAPAL_ERROR:
       return {
         ...state,
         typeKapal: { ...state.typeKapal, isLoading: false }

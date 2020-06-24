@@ -35,6 +35,10 @@ const api = {
     host.get("kapal-type", {
       headers: { Authorization: token }
     }),
+  postTypeKapal: (form: any) =>
+    host.post("kapal-type", form, {
+      headers: { Authorization: token }
+    }),
   getTypeSurvey: () =>
     host.get("survey-type", {
       headers: { Authorization: token }
