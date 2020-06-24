@@ -31,6 +31,11 @@ export const POST_TYPE_KAPAL_PENDING = "POST_TYPE_KAPAL_PENDING";
 export const POST_TYPE_KAPAL_SUCCESS = "POST_TYPE_KAPAL_SUCCESS";
 export const POST_TYPE_KAPAL_ERROR = "POST_TYPE_KAPAL_ERROR";
 
+// delete type kapal
+export const DELETE_TYPE_KAPAL_PENDING = "DELETE_TYPE_KAPAL_PENDING";
+export const DELETE_TYPE_KAPAL_SUCCESS = "DELETE_TYPE_KAPAL_SUCCESS";
+export const DELETE_TYPE_KAPAL_ERROR = "DELETE_TYPE_KAPAL_ERROR";
+
 // type survey
 export const GET_TYPE_SURVEY_PENDING = "GET_TYPE_SURVEY_PENDING";
 export const GET_TYPE_SURVEY_SUCCESS = "GET_TYPE_SURVEY_SUCCESS";
@@ -40,6 +45,11 @@ export const GET_TYPE_SURVEY_ERROR = "GET_TYPE_SURVEY_ERROR";
 export const POST_TYPE_SURVEY_PENDING = "POST_TYPE_SURVEY_PENDING";
 export const POST_TYPE_SURVEY_SUCCESS = "POST_TYPE_SURVEY_SUCCESS";
 export const POST_TYPE_SURVEY_ERROR = "POST_TYPE_SURVEY_ERROR";
+
+// delete type survey
+export const DELETE_TYPE_SURVEY_PENDING = "DELETE_TYPE_SURVEY_PENDING";
+export const DELETE_TYPE_SURVEY_SUCCESS = "DELETE_TYPE_SURVEY_SUCCESS";
+export const DELETE_TYPE_SURVEY_ERROR = "DELETE_TYPE_SURVEY_ERROR";
 
 export const getAllKapal = () => async (dispatch: Dispatch) => {
   try {
@@ -170,6 +180,26 @@ export const postTypeKapal = (form: any, cb: () => void) => async (
   }
 };
 
+export const deleteTypeKapal = (id: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch({ type: DELETE_TYPE_KAPAL_PENDING });
+    await API.deleteTypeKapal(id);
+    dispatch({
+      type: DELETE_TYPE_KAPAL_SUCCESS,
+      payload: { id }
+    });
+  } catch (err) {
+    if (err.response) {
+      dispatch({
+        type: DELETE_TYPE_KAPAL_ERROR,
+        payload: { data: err.response.data }
+      });
+    } else {
+      dispatch({ type: DELETE_TYPE_KAPAL_ERROR });
+    }
+  }
+};
+
 export const getTypeSurvey = () => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: GET_TYPE_SURVEY_PENDING });
@@ -209,6 +239,26 @@ export const postTypeSurvey = (form: any, cb: () => void) => async (
       });
     } else {
       dispatch({ type: POST_TYPE_SURVEY_ERROR });
+    }
+  }
+};
+
+export const deleteTypeSurvey = (id: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch({ type: DELETE_TYPE_SURVEY_PENDING });
+    await API.deleteTypeSurvey(id);
+    dispatch({
+      type: DELETE_TYPE_SURVEY_SUCCESS,
+      payload: { id }
+    });
+  } catch (err) {
+    if (err.response) {
+      dispatch({
+        type: DELETE_TYPE_SURVEY_ERROR,
+        payload: { data: err.response.data }
+      });
+    } else {
+      dispatch({ type: DELETE_TYPE_SURVEY_ERROR });
     }
   }
 };

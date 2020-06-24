@@ -2,6 +2,12 @@ import {
   DELETE_KAPAL_ERROR,
   DELETE_KAPAL_PENDING,
   DELETE_KAPAL_SUCCESS,
+  DELETE_TYPE_KAPAL_ERROR,
+  DELETE_TYPE_KAPAL_PENDING,
+  DELETE_TYPE_KAPAL_SUCCESS,
+  DELETE_TYPE_SURVEY_ERROR,
+  DELETE_TYPE_SURVEY_PENDING,
+  DELETE_TYPE_SURVEY_SUCCESS,
   GET_ALL_KAPAL_ERROR,
   GET_ALL_KAPAL_PENDING,
   GET_ALL_KAPAL_SUCCESS,
@@ -175,6 +181,27 @@ export default (state = initialState, { type, payload }: Action) => {
         typeKapal: { ...state.typeKapal, isLoading: false }
       };
 
+    // delete type kapal
+    case DELETE_TYPE_KAPAL_PENDING:
+      return {
+        ...state,
+        typeKapal: { ...state.typeKapal, isLoading: true }
+      };
+    case DELETE_TYPE_KAPAL_SUCCESS:
+      return {
+        ...state,
+        typeKapal: {
+          ...state.typeKapal,
+          isLoading: false,
+          list: state.typeKapal.list.filter(item => item.id !== payload.id)
+        }
+      };
+    case DELETE_TYPE_KAPAL_ERROR:
+      return {
+        ...state,
+        typeKapal: { ...state.typeKapal, isLoading: false }
+      };
+
     // get type survey
     case GET_TYPE_SURVEY_PENDING:
       return {
@@ -212,6 +239,27 @@ export default (state = initialState, { type, payload }: Action) => {
         }
       };
     case POST_TYPE_SURVEY_ERROR:
+      return {
+        ...state,
+        typeSurvey: { ...state.typeSurvey, isLoading: false }
+      };
+
+    // delete type survey
+    case DELETE_TYPE_SURVEY_PENDING:
+      return {
+        ...state,
+        typeSurvey: { ...state.typeSurvey, isLoading: true }
+      };
+    case DELETE_TYPE_SURVEY_SUCCESS:
+      return {
+        ...state,
+        typeSurvey: {
+          ...state.typeSurvey,
+          isLoading: false,
+          list: state.typeSurvey.list.filter(item => item.id !== payload.id)
+        }
+      };
+    case DELETE_TYPE_SURVEY_ERROR:
       return {
         ...state,
         typeSurvey: { ...state.typeSurvey, isLoading: false }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { documentTitle } from "../../utils";
 import { Col, Container, FormType, Row } from "../../components";
-import { getTypeSurvey } from "../../redux/actions";
+import { deleteTypeSurvey, getTypeSurvey } from "../../redux/actions";
 import { Reducers } from "../../redux/types";
 
 const Component = () => {
@@ -59,6 +59,7 @@ const Component = () => {
                         type="button"
                         className="btn btn-danger"
                         style={{ marginLeft: 15 }}
+                        onClick={() => dispatch(deleteTypeSurvey(item.id))}
                       >
                         delete
                       </button>
