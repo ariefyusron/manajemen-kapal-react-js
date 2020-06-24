@@ -23,6 +23,10 @@ const api = {
     host.post("kapal", form, {
       headers: { Authorization: token }
     }),
+  patchKapal: (form: any, id: number) =>
+    host.patch(`kapal/${id}`, form, {
+      headers: { Authorization: token }
+    }),
   deleteKapal: (id: string) =>
     host.delete(`kapal/${id}`, {
       headers: { Authorization: token }

@@ -11,6 +11,9 @@ import {
   GET_TYPE_SURVEY_ERROR,
   GET_TYPE_SURVEY_PENDING,
   GET_TYPE_SURVEY_SUCCESS,
+  PATCH_KAPAL_ERROR,
+  PATCH_KAPAL_PENDING,
+  PATCH_KAPAL_SUCCESS,
   POST_KAPAL_ERROR,
   POST_KAPAL_PENDING,
   POST_KAPAL_SUCCESS
@@ -29,6 +32,9 @@ const initialState: KapalState = {
   addKapal: {
     isLoading: false
   },
+  patchKapal: {
+    isLoading: false
+  },
   deleteKapal: {
     isLoading: false
   },
@@ -41,6 +47,9 @@ const initialState: KapalState = {
     list: []
   }
 };
+
+let result;
+let index;
 
 export default (state = initialState, { type, payload }: Action) => {
   switch (type) {
@@ -77,6 +86,28 @@ export default (state = initialState, { type, payload }: Action) => {
       return {
         ...state,
         addKapal: { ...state.addKapal, isLoading: false }
+      };
+
+    // patch kapal
+    case PATCH_KAPAL_PENDING:
+      return {
+        ...state,
+        patchKapal: { ...state.patchKapal, isLoading: true }
+      };
+    case PATCH_KAPAL_SUCCESS:
+      result = [...state.kapal.list];
+      index = state.kapal.list.findIndex(item => item.id === payload.id);
+      result[index] = { id: payload.id, ...payload.data };
+
+      return {
+        ...state,
+        patchKapal: { ...state.patchKapal, isLoading: false },
+        kapal: { ...state.kapal, list: result }
+      };
+    case PATCH_KAPAL_ERROR:
+      return {
+        ...state,
+        patchKapal: { ...state.patchKapal, isLoading: false }
       };
 
     // delete kapal

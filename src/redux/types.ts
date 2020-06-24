@@ -1,6 +1,7 @@
 // actions
 interface Payload {
   data?: any;
+  id?: string | number;
 }
 
 interface Params {
@@ -44,6 +45,9 @@ export interface KapalState {
     data: any;
   };
   addKapal: {
+    isLoading: boolean;
+  };
+  patchKapal: {
     isLoading: boolean;
   };
   deleteKapal: {
