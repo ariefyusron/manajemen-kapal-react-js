@@ -15,6 +15,15 @@ const api = {
     password: string;
     is_admin: boolean;
   }) => host.post("user/register", form),
+  getAllUser: () =>
+    host.get("user", {
+      headers: { Authorization: token }
+    }),
+  deleteUser: (id: string) =>
+    host.delete(`user/${id}`, {
+      headers: { Authorization: token }
+    }),
+
   getAllKapal: () =>
     host.get("kapal", {
       headers: { Authorization: token }
@@ -31,6 +40,7 @@ const api = {
     host.delete(`kapal/${id}`, {
       headers: { Authorization: token }
     }),
+
   getTypeKapal: () =>
     host.get("kapal-type", {
       headers: { Authorization: token }
@@ -39,12 +49,21 @@ const api = {
     host.post("kapal-type", form, {
       headers: { Authorization: token }
     }),
+  deleteTypeKapal: (id: string) =>
+    host.delete(`kapal-type/${id}`, {
+      headers: { Authorization: token }
+    }),
+
   getTypeSurvey: () =>
     host.get("survey-type", {
       headers: { Authorization: token }
     }),
   postTypeSurvey: (form: any) =>
     host.post("survey-type", form, {
+      headers: { Authorization: token }
+    }),
+  deleteTypeSurvey: (id: string) =>
+    host.delete(`survey-type/${id}`, {
       headers: { Authorization: token }
     })
 };

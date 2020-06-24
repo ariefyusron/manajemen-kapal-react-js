@@ -33,6 +33,10 @@ export interface AuthState {
     isLoading: boolean;
     error: string;
   };
+  user: {
+    isLoading: boolean;
+    list: any[];
+  };
 }
 
 export interface KapalState {

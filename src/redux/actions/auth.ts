@@ -11,6 +11,16 @@ export const POST_REGISTER_PENDING = "POST_REGISTER_PENDING";
 export const POST_REGISTER_SUCCESS = "POST_REGISTER_SUCCESS";
 export const POST_REGISTER_ERROR = "POST_REGISTER_ERROR";
 
+// get all user
+export const GET_ALL_USER_PENDING = "GET_ALL_USER_PENDING";
+export const GET_ALL_USER_SUCCESS = "GET_ALL_USER_SUCCESS";
+export const GET_ALL_USER_ERROR = "GET_ALL_USER_ERROR";
+
+// delete user
+export const DELETE_USER_PENDING = "DELETE_USER_PENDING";
+export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
+export const DELETE_USER_ERROR = "DELETE_USER_ERROR";
+
 export const HANDLE_LOGOUT = "HANDLE_LOGOUT";
 
 export const postLogin = (
@@ -80,4 +90,44 @@ export const handleLogout = (cb: () => void) => async (dispatch: Dispatch) => {
   localStorage.removeItem("token");
   localStorage.removeItem("is_admin");
   cb();
+};
+
+export const getAllUser = () => async (dispatch: Dispatch) => {
+  try {
+    dispatch({ type: GET_ALL_USER_PENDING });
+    const res = await API.getAllUser();
+    dispatch({
+      type: GET_ALL_USER_SUCCESS,
+      payload: { data: res.data }
+    });
+  } catch (err) {
+    if (err.response) {
+      dispatch({
+        type: GET_ALL_USER_ERROR,
+        payload: { data: err.response.data }
+      });
+    } else {
+      dispatch({ type: GET_ALL_USER_ERROR });
+    }
+  }
+};
+
+export const deleteUser = (id: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch({ type: DELETE_USER_PENDING });
+    await API.deleteUser(id);
+    dispatch({
+      type: DELETE_USER_SUCCESS,
+      payload: { id }
+    });
+  } catch (err) {
+    if (err.response) {
+      dispatch({
+        type: DELETE_USER_ERROR,
+        payload: { data: err.response.data }
+      });
+    } else {
+      dispatch({ type: DELETE_USER_ERROR });
+    }
+  }
 };
