@@ -42,6 +42,10 @@ const api = {
   getTypeSurvey: () =>
     host.get("survey-type", {
       headers: { Authorization: token }
+    }),
+  postTypeSurvey: (form: any) =>
+    host.post("survey-type", form, {
+      headers: { Authorization: token }
     })
 };
 

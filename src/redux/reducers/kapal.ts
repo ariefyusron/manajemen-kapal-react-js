@@ -19,7 +19,10 @@ import {
   POST_KAPAL_SUCCESS,
   POST_TYPE_KAPAL_ERROR,
   POST_TYPE_KAPAL_PENDING,
-  POST_TYPE_KAPAL_SUCCESS
+  POST_TYPE_KAPAL_SUCCESS,
+  POST_TYPE_SURVEY_ERROR,
+  POST_TYPE_SURVEY_PENDING,
+  POST_TYPE_SURVEY_SUCCESS
 } from "../actions";
 import { Action, KapalState } from "../types";
 
@@ -188,6 +191,27 @@ export default (state = initialState, { type, payload }: Action) => {
         }
       };
     case GET_TYPE_SURVEY_ERROR:
+      return {
+        ...state,
+        typeSurvey: { ...state.typeSurvey, isLoading: false }
+      };
+
+    // post type survey
+    case POST_TYPE_SURVEY_PENDING:
+      return {
+        ...state,
+        typeSurvey: { ...state.typeSurvey, isLoading: true }
+      };
+    case POST_TYPE_SURVEY_SUCCESS:
+      return {
+        ...state,
+        typeSurvey: {
+          ...state.typeSurvey,
+          isLoading: false,
+          list: [payload.data, ...state.typeSurvey.list]
+        }
+      };
+    case POST_TYPE_SURVEY_ERROR:
       return {
         ...state,
         typeSurvey: { ...state.typeSurvey, isLoading: false }

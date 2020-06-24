@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
-import { postTypeKapal } from "../../redux/actions";
+import { postTypeKapal, postTypeSurvey } from "../../redux/actions";
 
 interface Props {
   isShow: boolean;
@@ -20,6 +20,8 @@ const Component = ({ isShow, onHide, title, type }: Props) => {
     form => {
       if (type === "kapal") {
         dispatch(postTypeKapal(form, onHide!));
+      } else {
+        dispatch(postTypeSurvey(form, onHide!));
       }
     },
     [dispatch, onHide, type]

@@ -36,6 +36,11 @@ export const GET_TYPE_SURVEY_PENDING = "GET_TYPE_SURVEY_PENDING";
 export const GET_TYPE_SURVEY_SUCCESS = "GET_TYPE_SURVEY_SUCCESS";
 export const GET_TYPE_SURVEY_ERROR = "GET_TYPE_SURVEY_ERROR";
 
+// post type survey
+export const POST_TYPE_SURVEY_PENDING = "POST_TYPE_SURVEY_PENDING";
+export const POST_TYPE_SURVEY_SUCCESS = "POST_TYPE_SURVEY_SUCCESS";
+export const POST_TYPE_SURVEY_ERROR = "POST_TYPE_SURVEY_ERROR";
+
 export const getAllKapal = () => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: GET_ALL_KAPAL_PENDING });
@@ -181,6 +186,29 @@ export const getTypeSurvey = () => async (dispatch: Dispatch) => {
       });
     } else {
       dispatch({ type: GET_TYPE_SURVEY_ERROR });
+    }
+  }
+};
+
+export const postTypeSurvey = (form: any, cb: () => void) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch({ type: POST_TYPE_SURVEY_PENDING });
+    const res = await API.postTypeSurvey(form);
+    dispatch({
+      type: POST_TYPE_SURVEY_SUCCESS,
+      payload: { data: res.data }
+    });
+    cb();
+  } catch (err) {
+    if (err.response) {
+      dispatch({
+        type: POST_TYPE_SURVEY_ERROR,
+        payload: { data: err.response.data }
+      });
+    } else {
+      dispatch({ type: POST_TYPE_SURVEY_ERROR });
     }
   }
 };
