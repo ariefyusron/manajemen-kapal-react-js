@@ -72,7 +72,7 @@ const Component = () => {
           ))}
         </>
 
-        {localStorage.getItem("is_admin") && (
+        {localStorage.getItem("is_admin") === "true" && (
           <>
             <li className="nav-item">
               <div

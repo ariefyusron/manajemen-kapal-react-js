@@ -19,8 +19,9 @@ const Component = () => {
   const _handleRegister = useCallback(
     form => {
       dispatch(
-        postRegister({ username: form.username, password: form.password }, () =>
-          history.push("/dashboard")
+        postRegister(
+          { username: form.username, password: form.password, is_admin: true },
+          () => history.push("/dashboard")
         )
       );
     },

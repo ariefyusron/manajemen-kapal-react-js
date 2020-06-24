@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 
 import "./styles.scss";
 import { Col, Row, Sidebar, Topbar } from "../components";
@@ -7,6 +7,7 @@ import { Col, Row, Sidebar, Topbar } from "../components";
 // screens
 import StandarTarif from "../pages/StandarTarif";
 import IdentitasKapal from "../pages/IdentitasKapal";
+import Admin from "./Admin";
 
 const App = () => {
   const match = useRouteMatch();
@@ -25,6 +26,13 @@ const App = () => {
               </Route>
               <Route path={`${match.path}/identitas-kapal`}>
                 <IdentitasKapal />
+              </Route>
+              <Route path={`${match.path}/admin`}>
+                {localStorage.getItem("is_admin") === "true" ? (
+                  <Admin />
+                ) : (
+                  <Redirect to={match.path} />
+                )}
               </Route>
             </Col>
           </Row>

@@ -46,17 +46,23 @@ export const postRegister = (
   form: {
     username: string;
     password: string;
+    is_admin: boolean;
   },
-  cb: () => void
+  cb: () => void,
+  fromAdmin = false
 ) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: POST_REGISTER_PENDING });
-    const res = await API.postRegister({ ...form, is_admin: true });
+    const res = await API.postRegister(form);
     dispatch({
       type: POST_REGISTER_SUCCESS,
       payload: { data: res.data }
     });
-    dispatch(postLogin(form, cb));
+    if (!fromAdmin) {
+      dispatch(postLogin(form, cb));
+    } else {
+      cb();
+    }
   } catch (err) {
     if (err.response) {
       dispatch({
