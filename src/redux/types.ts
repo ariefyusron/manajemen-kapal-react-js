@@ -21,6 +21,7 @@ export interface Action {
 export interface Reducers {
   auth: AuthState;
   kapal: KapalState;
+  rabReparasi: RabReparasiState;
 }
 
 // reducers
@@ -62,6 +63,21 @@ export interface KapalState {
     list: any[];
   };
   typeSurvey: {
+    isLoading: boolean;
+    list: any[];
+  };
+}
+
+export interface RabReparasiState {
+  pengedokan: {
+    isLoading: boolean;
+    list: any[];
+  };
+  pelayananUmum: {
+    isLoading: boolean;
+    list: any[];
+  };
+  kontruksiBadanKapal: {
     isLoading: boolean;
     list: any[];
   };

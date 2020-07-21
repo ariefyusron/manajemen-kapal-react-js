@@ -65,6 +65,33 @@ const api = {
   deleteTypeSurvey: (id: string) =>
     host.delete(`survey-type/${id}`, {
       headers: { Authorization: token }
+    }),
+
+  getAllPengedokan: (idKapal: string) =>
+    host.get(`pengedokan/${idKapal}`, {
+      headers: { Authorization: token }
+    }),
+  deletePengedokan: (idKapal: string, id: string) =>
+    host.delete(`pengedokan/${idKapal}/${id}`, {
+      headers: { Authorization: token }
+    }),
+
+  getAllPelayananUmum: (idKapal: string) =>
+    host.get(`pelayanan-umum/${idKapal}`, {
+      headers: { Authorization: token }
+    }),
+  deletePelayananUmum: (idKapal: string, id: string) =>
+    host.delete(`pelayanan-umum/${idKapal}/${id}`, {
+      headers: { Authorization: token }
+    }),
+
+  getAllKontruksiBadanKapal: (idKapal: string) =>
+    host.get(`kontruksi-badan-kapal/${idKapal}`, {
+      headers: { Authorization: token }
+    }),
+  deleteKontruksiBadanKapal: (idKapal: string, id: string) =>
+    host.delete(`kontruksi-badan-kapal/${idKapal}/${id}`, {
+      headers: { Authorization: token }
     })
 };
 
