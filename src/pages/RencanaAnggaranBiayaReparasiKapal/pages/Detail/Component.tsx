@@ -227,6 +227,7 @@ const Component = () => {
                         <th scope="col">Jasa Peralatan</th>
                         <th scope="col">Material</th>
                         <th scope="col">Material Bantu</th>
+                        <th scope="col">Overhead</th>
                         <th scope="col">Total</th>
                         <th scope="col">Aksi</th>
                       </tr>
@@ -242,6 +243,7 @@ const Component = () => {
                           <td>{item.jasa_peralatan}</td>
                           <td>{item.material}</td>
                           <td>{item.material_bantu}</td>
+                          <td>{item.overhead}</td>
                           <td>{item.total}</td>
                           <td>
                             <button
@@ -316,6 +318,7 @@ const Component = () => {
                         <th scope="col">Jasa Peralatan</th>
                         <th scope="col">Material</th>
                         <th scope="col">Material Bantu</th>
+                        <th scope="col">Overhead</th>
                         <th scope="col">Total</th>
                         <th scope="col">Aksi</th>
                       </tr>
@@ -332,6 +335,7 @@ const Component = () => {
                             <td>{item.jasa_peralatan}</td>
                             <td>{item.material}</td>
                             <td>{item.material_bantu}</td>
+                            <td>{item.overhead}</td>
                             <td>{item.total}</td>
                             <td>
                               <button
@@ -407,6 +411,7 @@ const Component = () => {
                         <th scope="col">Jasa Peralatan</th>
                         <th scope="col">Material</th>
                         <th scope="col">Material Bantu</th>
+                        <th scope="col">Overhead</th>
                         <th scope="col">Total</th>
                         <th scope="col">Aksi</th>
                       </tr>
@@ -423,6 +428,7 @@ const Component = () => {
                             <td>{item.jasa_peralatan}</td>
                             <td>{item.material}</td>
                             <td>{item.material_bantu}</td>
+                            <td>{item.overhead}</td>
                             <td>{item.total}</td>
                             <td>
                               <button

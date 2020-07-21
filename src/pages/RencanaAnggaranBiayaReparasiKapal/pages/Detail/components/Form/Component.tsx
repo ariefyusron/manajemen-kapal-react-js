@@ -146,6 +146,18 @@ const Component = ({
             />
           </div>
 
+          <div className="form-group">
+            <label>Overhead</label>
+            <input
+              className="form-control"
+              type="text"
+              name="overhead"
+              placeholder="Overhead"
+              ref={register}
+              defaultValue={(data && data.overhead) || ""}
+            />
+          </div>
+
           <input type="submit" hidden />
         </form>
       </Modal.Body>

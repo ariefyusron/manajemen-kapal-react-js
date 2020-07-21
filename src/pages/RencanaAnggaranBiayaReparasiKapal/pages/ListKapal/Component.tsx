@@ -50,8 +50,8 @@ const Component = () => {
                     <th scope="row">{`${index + 1}.`}</th>
                     <td>{item.class}</td>
                     <td>{item.name}</td>
-                    <td>{item.KapalType.name}</td>
-                    <td>{item.SurveyType.name}</td>
+                    <td>{item.KapalType && item.KapalType.name}</td>
+                    <td>{item.SurveyType && item.SurveyType.name}</td>
                   </tr>
                 ))}
               </tbody>

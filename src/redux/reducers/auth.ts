@@ -52,7 +52,11 @@ export default (state = initialState, { type, payload }: Action) => {
         register: { ...state.register, isLoading: true, error: "" }
       };
     case POST_REGISTER_SUCCESS:
-      return { ...state, register: { ...state.register, isLoading: false } };
+      return {
+        ...state,
+        register: { ...state.register, isLoading: false },
+        user: { ...state.user, list: [payload.data, ...state.user.list] }
+      };
     case POST_REGISTER_ERROR:
       return {
         ...state,
