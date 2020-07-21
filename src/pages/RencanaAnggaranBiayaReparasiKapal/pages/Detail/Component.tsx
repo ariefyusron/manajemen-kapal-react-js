@@ -378,7 +378,7 @@ const Component = () => {
       )}
 
       {(pekerjaan === "" || pekerjaan === "3") && (
-        <Row>
+        <Row style={{ marginBottom: 30 }}>
           <Col>
             <Row style={{ marginBottom: 10 }}>
               <Col size={10}>
@@ -471,6 +471,74 @@ const Component = () => {
           </Col>
         </Row>
       )}
+
+      <Row style={{ marginBottom: 60 }}>
+        <Col>
+          <Row style={{ marginBottom: 10 }}>
+            <Col>
+              <h3>Total</h3>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">DPS (Jasa Tenaga)</th>
+                    <th scope="col">SUB KONT (Jasa Tenaga</th>
+                    <th scope="col">Jasa Peralatan</th>
+                    <th scope="col">Material</th>
+                    <th scope="col">Material Bantu</th>
+                    <th scope="col">Overhead</th>
+                    <th scope="col">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Rp. 50.000</td>
+                    <td>Rp. 50.000</td>
+                    <td>Rp. 50.000</td>
+                    <td>Rp. 50.000</td>
+                    <td>Rp. 50.000</td>
+                    <td>Rp. 50.000</td>
+                    <td>Rp. 50.000</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total biaya tenaga kerja</th>
+                    <td colSpan={6} style={{ textAlign: "center" }}>
+                      Rp. 50.000
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total bahan baku</th>
+                    <td colSpan={6} style={{ textAlign: "center" }}>
+                      Rp. 50.000
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total biaya tidak langsung</th>
+                    <td colSpan={6} style={{ textAlign: "center" }}>
+                      Rp. 50.000
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Harga PPN 10%</th>
+                    <td colSpan={6} style={{ textAlign: "center" }}>
+                      Rp. 50.000
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total estimasi biaya</th>
+                    <td colSpan={6} style={{ textAlign: "center" }}>
+                      Rp. 50.000
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
 
       <Form
         title={`Edit ${_typeTitle(modalEdit.type)}`}
