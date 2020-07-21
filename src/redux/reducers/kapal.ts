@@ -11,6 +11,9 @@ import {
   GET_ALL_KAPAL_ERROR,
   GET_ALL_KAPAL_PENDING,
   GET_ALL_KAPAL_SUCCESS,
+  GET_KAPAL_ERROR,
+  GET_KAPAL_PENDING,
+  GET_KAPAL_SUCCESS,
   GET_TYPE_KAPAL_ERROR,
   GET_TYPE_KAPAL_PENDING,
   GET_TYPE_KAPAL_SUCCESS,
@@ -65,6 +68,27 @@ let index;
 
 export default (state = initialState, { type, payload }: Action) => {
   switch (type) {
+    // get kapal
+    case GET_KAPAL_PENDING:
+      return {
+        ...state,
+        detailKapal: { ...state.detailKapal, isLoading: true }
+      };
+    case GET_KAPAL_SUCCESS:
+      return {
+        ...state,
+        detailKapal: {
+          ...state.detailKapal,
+          isLoading: false,
+          data: payload.data
+        }
+      };
+    case GET_KAPAL_ERROR:
+      return {
+        ...state,
+        detailKapal: { ...state.detailKapal, isLoading: false }
+      };
+
     // get all kapal
     case GET_ALL_KAPAL_PENDING:
       return {

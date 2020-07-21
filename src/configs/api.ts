@@ -24,6 +24,10 @@ const api = {
       headers: { Authorization: token }
     }),
 
+  getKapal: (id: string) =>
+    host.get(`kapal/${id}`, {
+      headers: { Authorization: token }
+    }),
   getAllKapal: () =>
     host.get("kapal", {
       headers: { Authorization: token }

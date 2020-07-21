@@ -1,6 +1,11 @@
 import { API } from "../../configs";
 import { Dispatch } from "../types";
 
+// get kapal
+export const GET_KAPAL_PENDING = "GET_KAPAL_PENDING";
+export const GET_KAPAL_SUCCESS = "GET_KAPAL_SUCCESS";
+export const GET_KAPAL_ERROR = "GET_KAPAL_ERROR";
+
 // get all kapal
 export const GET_ALL_KAPAL_PENDING = "GET_ALL_KAPAL_PENDING";
 export const GET_ALL_KAPAL_SUCCESS = "GET_ALL_KAPAL_SUCCESS";
@@ -50,6 +55,26 @@ export const POST_TYPE_SURVEY_ERROR = "POST_TYPE_SURVEY_ERROR";
 export const DELETE_TYPE_SURVEY_PENDING = "DELETE_TYPE_SURVEY_PENDING";
 export const DELETE_TYPE_SURVEY_SUCCESS = "DELETE_TYPE_SURVEY_SUCCESS";
 export const DELETE_TYPE_SURVEY_ERROR = "DELETE_TYPE_SURVEY_ERROR";
+
+export const getKapal = (id: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch({ type: GET_KAPAL_PENDING });
+    const res = await API.getKapal(id);
+    dispatch({
+      type: GET_KAPAL_SUCCESS,
+      payload: { data: res.data }
+    });
+  } catch (err) {
+    if (err.response) {
+      dispatch({
+        type: GET_KAPAL_ERROR,
+        payload: { data: err.response.data }
+      });
+    } else {
+      dispatch({ type: GET_KAPAL_ERROR });
+    }
+  }
+};
 
 export const getAllKapal = () => async (dispatch: Dispatch) => {
   try {

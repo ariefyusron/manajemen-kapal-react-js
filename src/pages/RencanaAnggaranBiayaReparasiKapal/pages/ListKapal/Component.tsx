@@ -33,8 +33,10 @@ const Component = () => {
               <thead className="thead-light">
                 <tr>
                   <th scope="col">No</th>
-                  <th scope="col">Nama Kapal</th>
                   <th scope="col">Nama Perusahaan</th>
+                  <th scope="col">Nama Kapal</th>
+                  <th scope="col">Type Kapal</th>
+                  <th scope="col">Type Survey</th>
                 </tr>
               </thead>
               <tbody>
@@ -46,8 +48,10 @@ const Component = () => {
                     }
                   >
                     <th scope="row">{`${index + 1}.`}</th>
-                    <td>{item.name}</td>
                     <td>{item.class}</td>
+                    <td>{item.name}</td>
+                    <td>{item.KapalType.name}</td>
+                    <td>{item.SurveyType.name}</td>
                   </tr>
                 ))}
               </tbody>

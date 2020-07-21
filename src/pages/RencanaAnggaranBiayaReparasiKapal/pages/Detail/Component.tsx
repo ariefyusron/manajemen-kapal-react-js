@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import { Reducers } from "../../../../redux/types";
 import {
@@ -9,7 +9,8 @@ import {
   deletePengedokan,
   getAllKontruksiBadanKapal,
   getAllPelayananUmum,
-  getAllPengedokan
+  getAllPengedokan,
+  getKapal
 } from "../../../../redux/actions";
 import { documentTitle } from "../../../../utils";
 import { Col, Container, Row } from "../../../../components";
@@ -48,12 +49,19 @@ const Component = () => {
   const [pekerjaan, setPekerjaan] = useState("");
   const [modalEdit, setModalEdit] = useState(initModalEdit);
   const [modalAdd, setModalAdd] = useState(initModalAdd);
-  const rabReparasiState = useSelector((state: Reducers) => state.rabReparasi);
+  const { rabReparasiState, kapalState } = useSelector(
+    (state: Reducers) => ({
+      rabReparasiState: state.rabReparasi,
+      kapalState: state.kapal
+    }),
+    shallowEqual
+  );
 
   useEffect(() => {
     dispatch(getAllPengedokan(id!));
     dispatch(getAllPelayananUmum(id!));
     dispatch(getAllKontruksiBadanKapal(id!));
+    dispatch(getKapal(id!));
   }, [dispatch, id]);
 
   const _typeTitle = useCallback(
@@ -90,7 +98,84 @@ const Component = () => {
         </Col>
       </Row>
 
-      <Row justifyContent="end" style={{ marginBottom: 20 }}>
+      <Row style={{ marginBottom: 40 }} className="align-items-end">
+        <Col size={9}>
+          <table style={{ width: "50%" }}>
+            <tr>
+              <td>CLIENT</td>
+              <td>:</td>
+              <td>{kapalState.detailKapal.data.class}</td>
+            </tr>
+            <tr>
+              <td>SHIP</td>
+              <td>:</td>
+              <td>{kapalState.detailKapal.data.name}</td>
+            </tr>
+            <tr>
+              <td colSpan={3} style={{ textAlign: "center" }}>
+                SHIP&apos;S PARTICULARS
+              </td>
+              <td>UNIT</td>
+            </tr>
+            <tr>
+              <td>LENGTH OA</td>
+              <td>:</td>
+              <td>{kapalState.detailKapal.data.length_oa}</td>
+              <td>Meter</td>
+            </tr>
+            <tr>
+              <td>LENGTH PP</td>
+              <td>:</td>
+              <td>{kapalState.detailKapal.data.length_pp}</td>
+              <td>Meter</td>
+            </tr>
+            <tr>
+              <td>BREADTH</td>
+              <td>:</td>
+              <td>{kapalState.detailKapal.data.breadth}</td>
+              <td>Meter</td>
+            </tr>
+            <tr>
+              <td>DEPTH</td>
+              <td>:</td>
+              <td>{kapalState.detailKapal.data.depth}</td>
+              <td>Meter</td>
+            </tr>
+            <tr>
+              <td>DRAFT</td>
+              <td>:</td>
+              <td>{kapalState.detailKapal.data.draft}</td>
+              <td>Meter</td>
+            </tr>
+            <tr>
+              <td>GROSS TONNAGE</td>
+              <td>:</td>
+              <td>{kapalState.detailKapal.data.gross_tonnage}</td>
+              <td>Ton</td>
+            </tr>
+            <tr>
+              <td colSpan={3} style={{ textAlign: "center" }}>
+                CLASSIFICATION AND SURVEY
+              </td>
+            </tr>
+            <tr>
+              <td>CLASSIFICATION</td>
+              <td>:</td>
+              <td>
+                {kapalState.detailKapal.data.KapalType &&
+                  kapalState.detailKapal.data.KapalType.name}
+              </td>
+            </tr>
+            <tr>
+              <td>KIND OF SURVEY</td>
+              <td>:</td>
+              <td>
+                {kapalState.detailKapal.data.SurveyType &&
+                  kapalState.detailKapal.data.SurveyType.name}
+              </td>
+            </tr>
+          </table>
+        </Col>
         <Col size={3}>
           <div className="form-group">
             <label htmlFor="exampleFormControlSelect1">Pekerjaan</label>
