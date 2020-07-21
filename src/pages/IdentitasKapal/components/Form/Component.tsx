@@ -175,6 +175,8 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
               <p>loading...</p>
             )}
           </div>
+
+          <input type="submit" hidden />
         </form>
       </Modal.Body>
       <Modal.Footer>

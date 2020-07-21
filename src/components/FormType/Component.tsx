@@ -48,6 +48,8 @@ const Component = ({ isShow, onHide, title, type }: Props) => {
             />
             {_renderError(errors.name, "Name is required")}
           </div>
+
+          <input type="submit" hidden />
         </form>
       </Modal.Body>
       <Modal.Footer>

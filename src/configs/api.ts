@@ -75,6 +75,14 @@ const api = {
     host.delete(`pengedokan/${idKapal}/${id}`, {
       headers: { Authorization: token }
     }),
+  postPengedokan: (form: any, id: string) =>
+    host.post(`pengedokan/${id}`, form, {
+      headers: { Authorization: token }
+    }),
+  patchPengedokan: (form: any, idKapal: string, id: string | number) =>
+    host.patch(`pengedokan/${idKapal}/${id}`, form, {
+      headers: { Authorization: token }
+    }),
 
   getAllPelayananUmum: (idKapal: string) =>
     host.get(`pelayanan-umum/${idKapal}`, {
@@ -84,6 +92,14 @@ const api = {
     host.delete(`pelayanan-umum/${idKapal}/${id}`, {
       headers: { Authorization: token }
     }),
+  postPelayananUmum: (form: any, id: string) =>
+    host.post(`pelayanan-umum/${id}`, form, {
+      headers: { Authorization: token }
+    }),
+  patchPelayananUmum: (form: any, idKapal: string, id: string | number) =>
+    host.patch(`pelayanan-umum/${idKapal}/${id}`, form, {
+      headers: { Authorization: token }
+    }),
 
   getAllKontruksiBadanKapal: (idKapal: string) =>
     host.get(`kontruksi-badan-kapal/${idKapal}`, {
@@ -91,6 +107,14 @@ const api = {
     }),
   deleteKontruksiBadanKapal: (idKapal: string, id: string) =>
     host.delete(`kontruksi-badan-kapal/${idKapal}/${id}`, {
+      headers: { Authorization: token }
+    }),
+  postKontruksiBadanKapal: (form: any, id: string) =>
+    host.post(`kontruksi-badan-kapal/${id}`, form, {
+      headers: { Authorization: token }
+    }),
+  patchKontruksiBadanKapal: (form: any, idKapal: string, id: string | number) =>
+    host.patch(`kontruksi-badan-kapal/${idKapal}/${id}`, form, {
       headers: { Authorization: token }
     })
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,6 +13,31 @@ import {
 } from "../../../../redux/actions";
 import { documentTitle } from "../../../../utils";
 import { Col, Container, Row } from "../../../../components";
+import { Form } from "./components";
+
+interface ModalEdit {
+  visible: boolean;
+  index: number;
+  id: number | string;
+  type: "pengedokan" | "pelayananUmum" | "kontruksiBadanKapal";
+}
+
+interface ModalAdd {
+  visible: boolean;
+  type: "pengedokan" | "pelayananUmum" | "kontruksiBadanKapal";
+}
+
+const initModalEdit: ModalEdit = {
+  visible: false,
+  index: 0,
+  id: 0,
+  type: "pengedokan"
+};
+
+const initModalAdd: ModalAdd = {
+  visible: false,
+  type: "pengedokan"
+};
 
 const Component = () => {
   documentTitle("RAB Reparasai Kapal");
@@ -21,6 +46,8 @@ const Component = () => {
   const { id } = useParams();
 
   const [pekerjaan, setPekerjaan] = useState("");
+  const [modalEdit, setModalEdit] = useState(initModalEdit);
+  const [modalAdd, setModalAdd] = useState(initModalAdd);
   const rabReparasiState = useSelector((state: Reducers) => state.rabReparasi);
 
   useEffect(() => {
@@ -28,6 +55,19 @@ const Component = () => {
     dispatch(getAllPelayananUmum(id!));
     dispatch(getAllKontruksiBadanKapal(id!));
   }, [dispatch, id]);
+
+  const _typeTitle = useCallback(
+    (type: "pengedokan" | "pelayananUmum" | "kontruksiBadanKapal") => {
+      if (type === "pengedokan") {
+        return "Pengedokan";
+      }
+      if (type === "pelayananUmum") {
+        return "Pelayanan Umum";
+      }
+      return "Kontruksi Badan Kapal";
+    },
+    []
+  );
 
   return (
     <Container>
@@ -80,6 +120,9 @@ const Component = () => {
                   type="button"
                   className="btn btn-primary"
                   style={{ width: "100%", marginBottom: 5 }}
+                  onClick={() =>
+                    setModalAdd({ visible: true, type: "pengedokan" })
+                  }
                 >
                   Add
                 </button>
@@ -116,7 +159,18 @@ const Component = () => {
                           <td>{item.material_bantu}</td>
                           <td>{item.total}</td>
                           <td>
-                            <button type="button" className="btn btn-success">
+                            <button
+                              type="button"
+                              className="btn btn-success"
+                              onClick={() =>
+                                setModalEdit({
+                                  id: item.id,
+                                  visible: true,
+                                  type: "pengedokan",
+                                  index
+                                })
+                              }
+                            >
                               edit
                             </button>
                             <button
@@ -155,6 +209,9 @@ const Component = () => {
                   type="button"
                   className="btn btn-primary"
                   style={{ width: "100%", marginBottom: 5 }}
+                  onClick={() =>
+                    setModalAdd({ visible: true, type: "pelayananUmum" })
+                  }
                 >
                   Add
                 </button>
@@ -192,7 +249,18 @@ const Component = () => {
                             <td>{item.material_bantu}</td>
                             <td>{item.total}</td>
                             <td>
-                              <button type="button" className="btn btn-success">
+                              <button
+                                type="button"
+                                className="btn btn-success"
+                                onClick={() =>
+                                  setModalEdit({
+                                    id: item.id,
+                                    visible: true,
+                                    type: "pelayananUmum",
+                                    index
+                                  })
+                                }
+                              >
                                 edit
                               </button>
                               <button
@@ -232,6 +300,9 @@ const Component = () => {
                   type="button"
                   className="btn btn-primary"
                   style={{ width: "100%", marginBottom: 5 }}
+                  onClick={() =>
+                    setModalAdd({ visible: true, type: "kontruksiBadanKapal" })
+                  }
                 >
                   Add
                 </button>
@@ -269,7 +340,18 @@ const Component = () => {
                             <td>{item.material_bantu}</td>
                             <td>{item.total}</td>
                             <td>
-                              <button type="button" className="btn btn-success">
+                              <button
+                                type="button"
+                                className="btn btn-success"
+                                onClick={() =>
+                                  setModalEdit({
+                                    id: item.id,
+                                    visible: true,
+                                    type: "kontruksiBadanKapal",
+                                    index
+                                  })
+                                }
+                              >
                                 edit
                               </button>
                               <button
@@ -298,6 +380,24 @@ const Component = () => {
           </Col>
         </Row>
       )}
+
+      <Form
+        title={`Edit ${_typeTitle(modalEdit.type)}`}
+        isShow={modalEdit.visible}
+        onHide={() => setModalEdit({ ...modalEdit, visible: false })}
+        data={rabReparasiState[modalEdit.type].list[modalEdit.index]}
+        idKapal={id!}
+        type={modalEdit.type}
+        id={modalEdit.id}
+      />
+
+      <Form
+        title={`Add ${_typeTitle(modalAdd.type)}`}
+        isShow={modalAdd.visible}
+        onHide={() => setModalAdd({ ...modalAdd, visible: false })}
+        idKapal={id!}
+        type={modalAdd.type}
+      />
     </Container>
   );
 };
