@@ -10,7 +10,7 @@ const Component = () => {
   const listMenu = [
     {
       title: "Standar tarif",
-      pathname: "/dashboard"
+      pathname: "/dashboard/standar-tarif"
     },
     {
       title: "Identitas Kapal",
@@ -62,7 +62,7 @@ const Component = () => {
             <li className="nav-item" key={index}>
               <div
                 className={`nav-link ${
-                  history.location.pathname === item.pathname ? "h6" : ""
+                  history.location.pathname.includes(item.pathname) ? "h6" : ""
                 }`}
                 onClick={() => history.push(item.pathname)}
               >
@@ -87,7 +87,9 @@ const Component = () => {
               <li className="nav-item" key={index}>
                 <div
                   className={`nav-link ${
-                    history.location.pathname === item.pathname ? "h6" : ""
+                    history.location.pathname.includes(item.pathname)
+                      ? "h6"
+                      : ""
                   }`}
                   onClick={() => history.push(item.pathname)}
                 >

@@ -7,6 +7,7 @@ import { Col, Row, Sidebar, Topbar } from "../components";
 // screens
 import StandarTarif from "../pages/StandarTarif";
 import IdentitasKapal from "../pages/IdentitasKapal";
+import RencanaAnggaranBiayaReparasiKapal from "../pages/RencanaAnggaranBiayaReparasiKapal";
 import Admin from "./Admin";
 
 const App = () => {
@@ -21,11 +22,17 @@ const App = () => {
               <Sidebar />
             </Col>
             <Col size={10}>
-              <Route path={match.path} exact>
+              <Route path={`${match.path}`} exact>
+                <Redirect to={`${match.path}/standar-tarif`} />
+              </Route>
+              <Route path={`${match.path}/standar-tarif`} exact>
                 <StandarTarif />
               </Route>
               <Route path={`${match.path}/identitas-kapal`}>
                 <IdentitasKapal />
+              </Route>
+              <Route path={`${match.path}/rab-reparasi-kapal`}>
+                <RencanaAnggaranBiayaReparasiKapal />
               </Route>
               <Route path={`${match.path}/admin`}>
                 {localStorage.getItem("is_admin") === "true" ? (
