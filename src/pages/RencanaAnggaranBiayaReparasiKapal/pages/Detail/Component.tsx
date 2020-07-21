@@ -12,7 +12,7 @@ import {
   getAllPengedokan,
   getKapal
 } from "../../../../redux/actions";
-import { documentTitle } from "../../../../utils";
+import { documentTitle, maskedMoney } from "../../../../utils";
 import { Col, Container, Row } from "../../../../components";
 import { Form } from "./components";
 
@@ -74,6 +74,12 @@ const Component = () => {
       }
       return "Kontruksi Badan Kapal";
     },
+    []
+  );
+
+  const _sum = useCallback(
+    (item: any[], key: string) =>
+      item.reduce((a, b) => parseInt(a, 10) + (parseInt(b[key], 10) || 0), 0),
     []
   );
 
@@ -238,13 +244,13 @@ const Component = () => {
                           <th scope="row">{`${index + 1}.`}</th>
                           <td>{item.nama_pekerjaan}</td>
                           <td>{item.satuan}</td>
-                          <td>{item.dps}</td>
-                          <td>{item.sub_kont}</td>
-                          <td>{item.jasa_peralatan}</td>
-                          <td>{item.material}</td>
-                          <td>{item.material_bantu}</td>
-                          <td>{item.overhead}</td>
-                          <td>{item.total}</td>
+                          <td>{maskedMoney(item.dps)}</td>
+                          <td>{maskedMoney(item.sub_kont)}</td>
+                          <td>{maskedMoney(item.jasa_peralatan)}</td>
+                          <td>{maskedMoney(item.material)}</td>
+                          <td>{maskedMoney(item.material_bantu)}</td>
+                          <td>{maskedMoney(item.overhead)}</td>
+                          <td>{maskedMoney(item.total)}</td>
                           <td>
                             <button
                               type="button"
@@ -330,13 +336,13 @@ const Component = () => {
                             <th scope="row">{`${index + 1}.`}</th>
                             <td>{item.nama_pekerjaan}</td>
                             <td>{item.satuan}</td>
-                            <td>{item.dps}</td>
-                            <td>{item.sub_kont}</td>
-                            <td>{item.jasa_peralatan}</td>
-                            <td>{item.material}</td>
-                            <td>{item.material_bantu}</td>
-                            <td>{item.overhead}</td>
-                            <td>{item.total}</td>
+                            <td>{maskedMoney(item.dps)}</td>
+                            <td>{maskedMoney(item.sub_kont)}</td>
+                            <td>{maskedMoney(item.jasa_peralatan)}</td>
+                            <td>{maskedMoney(item.material)}</td>
+                            <td>{maskedMoney(item.material_bantu)}</td>
+                            <td>{maskedMoney(item.overhead)}</td>
+                            <td>{maskedMoney(item.total)}</td>
                             <td>
                               <button
                                 type="button"
@@ -423,13 +429,13 @@ const Component = () => {
                             <th scope="row">{`${index + 1}.`}</th>
                             <td>{item.nama_pekerjaan}</td>
                             <td>{item.satuan}</td>
-                            <td>{item.dps}</td>
-                            <td>{item.sub_kont}</td>
-                            <td>{item.jasa_peralatan}</td>
-                            <td>{item.material}</td>
-                            <td>{item.material_bantu}</td>
-                            <td>{item.overhead}</td>
-                            <td>{item.total}</td>
+                            <td>{maskedMoney(item.dps)}</td>
+                            <td>{maskedMoney(item.sub_kont)}</td>
+                            <td>{maskedMoney(item.jasa_peralatan)}</td>
+                            <td>{maskedMoney(item.material)}</td>
+                            <td>{maskedMoney(item.material_bantu)}</td>
+                            <td>{maskedMoney(item.overhead)}</td>
+                            <td>{maskedMoney(item.total)}</td>
                             <td>
                               <button
                                 type="button"
@@ -494,43 +500,124 @@ const Component = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Rp. 50.000</td>
-                    <td>Rp. 50.000</td>
-                    <td>Rp. 50.000</td>
-                    <td>Rp. 50.000</td>
-                    <td>Rp. 50.000</td>
-                    <td>Rp. 50.000</td>
-                    <td>Rp. 50.000</td>
+                  <tr style={{ textAlign: "center" }}>
+                    <td>
+                      {maskedMoney(
+                        _sum(rabReparasiState.pengedokan.list, "dps") +
+                          _sum(rabReparasiState.pelayananUmum.list, "dps") +
+                          _sum(rabReparasiState.kontruksiBadanKapal.list, "dps")
+                      )}
+                    </td>
+                    <td>
+                      {maskedMoney(
+                        _sum(rabReparasiState.pengedokan.list, "sub_kont") +
+                          _sum(
+                            rabReparasiState.pelayananUmum.list,
+                            "sub_kont"
+                          ) +
+                          _sum(
+                            rabReparasiState.kontruksiBadanKapal.list,
+                            "sub_kont"
+                          )
+                      )}
+                    </td>
+                    <td>
+                      {maskedMoney(
+                        _sum(
+                          rabReparasiState.pengedokan.list,
+                          "jasa_peralatan"
+                        ) +
+                          _sum(
+                            rabReparasiState.pelayananUmum.list,
+                            "jasa_peralatan"
+                          ) +
+                          _sum(
+                            rabReparasiState.kontruksiBadanKapal.list,
+                            "jasa_peralatan"
+                          )
+                      )}
+                    </td>
+                    <td>
+                      {maskedMoney(
+                        _sum(rabReparasiState.pengedokan.list, "material") +
+                          _sum(
+                            rabReparasiState.pelayananUmum.list,
+                            "material"
+                          ) +
+                          _sum(
+                            rabReparasiState.kontruksiBadanKapal.list,
+                            "material"
+                          )
+                      )}
+                    </td>
+                    <td>
+                      {maskedMoney(
+                        _sum(
+                          rabReparasiState.pengedokan.list,
+                          "material_bantu"
+                        ) +
+                          _sum(
+                            rabReparasiState.pelayananUmum.list,
+                            "material_bantu"
+                          ) +
+                          _sum(
+                            rabReparasiState.kontruksiBadanKapal.list,
+                            "material_bantu"
+                          )
+                      )}
+                    </td>
+                    <td>
+                      {maskedMoney(
+                        _sum(rabReparasiState.pengedokan.list, "overhead") +
+                          _sum(
+                            rabReparasiState.pelayananUmum.list,
+                            "overhead"
+                          ) +
+                          _sum(
+                            rabReparasiState.kontruksiBadanKapal.list,
+                            "overhead"
+                          )
+                      )}
+                    </td>
+                    <td>
+                      {maskedMoney(
+                        _sum(rabReparasiState.pengedokan.list, "total") +
+                          _sum(rabReparasiState.pelayananUmum.list, "total") +
+                          _sum(
+                            rabReparasiState.kontruksiBadanKapal.list,
+                            "total"
+                          )
+                      )}
+                    </td>
                   </tr>
                   <tr>
                     <th scope="row">Total biaya tenaga kerja</th>
                     <td colSpan={6} style={{ textAlign: "center" }}>
-                      Rp. 50.000
+                      {maskedMoney(50000)}
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Total bahan baku</th>
                     <td colSpan={6} style={{ textAlign: "center" }}>
-                      Rp. 50.000
+                      {maskedMoney(50000)}
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Total biaya tidak langsung</th>
                     <td colSpan={6} style={{ textAlign: "center" }}>
-                      Rp. 50.000
+                      {maskedMoney(50000)}
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Harga PPN 10%</th>
                     <td colSpan={6} style={{ textAlign: "center" }}>
-                      Rp. 50.000
+                      {maskedMoney(50000)}
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Total estimasi biaya</th>
                     <td colSpan={6} style={{ textAlign: "center" }}>
-                      Rp. 50.000
+                      {maskedMoney(50000)}
                     </td>
                   </tr>
                 </tbody>
