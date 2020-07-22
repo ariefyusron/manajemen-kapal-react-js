@@ -83,6 +83,30 @@ const Component = () => {
     []
   );
 
+  const totalTenagaKerja =
+    _sum(rabReparasiState.pengedokan.list, "dps") +
+    _sum(rabReparasiState.pelayananUmum.list, "dps") +
+    _sum(rabReparasiState.kontruksiBadanKapal.list, "dps") +
+    _sum(rabReparasiState.pengedokan.list, "sub_kont") +
+    _sum(rabReparasiState.pelayananUmum.list, "sub_kont") +
+    _sum(rabReparasiState.kontruksiBadanKapal.list, "sub_kont");
+
+  const totalBahanBaku =
+    _sum(rabReparasiState.pengedokan.list, "material") +
+    _sum(rabReparasiState.pelayananUmum.list, "material") +
+    _sum(rabReparasiState.kontruksiBadanKapal.list, "material");
+
+  const totalBiayaTidakLangsung =
+    _sum(rabReparasiState.pengedokan.list, "jasa_peralatan") +
+    _sum(rabReparasiState.pelayananUmum.list, "jasa_peralatan") +
+    _sum(rabReparasiState.kontruksiBadanKapal.list, "jasa_peralatan") +
+    _sum(rabReparasiState.pengedokan.list, "material_bantu") +
+    _sum(rabReparasiState.pelayananUmum.list, "material_bantu") +
+    _sum(rabReparasiState.kontruksiBadanKapal.list, "material_bantu") +
+    _sum(rabReparasiState.pengedokan.list, "overhead") +
+    _sum(rabReparasiState.pelayananUmum.list, "overhead") +
+    _sum(rabReparasiState.kontruksiBadanKapal.list, "overhead");
+
   return (
     <Container
       isLoading={
@@ -586,31 +610,29 @@ const Component = () => {
                   <tr>
                     <th scope="row">Total biaya tenaga kerja</th>
                     <td colSpan={6} style={{ textAlign: "center" }}>
-                      {maskedMoney(50000)}
+                      {maskedMoney(totalTenagaKerja)}
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Total bahan baku</th>
                     <td colSpan={6} style={{ textAlign: "center" }}>
-                      {maskedMoney(50000)}
+                      {maskedMoney(totalBahanBaku)}
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Total biaya tidak langsung</th>
                     <td colSpan={6} style={{ textAlign: "center" }}>
-                      {maskedMoney(50000)}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Harga PPN 10%</th>
-                    <td colSpan={6} style={{ textAlign: "center" }}>
-                      {maskedMoney(50000)}
+                      {maskedMoney(totalBiayaTidakLangsung)}
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Total estimasi biaya</th>
                     <td colSpan={6} style={{ textAlign: "center" }}>
-                      {maskedMoney(50000)}
+                      {maskedMoney(
+                        totalTenagaKerja +
+                          totalBahanBaku +
+                          totalBiayaTidakLangsung
+                      )}
                     </td>
                   </tr>
                 </tbody>
