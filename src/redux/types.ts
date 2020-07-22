@@ -23,6 +23,7 @@ export interface Reducers {
   kapal: KapalState;
   rabReparasi: RabReparasiState;
   standarTarif: StandarTarifState;
+  persetujuanRab: PersetujuanRabState;
 }
 
 // reducers
@@ -79,4 +80,9 @@ export interface StandarTarifState {
   isLoading: boolean;
   list: any[];
   listPekerjaan: any[];
+}
+
+export interface PersetujuanRabState {
+  isLoading: boolean;
+  data: any;
 }

@@ -139,6 +139,15 @@ const api = {
   patchPekerjaanStandarTarif: (form: any, id: string | number) =>
     host.patch(`standar-tarif/pekerjaan/${id}`, form, {
       headers: { Authorization: token }
+    }),
+
+  getPersetujuanRab: (idKapal: string) =>
+    host.get(`persetujuan-rab/${idKapal}`, {
+      headers: { Authorization: token }
+    }),
+  patchPersetujuanRab: (form: any, idKapal: string) =>
+    host.patch(`persetujuan-rab/${idKapal}`, form, {
+      headers: { Authorization: token }
     })
 };
 

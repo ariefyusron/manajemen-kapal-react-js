@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
@@ -6,20 +6,24 @@ import { Reducers } from "../../../../redux/types";
 import {
   getAllPekerjaanRab,
   getAllRab,
-  getKapal
+  getKapal,
+  getPersetujuanRab
 } from "../../../../redux/actions";
 import { maskedMoney } from "../../../../utils";
 import { Col, Container, Row } from "../../../../components";
+import { Form } from "./components";
 
 const Component = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
 
-  const { rabReparasiState, kapalState } = useSelector(
+  const [modalEdit, setModalEdit] = useState(false);
+  const { rabReparasiState, kapalState, persetujuanRab } = useSelector(
     (state: Reducers) => ({
       rabReparasiState: state.rabReparasi,
-      kapalState: state.kapal
+      kapalState: state.kapal,
+      persetujuanRab: state.persetujuanRab
     }),
     shallowEqual
   );
@@ -28,6 +32,7 @@ const Component = () => {
     dispatch(getAllPekerjaanRab(id!));
     dispatch(getAllRab(id!));
     dispatch(getKapal(id!));
+    dispatch(getPersetujuanRab(id!));
   }, [dispatch, id]);
 
   const _sum = useCallback(
@@ -38,7 +43,11 @@ const Component = () => {
 
   return (
     <Container
-      isLoading={rabReparasiState.isLoading || kapalState.detailKapal.isLoading}
+      isLoading={
+        rabReparasiState.isLoading ||
+        kapalState.detailKapal.isLoading ||
+        persetujuanRab.isLoading
+      }
     >
       <Row
         style={{ marginBottom: 20, marginTop: 10 }}
@@ -59,8 +68,8 @@ const Component = () => {
         </Col>
       </Row>
 
-      <Row style={{ marginBottom: 20 }} className="align-items-end">
-        <Col>
+      <Row style={{ marginBottom: 20 }}>
+        <Col size={10}>
           <table style={{ width: "100%" }}>
             <tr>
               <th scope="col" colSpan={5}>
@@ -131,6 +140,16 @@ const Component = () => {
             </tr>
           </table>
         </Col>
+        <Col size={2}>
+          <button
+            type="button"
+            className="btn btn-link my-2 my-sm-0"
+            style={{ textDecoration: "underline" }}
+            onClick={() => setModalEdit(true)}
+          >
+            Edit
+          </button>
+        </Col>
       </Row>
 
       <Row style={{ marginBottom: 40 }} className="align-items-end">
@@ -149,14 +168,14 @@ const Component = () => {
               <td style={{ width: "2%" }}> </td>
               <td style={{ width: "30%" }}>Kapal di atas dok</td>
               <td style={{ width: "2%" }}>:</td>
-              <td style={{ width: "5%" }}>10</td>
+              <td style={{ width: "5%" }}>{persetujuanRab.data.dok}</td>
               <td>Hari</td>
             </tr>
             <tr>
               <td style={{ width: "2%" }}> </td>
               <td style={{ width: "30%" }}>Kapal floating</td>
               <td style={{ width: "2%" }}>:</td>
-              <td style={{ width: "5%" }}>5</td>
+              <td style={{ width: "5%" }}>{persetujuanRab.data.floating}</td>
               <td>Hari</td>
             </tr>
             <tr>
@@ -167,39 +186,25 @@ const Component = () => {
               <td style={{ width: "2%" }}> </td>
               <td style={{ width: "30%" }}>Tahap Pertama</td>
               <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>
-                20% dari beaya pekerjaan dibayarkan saat kapal masuk galangan.
-              </td>
+              <td colSpan={2}>{persetujuanRab.data.pertama}</td>
             </tr>
             <tr style={{ verticalAlign: "top" }}>
               <td style={{ width: "2%" }}> </td>
               <td style={{ width: "30%" }}>Tahap Kedua</td>
               <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>
-                30% dari beaya pekerjaan dan termasuk biaya pengembangan /
-                tambahan pekerjaan, dengan fisik pekerjaan 50% dan dibayarkan
-              </td>
+              <td colSpan={2}>{persetujuanRab.data.kedua}</td>
             </tr>
             <tr style={{ verticalAlign: "top" }}>
               <td style={{ width: "2%" }}> </td>
               <td style={{ width: "30%" }}>Tahap Ketiga</td>
               <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>
-                30% dari beaya pekerjaan dan termasuk biaya pengembangan /
-                tambahan pekerjaan, dengan fisik pekerjaan 100% dan dibayarkan
-              </td>
+              <td colSpan={2}>{persetujuanRab.data.ketiga}</td>
             </tr>
             <tr style={{ verticalAlign: "top" }}>
               <td style={{ width: "2%" }}> </td>
               <td style={{ width: "30%" }}>Tahap Keempat</td>
               <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>
-                20% dari final bill dibayarkan paling lambat 15 (lima belas)
-                hari kalender terhitung sejak kapal keluar dengan jaminan CEK
-                yang diberikan setelah Final Nego. Final negosiasi dilaksanakan
-                paling lambat 1 (satu) minggu setelah kapalkeluar galangan
-                PT.DPS.
-              </td>
+              <td colSpan={2}>{persetujuanRab.data.keempat}</td>
             </tr>
             <tr>
               <td style={{ width: "2%" }}>3.</td>
@@ -222,6 +227,14 @@ const Component = () => {
           </table>
         </Col>
       </Row>
+
+      <Form
+        isShow={modalEdit}
+        onHide={() => setModalEdit(false)}
+        title="Edit"
+        idKapal={id!}
+        data={persetujuanRab.data}
+      />
     </Container>
   );
 };
