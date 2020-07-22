@@ -13,7 +13,7 @@ import { Col, Container, Row } from "../../components";
 import { Form, FormPekerjaan } from "./components";
 
 const Component = () => {
-  documentTitle("Standar Tarifs");
+  documentTitle("Standar Tarif");
   const dispatch = useDispatch();
 
   const [modalAddPekerjaan, setModalAddPekerjaan] = useState(false);
