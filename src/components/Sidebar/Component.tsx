@@ -21,10 +21,6 @@ const Component = () => {
       pathname: "/dashboard/rab-reparasi-kapal"
     },
     {
-      title: "Proyek Reparasi Kapal",
-      pathname: "/dashboard/proyek-reparasi-kapal"
-    },
-    {
       title: "Persetujuan RAB",
       pathname: "/dashboard/peresetujuan-rab"
     }
