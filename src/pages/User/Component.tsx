@@ -19,7 +19,7 @@ const Component = () => {
   }, [dispatch]);
 
   return (
-    <Container>
+    <Container isLoading={authState.user.isLoading}>
       <Row style={{ marginBottom: 10, marginTop: 10 }}>
         <Col>
           <h1>User</h1>
@@ -41,39 +41,35 @@ const Component = () => {
 
       <Row>
         <Col>
-          {!authState.user.isLoading ? (
-            <table className="table">
-              <thead className="thead-light">
-                <tr>
-                  <th scope="col">No</th>
-                  <th scope="col">Username</th>
-                  <th scope="col">Permission</th>
-                  <th scope="col">Aksi</th>
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Username</th>
+                <th scope="col">Permission</th>
+                <th scope="col">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {authState.user.list.map((item, index) => (
+                <tr key={index}>
+                  <th scope="row">{`${index + 1}.`}</th>
+                  <td>{item.username}</td>
+                  <td>{item.is_admin ? "Admin" : "User"}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      style={{ marginLeft: 15 }}
+                      onClick={() => dispatch(deleteUser(item.id))}
+                    >
+                      delete
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {authState.user.list.map((item, index) => (
-                  <tr key={index}>
-                    <th scope="row">{`${index + 1}.`}</th>
-                    <td>{item.username}</td>
-                    <td>{item.is_admin ? "Admin" : "User"}</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        style={{ marginLeft: 15 }}
-                        onClick={() => dispatch(deleteUser(item.id))}
-                      >
-                        delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>loading...</p>
-          )}
+              ))}
+            </tbody>
+          </table>
         </Col>
       </Row>
 

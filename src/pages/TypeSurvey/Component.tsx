@@ -18,7 +18,7 @@ const Component = () => {
   }, [dispatch]);
 
   return (
-    <Container>
+    <Container isLoading={kapalState.typeSurvey.isLoading}>
       <Row style={{ marginBottom: 10, marginTop: 10 }}>
         <Col>
           <h1>Type Survey</h1>
@@ -40,37 +40,33 @@ const Component = () => {
 
       <Row>
         <Col>
-          {!kapalState.typeSurvey.isLoading ? (
-            <table className="table">
-              <thead className="thead-light">
-                <tr>
-                  <th scope="col">No</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Aksi</th>
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {kapalState.typeSurvey.list.map((item, index) => (
+                <tr key={index}>
+                  <th scope="row">{`${index + 1}.`}</th>
+                  <td>{item.name}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      style={{ marginLeft: 15 }}
+                      onClick={() => dispatch(deleteTypeSurvey(item.id))}
+                    >
+                      delete
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {kapalState.typeSurvey.list.map((item, index) => (
-                  <tr key={index}>
-                    <th scope="row">{`${index + 1}.`}</th>
-                    <td>{item.name}</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        style={{ marginLeft: 15 }}
-                        onClick={() => dispatch(deleteTypeSurvey(item.id))}
-                      >
-                        delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>loading.div....</p>
-          )}
+              ))}
+            </tbody>
+          </table>
         </Col>
       </Row>
 

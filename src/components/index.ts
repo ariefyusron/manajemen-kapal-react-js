@@ -6,5 +6,16 @@ import Col from "./Col";
 import Card from "./Card";
 import Topbar from "./Topbar";
 import FormType from "./FormType";
+import Loading from "./Loading";
 
-export { InfiniteScroll, Sidebar, Container, Row, Col, Card, Topbar, FormType };
+export {
+  InfiniteScroll,
+  Sidebar,
+  Container,
+  Row,
+  Col,
+  Card,
+  Topbar,
+  FormType,
+  Loading
+};

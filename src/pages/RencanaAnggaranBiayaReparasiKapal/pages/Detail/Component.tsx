@@ -84,7 +84,14 @@ const Component = () => {
   );
 
   return (
-    <Container>
+    <Container
+      isLoading={
+        rabReparasiState.pengedokan.isLoading ||
+        rabReparasiState.pelayananUmum.isLoading ||
+        rabReparasiState.kontruksiBadanKapal.isLoading ||
+        kapalState.detailKapal.isLoading
+      }
+    >
       <Row
         style={{ marginBottom: 20, marginTop: 10 }}
         className="align-items-center"
@@ -221,69 +228,65 @@ const Component = () => {
             </Row>
             <Row>
               <Col>
-                {!rabReparasiState.pengedokan.isLoading ? (
-                  <table className="table" style={{ textAlign: "center" }}>
-                    <thead className="thead-light">
-                      <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Pekerjaan</th>
-                        <th scope="col">Satuan</th>
-                        <th scope="col">DPS (Jasa Tenaga)</th>
-                        <th scope="col">SUB KONT (Jasa Tenaga)</th>
-                        <th scope="col">Jasa Peralatan</th>
-                        <th scope="col">Material</th>
-                        <th scope="col">Material Bantu</th>
-                        <th scope="col">Overhead</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Aksi</th>
+                <table className="table" style={{ textAlign: "center" }}>
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Nama Pekerjaan</th>
+                      <th scope="col">Satuan</th>
+                      <th scope="col">DPS (Jasa Tenaga)</th>
+                      <th scope="col">SUB KONT (Jasa Tenaga)</th>
+                      <th scope="col">Jasa Peralatan</th>
+                      <th scope="col">Material</th>
+                      <th scope="col">Material Bantu</th>
+                      <th scope="col">Overhead</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rabReparasiState.pengedokan.list.map((item, index) => (
+                      <tr key={index}>
+                        <th scope="row">{`${index + 1}.`}</th>
+                        <td>{item.nama_pekerjaan}</td>
+                        <td>{item.satuan}</td>
+                        <td>{maskedMoney(item.dps)}</td>
+                        <td>{maskedMoney(item.sub_kont)}</td>
+                        <td>{maskedMoney(item.jasa_peralatan)}</td>
+                        <td>{maskedMoney(item.material)}</td>
+                        <td>{maskedMoney(item.material_bantu)}</td>
+                        <td>{maskedMoney(item.overhead)}</td>
+                        <td>{maskedMoney(item.total)}</td>
+                        <td>
+                          <button
+                            type="button"
+                            className="btn btn-success"
+                            onClick={() =>
+                              setModalEdit({
+                                id: item.id,
+                                visible: true,
+                                type: "pengedokan",
+                                index
+                              })
+                            }
+                          >
+                            edit
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            style={{ marginLeft: 15 }}
+                            onClick={() =>
+                              dispatch(deletePengedokan(id!, item.id))
+                            }
+                          >
+                            delete
+                          </button>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {rabReparasiState.pengedokan.list.map((item, index) => (
-                        <tr key={index}>
-                          <th scope="row">{`${index + 1}.`}</th>
-                          <td>{item.nama_pekerjaan}</td>
-                          <td>{item.satuan}</td>
-                          <td>{maskedMoney(item.dps)}</td>
-                          <td>{maskedMoney(item.sub_kont)}</td>
-                          <td>{maskedMoney(item.jasa_peralatan)}</td>
-                          <td>{maskedMoney(item.material)}</td>
-                          <td>{maskedMoney(item.material_bantu)}</td>
-                          <td>{maskedMoney(item.overhead)}</td>
-                          <td>{maskedMoney(item.total)}</td>
-                          <td>
-                            <button
-                              type="button"
-                              className="btn btn-success"
-                              onClick={() =>
-                                setModalEdit({
-                                  id: item.id,
-                                  visible: true,
-                                  type: "pengedokan",
-                                  index
-                                })
-                              }
-                            >
-                              edit
-                            </button>
-                            <button
-                              type="button"
-                              className="btn btn-danger"
-                              style={{ marginLeft: 15 }}
-                              onClick={() =>
-                                dispatch(deletePengedokan(id!, item.id))
-                              }
-                            >
-                              delete
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p>loading.div....</p>
-                )}
+                    ))}
+                  </tbody>
+                </table>
               </Col>
             </Row>
           </Col>
@@ -312,71 +315,65 @@ const Component = () => {
             </Row>
             <Row>
               <Col>
-                {!rabReparasiState.pelayananUmum.isLoading ? (
-                  <table className="table" style={{ textAlign: "center" }}>
-                    <thead className="thead-light">
-                      <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Pekerjaan</th>
-                        <th scope="col">Satuan</th>
-                        <th scope="col">DPS (Jasa Tenaga)</th>
-                        <th scope="col">SUB KONT (Jasa Tenaga)</th>
-                        <th scope="col">Jasa Peralatan</th>
-                        <th scope="col">Material</th>
-                        <th scope="col">Material Bantu</th>
-                        <th scope="col">Overhead</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Aksi</th>
+                <table className="table" style={{ textAlign: "center" }}>
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Nama Pekerjaan</th>
+                      <th scope="col">Satuan</th>
+                      <th scope="col">DPS (Jasa Tenaga)</th>
+                      <th scope="col">SUB KONT (Jasa Tenaga)</th>
+                      <th scope="col">Jasa Peralatan</th>
+                      <th scope="col">Material</th>
+                      <th scope="col">Material Bantu</th>
+                      <th scope="col">Overhead</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rabReparasiState.pelayananUmum.list.map((item, index) => (
+                      <tr key={index}>
+                        <th scope="row">{`${index + 1}.`}</th>
+                        <td>{item.nama_pekerjaan}</td>
+                        <td>{item.satuan}</td>
+                        <td>{maskedMoney(item.dps)}</td>
+                        <td>{maskedMoney(item.sub_kont)}</td>
+                        <td>{maskedMoney(item.jasa_peralatan)}</td>
+                        <td>{maskedMoney(item.material)}</td>
+                        <td>{maskedMoney(item.material_bantu)}</td>
+                        <td>{maskedMoney(item.overhead)}</td>
+                        <td>{maskedMoney(item.total)}</td>
+                        <td>
+                          <button
+                            type="button"
+                            className="btn btn-success"
+                            onClick={() =>
+                              setModalEdit({
+                                id: item.id,
+                                visible: true,
+                                type: "pelayananUmum",
+                                index
+                              })
+                            }
+                          >
+                            edit
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            style={{ marginLeft: 15 }}
+                            onClick={() =>
+                              dispatch(deletePelayananUmum(id!, item.id))
+                            }
+                          >
+                            delete
+                          </button>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {rabReparasiState.pelayananUmum.list.map(
-                        (item, index) => (
-                          <tr key={index}>
-                            <th scope="row">{`${index + 1}.`}</th>
-                            <td>{item.nama_pekerjaan}</td>
-                            <td>{item.satuan}</td>
-                            <td>{maskedMoney(item.dps)}</td>
-                            <td>{maskedMoney(item.sub_kont)}</td>
-                            <td>{maskedMoney(item.jasa_peralatan)}</td>
-                            <td>{maskedMoney(item.material)}</td>
-                            <td>{maskedMoney(item.material_bantu)}</td>
-                            <td>{maskedMoney(item.overhead)}</td>
-                            <td>{maskedMoney(item.total)}</td>
-                            <td>
-                              <button
-                                type="button"
-                                className="btn btn-success"
-                                onClick={() =>
-                                  setModalEdit({
-                                    id: item.id,
-                                    visible: true,
-                                    type: "pelayananUmum",
-                                    index
-                                  })
-                                }
-                              >
-                                edit
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-danger"
-                                style={{ marginLeft: 15 }}
-                                onClick={() =>
-                                  dispatch(deletePelayananUmum(id!, item.id))
-                                }
-                              >
-                                delete
-                              </button>
-                            </td>
-                          </tr>
-                        )
-                      )}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p>loading.div....</p>
-                )}
+                    ))}
+                  </tbody>
+                </table>
               </Col>
             </Row>
           </Col>
@@ -405,73 +402,69 @@ const Component = () => {
             </Row>
             <Row>
               <Col>
-                {!rabReparasiState.kontruksiBadanKapal.isLoading ? (
-                  <table className="table" style={{ textAlign: "center" }}>
-                    <thead className="thead-light">
-                      <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Pekerjaan</th>
-                        <th scope="col">Satuan</th>
-                        <th scope="col">DPS (Jasa Tenaga)</th>
-                        <th scope="col">SUB KONT (Jasa Tenaga)</th>
-                        <th scope="col">Jasa Peralatan</th>
-                        <th scope="col">Material</th>
-                        <th scope="col">Material Bantu</th>
-                        <th scope="col">Overhead</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {rabReparasiState.kontruksiBadanKapal.list.map(
-                        (item, index) => (
-                          <tr key={index}>
-                            <th scope="row">{`${index + 1}.`}</th>
-                            <td>{item.nama_pekerjaan}</td>
-                            <td>{item.satuan}</td>
-                            <td>{maskedMoney(item.dps)}</td>
-                            <td>{maskedMoney(item.sub_kont)}</td>
-                            <td>{maskedMoney(item.jasa_peralatan)}</td>
-                            <td>{maskedMoney(item.material)}</td>
-                            <td>{maskedMoney(item.material_bantu)}</td>
-                            <td>{maskedMoney(item.overhead)}</td>
-                            <td>{maskedMoney(item.total)}</td>
-                            <td>
-                              <button
-                                type="button"
-                                className="btn btn-success"
-                                onClick={() =>
-                                  setModalEdit({
-                                    id: item.id,
-                                    visible: true,
-                                    type: "kontruksiBadanKapal",
-                                    index
-                                  })
-                                }
-                              >
-                                edit
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-danger"
-                                style={{ marginLeft: 15 }}
-                                onClick={() =>
-                                  dispatch(
-                                    deleteKontruksiBadanKapal(id!, item.id)
-                                  )
-                                }
-                              >
-                                delete
-                              </button>
-                            </td>
-                          </tr>
-                        )
-                      )}
-                    </tbody>
-                  </table>
-                ) : (
-                  <p>loading.div....</p>
-                )}
+                <table className="table" style={{ textAlign: "center" }}>
+                  <thead className="thead-light">
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Nama Pekerjaan</th>
+                      <th scope="col">Satuan</th>
+                      <th scope="col">DPS (Jasa Tenaga)</th>
+                      <th scope="col">SUB KONT (Jasa Tenaga)</th>
+                      <th scope="col">Jasa Peralatan</th>
+                      <th scope="col">Material</th>
+                      <th scope="col">Material Bantu</th>
+                      <th scope="col">Overhead</th>
+                      <th scope="col">Total</th>
+                      <th scope="col">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rabReparasiState.kontruksiBadanKapal.list.map(
+                      (item, index) => (
+                        <tr key={index}>
+                          <th scope="row">{`${index + 1}.`}</th>
+                          <td>{item.nama_pekerjaan}</td>
+                          <td>{item.satuan}</td>
+                          <td>{maskedMoney(item.dps)}</td>
+                          <td>{maskedMoney(item.sub_kont)}</td>
+                          <td>{maskedMoney(item.jasa_peralatan)}</td>
+                          <td>{maskedMoney(item.material)}</td>
+                          <td>{maskedMoney(item.material_bantu)}</td>
+                          <td>{maskedMoney(item.overhead)}</td>
+                          <td>{maskedMoney(item.total)}</td>
+                          <td>
+                            <button
+                              type="button"
+                              className="btn btn-success"
+                              onClick={() =>
+                                setModalEdit({
+                                  id: item.id,
+                                  visible: true,
+                                  type: "kontruksiBadanKapal",
+                                  index
+                                })
+                              }
+                            >
+                              edit
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              style={{ marginLeft: 15 }}
+                              onClick={() =>
+                                dispatch(
+                                  deleteKontruksiBadanKapal(id!, item.id)
+                                )
+                              }
+                            >
+                              delete
+                            </button>
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
               </Col>
             </Row>
           </Col>

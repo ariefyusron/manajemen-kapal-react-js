@@ -19,7 +19,7 @@ const Component = () => {
   }, [dispatch]);
 
   return (
-    <Container>
+    <Container isLoading={kapalState.kapal.isLoading}>
       <Row style={{ marginBottom: 40, marginTop: 10 }}>
         <Col>
           <h1>Rencana Anggaran Biaya Reparasi Kapal</h1>
@@ -28,37 +28,33 @@ const Component = () => {
 
       <Row>
         <Col>
-          {!kapalState.kapal.isLoading ? (
-            <table className="table">
-              <thead className="thead-light">
-                <tr>
-                  <th scope="col">No</th>
-                  <th scope="col">Nama Perusahaan</th>
-                  <th scope="col">Nama Kapal</th>
-                  <th scope="col">Type Kapal</th>
-                  <th scope="col">Type Survey</th>
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama Perusahaan</th>
+                <th scope="col">Nama Kapal</th>
+                <th scope="col">Type Kapal</th>
+                <th scope="col">Type Survey</th>
+              </tr>
+            </thead>
+            <tbody>
+              {kapalState.kapal.list.map((item, index) => (
+                <tr
+                  key={index}
+                  onClick={() =>
+                    history.push(`${history.location.pathname}/${item.id}`)
+                  }
+                >
+                  <th scope="row">{`${index + 1}.`}</th>
+                  <td>{item.class}</td>
+                  <td>{item.name}</td>
+                  <td>{item.KapalType && item.KapalType.name}</td>
+                  <td>{item.SurveyType && item.SurveyType.name}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {kapalState.kapal.list.map((item, index) => (
-                  <tr
-                    key={index}
-                    onClick={() =>
-                      history.push(`${history.location.pathname}/${item.id}`)
-                    }
-                  >
-                    <th scope="row">{`${index + 1}.`}</th>
-                    <td>{item.class}</td>
-                    <td>{item.name}</td>
-                    <td>{item.KapalType && item.KapalType.name}</td>
-                    <td>{item.SurveyType && item.SurveyType.name}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>loading.div....</p>
-          )}
+              ))}
+            </tbody>
+          </table>
         </Col>
       </Row>
     </Container>

@@ -32,7 +32,7 @@ const Component = () => {
     isShow && <div className="invalid-feedback">{message}</div>;
 
   return (
-    <Container className="register">
+    <Container className="register" isLoading={authState.register.isLoading}>
       <Row justifyContent="center" style={{ paddingTop: 200 }}>
         <Col size={6}>
           <Card title="Register Admin">

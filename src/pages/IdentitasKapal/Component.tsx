@@ -31,7 +31,14 @@ const Component = () => {
   }, [dispatch]);
 
   return (
-    <Container>
+    <Container
+      isLoading={
+        kapalState.kapal.isLoading ||
+        kapalState.deleteKapal.isLoading ||
+        kapalState.patchKapal.isLoading ||
+        kapalState.addKapal.isLoading
+      }
+    >
       <Row style={{ marginBottom: 10, marginTop: 10 }}>
         <Col>
           <h1>Identitas Kapal</h1>
@@ -53,48 +60,44 @@ const Component = () => {
 
       <Row>
         <Col>
-          {!kapalState.kapal.isLoading ? (
-            <table className="table">
-              <thead className="thead-light">
-                <tr>
-                  <th scope="col">No</th>
-                  <th scope="col">Nama Kapal</th>
-                  <th scope="col">Nama Perusahaan</th>
-                  <th scope="col">Aksi</th>
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama Kapal</th>
+                <th scope="col">Nama Perusahaan</th>
+                <th scope="col">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {kapalState.kapal.list.map((item, index) => (
+                <tr key={index}>
+                  <th scope="row">{`${index + 1}.`}</th>
+                  <td>{item.name}</td>
+                  <td>{item.class}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-success"
+                      onClick={() =>
+                        setModalEdit({ show: true, index, id: item.id })
+                      }
+                    >
+                      edit
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      style={{ marginLeft: 15 }}
+                      onClick={() => dispatch(deleteKapal(item.id))}
+                    >
+                      delete
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {kapalState.kapal.list.map((item, index) => (
-                  <tr key={index}>
-                    <th scope="row">{`${index + 1}.`}</th>
-                    <td>{item.name}</td>
-                    <td>{item.class}</td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-success"
-                        onClick={() =>
-                          setModalEdit({ show: true, index, id: item.id })
-                        }
-                      >
-                        edit
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        style={{ marginLeft: 15 }}
-                        onClick={() => dispatch(deleteKapal(item.id))}
-                      >
-                        delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : (
-            <p>loading.div....</p>
-          )}
+              ))}
+            </tbody>
+          </table>
         </Col>
       </Row>
 
