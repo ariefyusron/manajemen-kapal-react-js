@@ -1,9 +1,10 @@
 import React, { memo, useCallback } from "react";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { patchStandarTarif, postStandarTarif } from "../../../../redux/actions";
+import { Reducers } from "../../../../redux/types";
 
 interface Props {
   isShow: boolean;
@@ -16,6 +17,10 @@ interface Props {
 const Component = ({ isShow, onHide, data, id, title }: Props) => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
+
+  const standarTarifState = useSelector(
+    (state: Reducers) => state.standarTarif
+  );
 
   const _handleSubmit = useCallback(
     form => {
@@ -35,6 +40,23 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={handleSubmit(_handleSubmit)}>
+          <div className="form-group">
+            <label>Pekerjaan</label>
+            <select
+              className="form-control"
+              name="id_pekerjaan"
+              ref={register}
+              defaultValue={(data && data.id_pekerjaan) || ""}
+            >
+              <option value="">--pilih--</option>
+              {standarTarifState.listPekerjaan.map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className="form-group">
             <label>Item Pekerjaan</label>
             <input

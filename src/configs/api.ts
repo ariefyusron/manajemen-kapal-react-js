@@ -137,6 +137,22 @@ const api = {
   patchStandarTarif: (form: any, id: string | number) =>
     host.patch(`standar-tarif/${id}`, form, {
       headers: { Authorization: token }
+    }),
+  getPekerjaanStandarTarif: () =>
+    host.get("standar-tarif/pekerjaan", {
+      headers: { Authorization: token }
+    }),
+  deletePekerjaanStandarTarif: (id: string) =>
+    host.delete(`standar-tarif/pekerjaan/${id}`, {
+      headers: { Authorization: token }
+    }),
+  postPekerjaanStandarTarif: (form: any) =>
+    host.post("standar-tarif/pekerjaan", form, {
+      headers: { Authorization: token }
+    }),
+  patchPekerjaanStandarTarif: (form: any, id: string | number) =>
+    host.patch(`standar-tarif/pekerjaan/${id}`, form, {
+      headers: { Authorization: token }
     })
 };
 

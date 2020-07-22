@@ -87,4 +87,5 @@ export interface RabReparasiState {
 export interface StandarTarifState {
   isLoading: boolean;
   list: any[];
+  listPekerjaan: any[];
 }
