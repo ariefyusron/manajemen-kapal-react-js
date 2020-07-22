@@ -22,6 +22,7 @@ export interface Reducers {
   auth: AuthState;
   kapal: KapalState;
   rabReparasi: RabReparasiState;
+  standarTarif: StandarTarifState;
 }
 
 // reducers
@@ -81,4 +82,9 @@ export interface RabReparasiState {
     isLoading: boolean;
     list: any[];
   };
+}
+
+export interface StandarTarifState {
+  isLoading: boolean;
+  list: any[];
 }

@@ -120,6 +120,23 @@ const api = {
   patchKontruksiBadanKapal: (form: any, idKapal: string, id: string | number) =>
     host.patch(`kontruksi-badan-kapal/${idKapal}/${id}`, form, {
       headers: { Authorization: token }
+    }),
+
+  getStandarTarif: () =>
+    host.get("standar-tarif", {
+      headers: { Authorization: token }
+    }),
+  deleteStandarTarif: (id: string) =>
+    host.delete(`standar-tarif/${id}`, {
+      headers: { Authorization: token }
+    }),
+  postStandarTarif: (form: any) =>
+    host.post("standar-tarif", form, {
+      headers: { Authorization: token }
+    }),
+  patchStandarTarif: (form: any, id: string | number) =>
+    host.patch(`standar-tarif/${id}`, form, {
+      headers: { Authorization: token }
     })
 };
 
