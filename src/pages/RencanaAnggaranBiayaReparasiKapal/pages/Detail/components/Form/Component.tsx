@@ -1,16 +1,10 @@
 import React, { memo, useCallback } from "react";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import {
-  patchKontruksiBadanKapal,
-  patchPelayananUmum,
-  patchPengedokan,
-  postKontruksiBadanKapal,
-  postPelayananUmum,
-  postPengedokan
-} from "../../../../../../redux/actions";
+import { patchRab, postRab } from "../../../../../../redux/actions";
+import { Reducers } from "../../../../../../redux/types";
 
 interface Props {
   isShow: boolean;
@@ -19,40 +13,23 @@ interface Props {
   idKapal: string;
   id?: string | number;
   title: string;
-  type?: "pengedokan" | "pelayananUmum" | "kontruksiBadanKapal";
 }
 
-const Component = ({
-  isShow,
-  onHide,
-  data,
-  idKapal,
-  title,
-  type,
-  id
-}: Props) => {
+const Component = ({ isShow, onHide, data, idKapal, title, id }: Props) => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
+
+  const rabReparasiState = useSelector((state: Reducers) => state.rabReparasi);
 
   const _handleSubmit = useCallback(
     form => {
       if (data) {
-        if (type === "pengedokan") {
-          dispatch(patchPengedokan(form, idKapal, id!, onHide));
-        } else if (type === "pelayananUmum") {
-          dispatch(patchPelayananUmum(form, idKapal, id!, onHide));
-        } else {
-          dispatch(patchKontruksiBadanKapal(form, idKapal, id!, onHide));
-        }
-      } else if (type === "pengedokan") {
-        dispatch(postPengedokan(form, idKapal, onHide));
-      } else if (type === "pelayananUmum") {
-        dispatch(postPelayananUmum(form, idKapal, onHide));
+        dispatch(patchRab(form, idKapal, id!, onHide));
       } else {
-        dispatch(postKontruksiBadanKapal(form, idKapal, onHide));
+        dispatch(postRab(form, idKapal, onHide));
       }
     },
-    [dispatch, data, idKapal, type, onHide, id]
+    [dispatch, data, idKapal, onHide, id]
   );
 
   return (
@@ -62,6 +39,23 @@ const Component = ({
       </Modal.Header>
       <Modal.Body>
         <form onSubmit={handleSubmit(_handleSubmit)}>
+          <div className="form-group">
+            <label>Pekerjaan</label>
+            <select
+              className="form-control"
+              name="id_pekerjaan"
+              ref={register}
+              defaultValue={(data && data.id_pekerjaan) || ""}
+            >
+              <option value="">--pilih--</option>
+              {rabReparasiState.listPekerjaan.map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className="form-group">
             <label>Nama Pekerjaan</label>
             <input

@@ -70,18 +70,9 @@ export interface KapalState {
 }
 
 export interface RabReparasiState {
-  pengedokan: {
-    isLoading: boolean;
-    list: any[];
-  };
-  pelayananUmum: {
-    isLoading: boolean;
-    list: any[];
-  };
-  kontruksiBadanKapal: {
-    isLoading: boolean;
-    list: any[];
-  };
+  isLoading: boolean;
+  list: any[];
+  listPekerjaan: any[];
 }
 
 export interface StandarTarifState {
