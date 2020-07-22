@@ -286,108 +286,120 @@ const Component = () => {
       </Row>
 
       {rabReparasiState.listPekerjaan.length > 0 && (
-        <Row style={{ marginBottom: 60 }}>
-          <Col>
-            <Row style={{ marginBottom: 10 }}>
-              <Col>
-                <h3>Total</h3>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <table className="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th scope="col">DPS (Jasa Tenaga)</th>
-                      <th scope="col">SUB KONT (Jasa Tenaga</th>
-                      <th scope="col">Jasa Peralatan</th>
-                      <th scope="col">Material</th>
-                      <th scope="col">Material Bantu</th>
-                      <th scope="col">Overhead</th>
-                      <th scope="col">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style={{ textAlign: "center" }}>
-                      <td>{maskedMoney(_sum(rabReparasiState.list, "dps"))}</td>
-                      <td>
-                        {maskedMoney(_sum(rabReparasiState.list, "sub_kont"))}
-                      </td>
-                      <td>
-                        {maskedMoney(
-                          _sum(rabReparasiState.list, "jasa_peralatan")
-                        )}
-                      </td>
-                      <td>
-                        {maskedMoney(_sum(rabReparasiState.list, "material"))}
-                      </td>
-                      <td>
-                        {maskedMoney(
-                          _sum(rabReparasiState.list, "material_bantu")
-                        )}
-                      </td>
-                      <td>
-                        {maskedMoney(_sum(rabReparasiState.list, "overhead"))}
-                      </td>
-                      <td>
-                        {maskedMoney(_sum(rabReparasiState.list, "total"))}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Total biaya tenaga kerja</th>
-                      <td colSpan={6} style={{ textAlign: "center" }}>
-                        {maskedMoney(
-                          _sum(rabReparasiState.list, "dps") +
-                            _sum(rabReparasiState.list, "sub_kont")
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Total biaya bahan baku</th>
-                      <td colSpan={6} style={{ textAlign: "center" }}>
-                        {maskedMoney(_sum(rabReparasiState.list, "material"))}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Total biaya overhead</th>
-                      <td colSpan={6} style={{ textAlign: "center" }}>
-                        {maskedMoney(_sum(rabReparasiState.list, "overhead"))}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Total biaya tidak langsung</th>
-                      <td colSpan={6} style={{ textAlign: "center" }}>
-                        {maskedMoney(
-                          (_sum(rabReparasiState.list, "dps") +
-                            _sum(rabReparasiState.list, "sub_kont") +
-                            _sum(rabReparasiState.list, "material") +
-                            _sum(rabReparasiState.list, "overhead")) *
-                            (2.5 / 100)
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Total estimasi biaya</th>
-                      <td colSpan={6} style={{ textAlign: "center" }}>
-                        {maskedMoney(
-                          _sum(rabReparasiState.list, "dps") +
-                            _sum(rabReparasiState.list, "sub_kont") +
-                            _sum(rabReparasiState.list, "material") +
-                            _sum(rabReparasiState.list, "overhead") +
+        <>
+          <Row style={{ marginBottom: 30 }}>
+            <Col>
+              <Row style={{ marginBottom: 10 }}>
+                <Col>
+                  <h3>Total</h3>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <table className="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">DPS (Jasa Tenaga)</th>
+                        <th scope="col">SUB KONT (Jasa Tenaga</th>
+                        <th scope="col">Jasa Peralatan</th>
+                        <th scope="col">Material</th>
+                        <th scope="col">Material Bantu</th>
+                        <th scope="col">Overhead</th>
+                        <th scope="col">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style={{ textAlign: "center" }}>
+                        <td>
+                          {maskedMoney(_sum(rabReparasiState.list, "dps"))}
+                        </td>
+                        <td>
+                          {maskedMoney(_sum(rabReparasiState.list, "sub_kont"))}
+                        </td>
+                        <td>
+                          {maskedMoney(
+                            _sum(rabReparasiState.list, "jasa_peralatan")
+                          )}
+                        </td>
+                        <td>
+                          {maskedMoney(_sum(rabReparasiState.list, "material"))}
+                        </td>
+                        <td>
+                          {maskedMoney(
+                            _sum(rabReparasiState.list, "material_bantu")
+                          )}
+                        </td>
+                        <td>
+                          {maskedMoney(_sum(rabReparasiState.list, "overhead"))}
+                        </td>
+                        <td>
+                          {maskedMoney(_sum(rabReparasiState.list, "total"))}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total biaya tenaga kerja</th>
+                        <td colSpan={6} style={{ textAlign: "center" }}>
+                          {maskedMoney(
+                            _sum(rabReparasiState.list, "dps") +
+                              _sum(rabReparasiState.list, "sub_kont")
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total biaya bahan baku</th>
+                        <td colSpan={6} style={{ textAlign: "center" }}>
+                          {maskedMoney(_sum(rabReparasiState.list, "material"))}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total biaya overhead</th>
+                        <td colSpan={6} style={{ textAlign: "center" }}>
+                          {maskedMoney(_sum(rabReparasiState.list, "overhead"))}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total biaya tidak langsung</th>
+                        <td colSpan={6} style={{ textAlign: "center" }}>
+                          {maskedMoney(
                             (_sum(rabReparasiState.list, "dps") +
                               _sum(rabReparasiState.list, "sub_kont") +
                               _sum(rabReparasiState.list, "material") +
                               _sum(rabReparasiState.list, "overhead")) *
                               (2.5 / 100)
-                        )}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+                          )}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Total estimasi biaya</th>
+                        <td colSpan={6} style={{ textAlign: "center" }}>
+                          {maskedMoney(
+                            _sum(rabReparasiState.list, "dps") +
+                              _sum(rabReparasiState.list, "sub_kont") +
+                              _sum(rabReparasiState.list, "material") +
+                              _sum(rabReparasiState.list, "overhead") +
+                              (_sum(rabReparasiState.list, "dps") +
+                                _sum(rabReparasiState.list, "sub_kont") +
+                                _sum(rabReparasiState.list, "material") +
+                                _sum(rabReparasiState.list, "overhead")) *
+                                (2.5 / 100)
+                          )}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+
+          <Row style={{ marginBottom: 60 }} justifyContent="end">
+            <Col size={2}>
+              <button type="button" className="btn btn-dark">
+                export to excel
+              </button>
+            </Col>
+          </Row>
+        </>
       )}
 
       <Form
