@@ -337,25 +337,50 @@ const Component = () => {
                     <tr>
                       <th scope="row">Total biaya tenaga kerja</th>
                       <td colSpan={6} style={{ textAlign: "center" }}>
-                        {maskedMoney(50)}
+                        {maskedMoney(
+                          _sum(rabReparasiState.list, "dps") +
+                            _sum(rabReparasiState.list, "sub_kont")
+                        )}
                       </td>
                     </tr>
                     <tr>
-                      <th scope="row">Total bahan baku</th>
+                      <th scope="row">Total biaya bahan baku</th>
                       <td colSpan={6} style={{ textAlign: "center" }}>
-                        {maskedMoney(50)}
+                        {maskedMoney(_sum(rabReparasiState.list, "material"))}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Total biaya overhead</th>
+                      <td colSpan={6} style={{ textAlign: "center" }}>
+                        {maskedMoney(_sum(rabReparasiState.list, "overhead"))}
                       </td>
                     </tr>
                     <tr>
                       <th scope="row">Total biaya tidak langsung</th>
                       <td colSpan={6} style={{ textAlign: "center" }}>
-                        {maskedMoney(50)}
+                        {maskedMoney(
+                          (_sum(rabReparasiState.list, "dps") +
+                            _sum(rabReparasiState.list, "sub_kont") +
+                            _sum(rabReparasiState.list, "material") +
+                            _sum(rabReparasiState.list, "overhead")) *
+                            (2.5 / 100)
+                        )}
                       </td>
                     </tr>
                     <tr>
                       <th scope="row">Total estimasi biaya</th>
                       <td colSpan={6} style={{ textAlign: "center" }}>
-                        {maskedMoney(50)}
+                        {maskedMoney(
+                          _sum(rabReparasiState.list, "dps") +
+                            _sum(rabReparasiState.list, "sub_kont") +
+                            _sum(rabReparasiState.list, "material") +
+                            _sum(rabReparasiState.list, "overhead") +
+                            (_sum(rabReparasiState.list, "dps") +
+                              _sum(rabReparasiState.list, "sub_kont") +
+                              _sum(rabReparasiState.list, "material") +
+                              _sum(rabReparasiState.list, "overhead")) *
+                              (2.5 / 100)
+                        )}
                       </td>
                     </tr>
                   </tbody>
