@@ -54,7 +54,7 @@ const Component = () => {
         className="align-items-center"
       >
         <Col size={11}>
-          <h1>Rencana Anggaran Biaya Reparasi Kapal</h1>
+          <h1>Persetujuan Rencana Anggaran Biaya</h1>
         </Col>
         <Col size={1}>
           <button
@@ -75,6 +75,18 @@ const Component = () => {
               <th scope="col" colSpan={5}>
                 DATA-DATA KAPAL :
               </th>
+            </tr>
+            <tr>
+              <td> </td>
+              <td>Client</td>
+              <td>:</td>
+              <td colSpan={2}>{kapalState.detailKapal.data.class}</td>
+            </tr>
+            <tr>
+              <td> </td>
+              <td>Nama</td>
+              <td>:</td>
+              <td colSpan={2}>{kapalState.detailKapal.data.name}</td>
             </tr>
             <tr>
               <td style={{ width: "5%" }}> </td>

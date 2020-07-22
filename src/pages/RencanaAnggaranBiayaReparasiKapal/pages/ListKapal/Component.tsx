@@ -33,7 +33,6 @@ const Component = () => {
                 <th scope="col">Nama Perusahaan</th>
                 <th scope="col">Nama Kapal</th>
                 <th scope="col">Type Kapal</th>
-                <th scope="col">Type Survey</th>
               </tr>
             </thead>
             <tbody>
@@ -48,7 +47,6 @@ const Component = () => {
                   <td>{item.class}</td>
                   <td>{item.name}</td>
                   <td>{item.KapalType && item.KapalType.name}</td>
-                  <td>{item.SurveyType && item.SurveyType.name}</td>
                 </tr>
               ))}
             </tbody>
