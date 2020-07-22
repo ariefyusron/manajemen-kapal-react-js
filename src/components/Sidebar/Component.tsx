@@ -22,7 +22,7 @@ const Component = () => {
     },
     {
       title: "Persetujuan RAB",
-      pathname: "/dashboard/peresetujuan-rab"
+      pathname: "/dashboard/persetujuan-rab"
     }
   ];
 

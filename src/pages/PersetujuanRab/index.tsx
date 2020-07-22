@@ -8,7 +8,7 @@ import ListKapal from "./pages/ListKapal";
 import Detail from "./pages/Detail";
 
 const App = () => {
-  documentTitle("RAB Reparasai Kapal");
+  documentTitle("Persetujuan RAB");
   const match = useRouteMatch();
 
   return (

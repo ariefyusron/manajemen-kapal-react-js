@@ -8,6 +8,7 @@ import { Col, Row, Sidebar, Topbar } from "../components";
 import StandarTarif from "../pages/StandarTarif";
 import IdentitasKapal from "../pages/IdentitasKapal";
 import RencanaAnggaranBiayaReparasiKapal from "../pages/RencanaAnggaranBiayaReparasiKapal";
+import PersetujuanRab from "../pages/PersetujuanRab";
 import Admin from "./Admin";
 
 const App = () => {
@@ -33,6 +34,9 @@ const App = () => {
               </Route>
               <Route path={`${match.path}/rab-reparasi-kapal`}>
                 <RencanaAnggaranBiayaReparasiKapal />
+              </Route>
+              <Route path={`${match.path}/persetujuan-rab`}>
+                <PersetujuanRab />
               </Route>
               <Route path={`${match.path}/admin`}>
                 {localStorage.getItem("is_admin") === "true" ? (

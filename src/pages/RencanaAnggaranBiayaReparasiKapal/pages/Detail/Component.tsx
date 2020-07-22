@@ -10,12 +10,11 @@ import {
   getAllRab,
   getKapal
 } from "../../../../redux/actions";
-import { documentTitle, maskedMoney } from "../../../../utils";
+import { maskedMoney } from "../../../../utils";
 import { Col, Container, Row } from "../../../../components";
 import { Form, FormPekerjaan } from "./components";
 
 const Component = () => {
-  documentTitle("RAB Reparasai Kapal");
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();

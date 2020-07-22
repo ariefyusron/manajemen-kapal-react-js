@@ -20,7 +20,7 @@ const Component = () => {
     <Container isLoading={kapalState.kapal.isLoading}>
       <Row style={{ marginBottom: 40, marginTop: 10 }}>
         <Col>
-          <h1>Rencana Anggaran Biaya Reparasi Kapal</h1>
+          <h1>Persetujuan Rencana Anggaran Biaya</h1>
         </Col>
       </Row>
 
@@ -34,6 +34,7 @@ const Component = () => {
                 <th scope="col">Nama Kapal</th>
                 <th scope="col">Type Kapal</th>
                 <th scope="col">Type Survey</th>
+                <th scope="col">Aksi Persetujuan</th>
               </tr>
             </thead>
             <tbody>
@@ -49,6 +50,11 @@ const Component = () => {
                   <td>{item.name}</td>
                   <td>{item.KapalType && item.KapalType.name}</td>
                   <td>{item.SurveyType && item.SurveyType.name}</td>
+                  <td>
+                    <button type="button" className="btn btn-success">
+                      set
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
