@@ -225,7 +225,7 @@ const Component = () => {
                     {rabReparasiState.list
                       .filter(
                         resFilter =>
-                          resFilter.id_pekerjaan.toString() !== e.id.toString()
+                          resFilter.id_pekerjaan.toString() === e.id.toString()
                       )
                       .map((item, index) => (
                         <tr key={index}>
