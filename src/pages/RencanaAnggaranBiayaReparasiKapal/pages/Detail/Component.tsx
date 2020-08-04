@@ -62,14 +62,9 @@ const Component = () => {
     _sum(rabReparasiState.list, "material_bantu") +
     _sum(rabReparasiState.list, "jasa_peralatan");
 
-  const totalBiayaTidakLangsung =
-    _sum(rabReparasiState.list, "dps") +
-    _sum(rabReparasiState.list, "sub_kont") +
-    _sum(rabReparasiState.list, "material") +
-    (_sum(rabReparasiState.list, "overhead") +
-      _sum(rabReparasiState.list, "material_bantu") +
-      _sum(rabReparasiState.list, "jasa_peralatan")) *
-      (2.5 / 100);
+  const totalBiayaTidakLangsung = Math.ceil(
+    (totalBiayaTenagaKerja + totalBiayaBahanBaku + totalBiayaOverhead) * 0.025
+  );
 
   const totalEstimasi =
     totalBiayaTenagaKerja +
