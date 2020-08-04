@@ -62,6 +62,15 @@ const Component = () => {
     totalBiayaOverhead +
     totalBiayaTidakLangsung;
 
+  const _exportPdf = () => {
+    const printContents = document.getElementById("my-table")!.innerHTML;
+    const originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  };
+
   return (
     <Container
       isLoading={
@@ -89,163 +98,173 @@ const Component = () => {
         </Col>
       </Row>
 
-      <Row style={{ marginBottom: 20 }}>
-        <Col size={10}>
-          <table style={{ width: "100%" }}>
-            <tr>
-              <th scope="col" colSpan={5}>
-                DATA-DATA KAPAL :
-              </th>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Client</td>
-              <td>:</td>
-              <td colSpan={2}>{kapalState.detailKapal.data.class}</td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Nama</td>
-              <td>:</td>
-              <td colSpan={2}>{kapalState.detailKapal.data.name}</td>
-            </tr>
-            <tr>
-              <td style={{ width: "5%" }}> </td>
-              <td style={{ width: "10%" }}>Loa</td>
-              <td style={{ width: "2%" }}>:</td>
-              <td style={{ width: "5%" }}>
-                {kapalState.detailKapal.data.length_oa}
-              </td>
-              <td>M</td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Lpp</td>
-              <td>:</td>
-              <td>{kapalState.detailKapal.data.length_pp}</td>
-              <td>M</td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Breadth</td>
-              <td>:</td>
-              <td>{kapalState.detailKapal.data.breadth}</td>
-              <td>M</td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Depth</td>
-              <td>:</td>
-              <td>{kapalState.detailKapal.data.depth}</td>
-              <td>M</td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Draft</td>
-              <td>:</td>
-              <td>{kapalState.detailKapal.data.draft}</td>
-              <td>M</td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>GRT</td>
-              <td>:</td>
-              <td>{kapalState.detailKapal.data.gross_tonnage}</td>
-              <td>TON</td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Survey</td>
-              <td>:</td>
-              <td colSpan={2}>
-                {kapalState.detailKapal.data.SurveyType &&
-                  kapalState.detailKapal.data.SurveyType.name}
-              </td>
-            </tr>
-            <tr>
-              <td> </td>
-              <td>Class</td>
-              <td>:</td>
-              <td colSpan={2}>
-                {kapalState.detailKapal.data.KapalType &&
-                  kapalState.detailKapal.data.KapalType.name}
-              </td>
-            </tr>
-          </table>
-        </Col>
-        <Col size={2}>
-          <button
-            type="button"
-            className="btn btn-link my-2 my-sm-0"
-            style={{ textDecoration: "underline" }}
-            onClick={() => setModalEdit(true)}
-          >
-            Edit
-          </button>
-        </Col>
-      </Row>
+      <div style={{ width: "100%" }} id="my-table">
+        <Row style={{ marginBottom: 20 }}>
+          <Col size={10}>
+            <table style={{ width: "100%" }}>
+              <tr>
+                <th scope="col" colSpan={5}>
+                  DATA-DATA KAPAL :
+                </th>
+              </tr>
+              <tr>
+                <td> </td>
+                <td>Client</td>
+                <td>:</td>
+                <td colSpan={2}>{kapalState.detailKapal.data.class}</td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td>Nama</td>
+                <td>:</td>
+                <td colSpan={2}>{kapalState.detailKapal.data.name}</td>
+              </tr>
+              <tr>
+                <td style={{ width: "5%" }}> </td>
+                <td style={{ width: "10%" }}>Loa</td>
+                <td style={{ width: "2%" }}>:</td>
+                <td style={{ width: "5%" }}>
+                  {kapalState.detailKapal.data.length_oa}
+                </td>
+                <td>M</td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td>Lpp</td>
+                <td>:</td>
+                <td>{kapalState.detailKapal.data.length_pp}</td>
+                <td>M</td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td>Breadth</td>
+                <td>:</td>
+                <td>{kapalState.detailKapal.data.breadth}</td>
+                <td>M</td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td>Depth</td>
+                <td>:</td>
+                <td>{kapalState.detailKapal.data.depth}</td>
+                <td>M</td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td>Draft</td>
+                <td>:</td>
+                <td>{kapalState.detailKapal.data.draft}</td>
+                <td>M</td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td>GRT</td>
+                <td>:</td>
+                <td>{kapalState.detailKapal.data.gross_tonnage}</td>
+                <td>TON</td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td>Survey</td>
+                <td>:</td>
+                <td colSpan={2}>
+                  {kapalState.detailKapal.data.SurveyType &&
+                    kapalState.detailKapal.data.SurveyType.name}
+                </td>
+              </tr>
+              <tr>
+                <td> </td>
+                <td>Class</td>
+                <td>:</td>
+                <td colSpan={2}>
+                  {kapalState.detailKapal.data.KapalType &&
+                    kapalState.detailKapal.data.KapalType.name}
+                </td>
+              </tr>
+            </table>
+          </Col>
+          <Col size={2}>
+            <button
+              type="button"
+              className="btn btn-link my-2 my-sm-0"
+              style={{ textDecoration: "underline" }}
+              onClick={() => setModalEdit(true)}
+            >
+              Edit
+            </button>
+          </Col>
+        </Row>
 
-      <Row style={{ marginBottom: 40 }} className="align-items-end">
-        <Col>
-          <table style={{ width: "60%" }}>
-            <tr>
-              <th scope="col" colSpan={5}>
-                ASUMSI YANG DIPAKAI :
-              </th>
-            </tr>
-            <tr>
-              <td style={{ width: "2%" }}>1.</td>
-              <td colSpan={4}>Penyelesaian Proyek :</td>
-            </tr>
-            <tr>
-              <td style={{ width: "2%" }}> </td>
-              <td style={{ width: "30%" }}>Kapal di atas dok</td>
-              <td style={{ width: "2%" }}>:</td>
-              <td style={{ width: "5%" }}>{persetujuanRab.data.dok}</td>
-              <td>Hari</td>
-            </tr>
-            <tr>
-              <td style={{ width: "2%" }}> </td>
-              <td style={{ width: "30%" }}>Kapal floating</td>
-              <td style={{ width: "2%" }}>:</td>
-              <td style={{ width: "5%" }}>{persetujuanRab.data.floating}</td>
-              <td>Hari</td>
-            </tr>
-            <tr>
-              <td>2.</td>
-              <td colSpan={4}>Syarat Pembayaran :</td>
-            </tr>
-            <tr style={{ verticalAlign: "top" }}>
-              <td style={{ width: "2%" }}> </td>
-              <td style={{ width: "30%" }}>Tahap Pertama</td>
-              <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>{persetujuanRab.data.pertama}</td>
-            </tr>
-            <tr style={{ verticalAlign: "top" }}>
-              <td style={{ width: "2%" }}> </td>
-              <td style={{ width: "30%" }}>Tahap Kedua</td>
-              <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>{persetujuanRab.data.kedua}</td>
-            </tr>
-            <tr style={{ verticalAlign: "top" }}>
-              <td style={{ width: "2%" }}> </td>
-              <td style={{ width: "30%" }}>Tahap Ketiga</td>
-              <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>{persetujuanRab.data.ketiga}</td>
-            </tr>
-            <tr style={{ verticalAlign: "top" }}>
-              <td style={{ width: "2%" }}> </td>
-              <td style={{ width: "30%" }}>Tahap Keempat</td>
-              <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>{persetujuanRab.data.keempat}</td>
-            </tr>
-            <tr>
-              <td style={{ width: "2%" }}>3.</td>
-              <td style={{ width: "30%" }}>Estimasi RAB</td>
-              <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>{maskedMoney(totalEstimasi)}</td>
-            </tr>
-          </table>
+        <Row style={{ marginBottom: 40 }} className="align-items-end">
+          <Col>
+            <table style={{ width: "60%" }}>
+              <tr>
+                <th scope="col" colSpan={5}>
+                  ASUMSI YANG DIPAKAI :
+                </th>
+              </tr>
+              <tr>
+                <td style={{ width: "2%" }}>1.</td>
+                <td colSpan={4}>Penyelesaian Proyek :</td>
+              </tr>
+              <tr>
+                <td style={{ width: "2%" }}> </td>
+                <td style={{ width: "30%" }}>Kapal di atas dok</td>
+                <td style={{ width: "2%" }}>:</td>
+                <td style={{ width: "5%" }}>{persetujuanRab.data.dok}</td>
+                <td>Hari</td>
+              </tr>
+              <tr>
+                <td style={{ width: "2%" }}> </td>
+                <td style={{ width: "30%" }}>Kapal floating</td>
+                <td style={{ width: "2%" }}>:</td>
+                <td style={{ width: "5%" }}>{persetujuanRab.data.floating}</td>
+                <td>Hari</td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td colSpan={4}>Syarat Pembayaran :</td>
+              </tr>
+              <tr style={{ verticalAlign: "top" }}>
+                <td style={{ width: "2%" }}> </td>
+                <td style={{ width: "30%" }}>Tahap Pertama</td>
+                <td style={{ width: "2%" }}>:</td>
+                <td colSpan={2}>{persetujuanRab.data.pertama}</td>
+              </tr>
+              <tr style={{ verticalAlign: "top" }}>
+                <td style={{ width: "2%" }}> </td>
+                <td style={{ width: "30%" }}>Tahap Kedua</td>
+                <td style={{ width: "2%" }}>:</td>
+                <td colSpan={2}>{persetujuanRab.data.kedua}</td>
+              </tr>
+              <tr style={{ verticalAlign: "top" }}>
+                <td style={{ width: "2%" }}> </td>
+                <td style={{ width: "30%" }}>Tahap Ketiga</td>
+                <td style={{ width: "2%" }}>:</td>
+                <td colSpan={2}>{persetujuanRab.data.ketiga}</td>
+              </tr>
+              <tr style={{ verticalAlign: "top" }}>
+                <td style={{ width: "2%" }}> </td>
+                <td style={{ width: "30%" }}>Tahap Keempat</td>
+                <td style={{ width: "2%" }}>:</td>
+                <td colSpan={2}>{persetujuanRab.data.keempat}</td>
+              </tr>
+              <tr>
+                <td style={{ width: "2%" }}>3.</td>
+                <td style={{ width: "30%" }}>Estimasi RAB</td>
+                <td style={{ width: "2%" }}>:</td>
+                <td colSpan={2}>{maskedMoney(totalEstimasi)}</td>
+              </tr>
+            </table>
+          </Col>
+        </Row>
+      </div>
+
+      <Row style={{ marginBottom: 60 }} justifyContent="end">
+        <Col size={2}>
+          <button type="button" className="btn btn-dark" onClick={_exportPdf}>
+            export to pdf
+          </button>
         </Col>
       </Row>
 
