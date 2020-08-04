@@ -41,6 +41,27 @@ const Component = () => {
     []
   );
 
+  const totalBiayaTenagaKerja =
+    _sum(rabReparasiState.list, "dps") +
+    _sum(rabReparasiState.list, "sub_kont");
+
+  const totalBiayaBahanBaku = _sum(rabReparasiState.list, "material");
+
+  const totalBiayaOverhead =
+    _sum(rabReparasiState.list, "overhead") +
+    _sum(rabReparasiState.list, "material_bantu") +
+    _sum(rabReparasiState.list, "jasa_peralatan");
+
+  const totalBiayaTidakLangsung = Math.ceil(
+    (totalBiayaTenagaKerja + totalBiayaBahanBaku + totalBiayaOverhead) * 0.025
+  );
+
+  const totalEstimasi =
+    totalBiayaTenagaKerja +
+    totalBiayaBahanBaku +
+    totalBiayaOverhead +
+    totalBiayaTidakLangsung;
+
   return (
     <Container
       isLoading={
@@ -222,19 +243,7 @@ const Component = () => {
               <td style={{ width: "2%" }}>3.</td>
               <td style={{ width: "30%" }}>Estimasi RAB</td>
               <td style={{ width: "2%" }}>:</td>
-              <td colSpan={2}>
-                {maskedMoney(
-                  _sum(rabReparasiState.list, "dps") +
-                    _sum(rabReparasiState.list, "sub_kont") +
-                    _sum(rabReparasiState.list, "material") +
-                    _sum(rabReparasiState.list, "overhead") +
-                    (_sum(rabReparasiState.list, "dps") +
-                      _sum(rabReparasiState.list, "sub_kont") +
-                      _sum(rabReparasiState.list, "material") +
-                      _sum(rabReparasiState.list, "overhead")) *
-                      (2.5 / 100)
-                )}
-              </td>
+              <td colSpan={2}>{maskedMoney(totalEstimasi)}</td>
             </tr>
           </table>
         </Col>
