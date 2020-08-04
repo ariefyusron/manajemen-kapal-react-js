@@ -1,5 +1,7 @@
 import React, { ReactNode, memo } from "react";
 
+import { Col, Row } from "..";
+
 interface Props {
   children: ReactNode;
   title?: string;
@@ -7,8 +9,20 @@ interface Props {
 
 const Component = ({ children, title }: Props) => (
   <div className="card">
-    {title !== "" && <div className="card-header">{title}</div>}
-    <div className="card-body">{children}</div>
+    <div className="card-body">
+      <>
+        {title !== "" && (
+          <Row style={{ marginBottom: 30 }}>
+            <Col>
+              <div className="h4" style={{ textAlign: "center" }}>
+                {title}
+              </div>
+            </Col>
+          </Row>
+        )}
+        {children}
+      </>
+    </div>
   </div>
 );
 

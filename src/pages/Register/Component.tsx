@@ -51,8 +51,7 @@ const Component = () => {
                 <Row>
                   <Col>
                     <form onSubmit={handleSubmit(_handleRegister)}>
-                      <div className="form-group">
-                        <label>Username</label>
+                      <div className="form-group" style={{ marginBottom: 20 }}>
                         <input
                           className={`form-control${
                             errors.username ? " is-invalid" : ""
@@ -65,8 +64,7 @@ const Component = () => {
                         {_renderError(errors.username, "Username is required")}
                       </div>
 
-                      <div className="form-group">
-                        <label>Password</label>
+                      <div className="form-group" style={{ marginBottom: 20 }}>
                         <input
                           className={`form-control${
                             errors.password ? " is-invalid" : ""
@@ -80,7 +78,6 @@ const Component = () => {
                       </div>
 
                       <div className="form-group">
-                        <label>Password</label>
                         <input
                           className={`form-control${
                             errors.password_confirm ? " is-invalid" : ""
@@ -104,6 +101,7 @@ const Component = () => {
                         type="submit"
                         onClick={handleSubmit(_handleRegister)}
                         className="btn btn-primary"
+                        style={{ width: "100%", marginTop: 20 }}
                       >
                         Daftar
                       </button>

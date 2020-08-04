@@ -29,7 +29,7 @@ const Component = () => {
   return (
     <Container className="login" isLoading={authState.login.isLoading}>
       <Row justifyContent="center" style={{ paddingTop: 200 }}>
-        <Col size={6}>
+        <Col size={3}>
           <Card title="Login">
             <Row>
               <Col>
@@ -46,8 +46,7 @@ const Component = () => {
                 <Row>
                   <Col>
                     <form onSubmit={handleSubmit(_handleLogin)}>
-                      <div className="form-group">
-                        <label>Username</label>
+                      <div className="form-group" style={{ marginBottom: 20 }}>
                         <input
                           className={`form-control${
                             errors.username ? " is-invalid" : ""
@@ -61,7 +60,6 @@ const Component = () => {
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="">Password</label>
                         <input
                           className={`form-control${
                             errors.password ? " is-invalid" : ""
@@ -78,6 +76,7 @@ const Component = () => {
                         type="submit"
                         onClick={handleSubmit(_handleLogin)}
                         className="btn btn-primary"
+                        style={{ width: "100%", marginTop: 20 }}
                       >
                         Login
                       </button>
