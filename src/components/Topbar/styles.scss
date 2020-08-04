@@ -1,0 +1,19 @@
+@import "../../sass/color";
+
+.component-topbar {
+  width: 100%;
+  background-color: $button-primary;
+
+  .left {
+    background-color: $color-logo;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    .h1 {
+      color: $white;
+    }
+  }
+
+}
