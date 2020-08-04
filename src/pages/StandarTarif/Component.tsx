@@ -68,37 +68,39 @@ const Component = () => {
               <Col size={10}>
                 <h3>{e.name}</h3>
               </Col>
-              <Col size={2}>
-                <Row justifyContent="end">
-                  <Col size={3}>
-                    <button
-                      type="button"
-                      className="btn btn-success"
-                      onClick={() =>
-                        setModalEditPekerjaan({
-                          visible: true,
-                          index: i,
-                          id: e.id
-                        })
-                      }
-                    >
-                      edit
-                    </button>
-                  </Col>
-                  <Col size={6}>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      style={{ marginLeft: 15 }}
-                      onClick={() =>
-                        dispatch(deletePekerjaanStandarTarif(e.id))
-                      }
-                    >
-                      delete
-                    </button>
-                  </Col>
-                </Row>
-              </Col>
+              {localStorage.getItem("is_admin") === "true" && (
+                <Col size={2}>
+                  <Row justifyContent="end">
+                    <Col size={3}>
+                      <button
+                        type="button"
+                        className="btn btn-success"
+                        onClick={() =>
+                          setModalEditPekerjaan({
+                            visible: true,
+                            index: i,
+                            id: e.id
+                          })
+                        }
+                      >
+                        edit
+                      </button>
+                    </Col>
+                    <Col size={6}>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        style={{ marginLeft: 15 }}
+                        onClick={() =>
+                          dispatch(deletePekerjaanStandarTarif(e.id))
+                        }
+                      >
+                        delete
+                      </button>
+                    </Col>
+                  </Row>
+                </Col>
+              )}
             </Row>
             <Row>
               <Col>
