@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { postLogin } from "../../redux/actions";
@@ -11,16 +10,15 @@ import { Card, Col, Container, Row } from "../../components";
 const Component = () => {
   documentTitle("Login");
   const dispatch = useDispatch();
-  const history = useHistory();
   const { register, handleSubmit, errors } = useForm();
 
   const authState = useSelector((state: Reducers) => state.auth);
 
   const _handleLogin = useCallback(
     form => {
-      dispatch(postLogin(form, () => history.push("/dashboard")));
+      dispatch(postLogin(form));
     },
-    [dispatch, history]
+    [dispatch]
   );
 
   const _renderError = (isShow: boolean, message: string) =>

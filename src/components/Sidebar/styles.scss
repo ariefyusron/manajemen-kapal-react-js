@@ -1,8 +1,41 @@
-.sidebar-component {
-  padding-top: 10px;
+@import "../../sass/color";
+
+.component-sidebar {
+
+  ul {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .group {
+    border-bottom: 1px solid $black01;
+    padding-bottom: 10px;
+  }
 
   .nav-link {
     cursor: pointer;
+
+    &.item {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      margin-top: -10px;
+      margin-bottom: -10px;
+
+      &:hover {
+        background-color: $hover;
+      }
+    }
+
+    &.heading {
+      cursor: unset;
+      color: $heading;
+      padding: 0 1rem;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: .13rem;
+      padding-top: 20px;
+      margin-bottom: 10px;
+    }
   }
 
   .h6 {

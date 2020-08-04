@@ -28,9 +28,7 @@ const Component = () => {
                 className="btn btn-link my-2 my-sm-0"
                 type="button"
                 style={{ color: "white", textDecoration: "underline" }}
-                onClick={() =>
-                  dispatch(handleLogout(() => history.push("/login")))
-                }
+                onClick={() => dispatch(handleLogout())}
               >
                 Logout
               </button>

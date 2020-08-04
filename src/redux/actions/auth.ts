@@ -23,13 +23,10 @@ export const DELETE_USER_ERROR = "DELETE_USER_ERROR";
 
 export const HANDLE_LOGOUT = "HANDLE_LOGOUT";
 
-export const postLogin = (
-  form: {
-    username: string;
-    password: string;
-  },
-  cb: () => void
-) => async (dispatch: Dispatch) => {
+export const postLogin = (form: {
+  username: string;
+  password: string;
+}) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: POST_LOGIN_PENDING });
     const res = await API.postLogin(form);
@@ -39,7 +36,7 @@ export const postLogin = (
     });
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("is_admin", res.data.is_admin);
-    cb();
+    window.location.reload();
   } catch (err) {
     if (err.response) {
       dispatch({
@@ -69,7 +66,7 @@ export const postRegister = (
       payload: { data: res.data }
     });
     if (!fromAdmin) {
-      dispatch(postLogin(form, cb));
+      dispatch(postLogin(form));
     } else {
       cb();
     }
@@ -85,11 +82,11 @@ export const postRegister = (
   }
 };
 
-export const handleLogout = (cb: () => void) => async (dispatch: Dispatch) => {
+export const handleLogout = () => async (dispatch: Dispatch) => {
   dispatch({ type: HANDLE_LOGOUT });
   localStorage.removeItem("token");
   localStorage.removeItem("is_admin");
-  cb();
+  window.location.reload();
 };
 
 export const getAllUser = () => async (dispatch: Dispatch) => {

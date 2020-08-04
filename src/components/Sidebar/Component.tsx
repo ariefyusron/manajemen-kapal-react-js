@@ -42,22 +42,28 @@ const Component = () => {
   ];
 
   return (
-    <Container className="sidebar-component">
+    <Container className="component-sidebar">
       <ul className="nav flex-column">
-        <>
+        <div className="group">
           <li className="nav-item">
             <div
-              className="nav-link h5"
-              style={{ margin: 0 }}
-              onClick={() => history.push(listMenu[0].pathname)}
+              className="nav-link item"
+              style={{ marginTop: 0 }}
+              onClick={() => history.push("/dashboard")}
             >
-              Menu
+              Dashboard
             </div>
+          </li>
+        </div>
+
+        <div className="group">
+          <li className="nav-item">
+            <div className="nav-link heading">FEATURES</div>
           </li>
           {listMenu.map((item, index) => (
             <li className="nav-item" key={index}>
               <div
-                className={`nav-link ${
+                className={`nav-link item ${
                   history.location.pathname.includes(item.pathname) ? "h6" : ""
                 }`}
                 onClick={() => history.push(item.pathname)}
@@ -66,23 +72,17 @@ const Component = () => {
               </div>
             </li>
           ))}
-        </>
+        </div>
 
         {localStorage.getItem("is_admin") === "true" && (
-          <>
+          <div className="group">
             <li className="nav-item">
-              <div
-                className="nav-link h5"
-                style={{ margin: 0, marginTop: 20 }}
-                onClick={() => history.push(listMenuAdmin[0].pathname)}
-              >
-                Admin
-              </div>
+              <div className="nav-link heading">ADMIN</div>
             </li>
             {listMenuAdmin.map((item, index) => (
               <li className="nav-item" key={index}>
                 <div
-                  className={`nav-link ${
+                  className={`nav-link item ${
                     history.location.pathname.includes(item.pathname)
                       ? "h6"
                       : ""
@@ -93,7 +93,7 @@ const Component = () => {
                 </div>
               </li>
             ))}
-          </>
+          </div>
         )}
       </ul>
     </Container>

@@ -10,6 +10,7 @@ import IdentitasKapal from "../pages/IdentitasKapal";
 import RencanaAnggaranBiayaReparasiKapal from "../pages/RencanaAnggaranBiayaReparasiKapal";
 import PersetujuanRab from "../pages/PersetujuanRab";
 import Admin from "./Admin";
+import Dashboard from "../pages/Dashboard";
 
 const App = () => {
   const match = useRouteMatch();
@@ -22,9 +23,9 @@ const App = () => {
             <Col size={2} className="sidebar">
               <Sidebar />
             </Col>
-            <Col size={10}>
+            <Col size={10} style={{ paddingLeft: 40 }}>
               <Route path={`${match.path}`} exact>
-                <Redirect to={`${match.path}/standar-tarif`} />
+                <Dashboard />
               </Route>
               <Route path={`${match.path}/standar-tarif`} exact>
                 <StandarTarif />

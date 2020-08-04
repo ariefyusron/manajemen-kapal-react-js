@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { postRegister } from "../../redux/actions";
@@ -11,7 +10,6 @@ import { Card, Col, Container, Row } from "../../components";
 const Component = () => {
   documentTitle("Register - Admin");
   const dispatch = useDispatch();
-  const history = useHistory();
   const { register, handleSubmit, errors, getValues } = useForm();
 
   const authState = useSelector((state: Reducers) => state.auth);
@@ -21,11 +19,11 @@ const Component = () => {
       dispatch(
         postRegister(
           { username: form.username, password: form.password, is_admin: true },
-          () => history.push("/dashboard")
+          () => window.location.reload()
         )
       );
     },
-    [dispatch, history]
+    [dispatch]
   );
 
   const _renderError = (isShow: boolean, message: string) =>
@@ -34,7 +32,7 @@ const Component = () => {
   return (
     <Container className="register" isLoading={authState.register.isLoading}>
       <Row justifyContent="center" style={{ paddingTop: 200 }}>
-        <Col size={6}>
+        <Col size={3}>
           <Card title="Register Admin">
             <Row>
               <Col>
