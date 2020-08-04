@@ -63,7 +63,7 @@ const Component = () => {
     totalBiayaTidakLangsung;
 
   const _exportPdf = () => {
-    const printContents = document.getElementById("my-table")!.innerHTML;
+    const printContents = document.getElementById("print")!.innerHTML;
     const originalContents = document.body.innerHTML;
 
     document.body.innerHTML = printContents;
@@ -98,7 +98,7 @@ const Component = () => {
         </Col>
       </Row>
 
-      <div style={{ width: "100%" }} id="my-table">
+      <div style={{ width: "100%" }} id="print">
         <Row style={{ marginBottom: 20 }}>
           <Col size={10}>
             <table style={{ width: "100%" }}>
@@ -183,7 +183,7 @@ const Component = () => {
               </tr>
             </table>
           </Col>
-          <Col size={2}>
+          <Col size={2} className="no-print">
             <button
               type="button"
               className="btn btn-link my-2 my-sm-0"

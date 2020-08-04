@@ -73,7 +73,7 @@ const Component = () => {
     totalBiayaTidakLangsung;
 
   const _exportPdf = () => {
-    const printContents = document.getElementById("my-table")!.innerHTML;
+    const printContents = document.getElementById("print")!.innerHTML;
     const originalContents = document.body.innerHTML;
 
     document.body.innerHTML = printContents;
@@ -85,7 +85,7 @@ const Component = () => {
     <Container
       isLoading={rabReparasiState.isLoading || kapalState.detailKapal.isLoading}
     >
-      <div style={{ width: "100%" }} id="my-table">
+      <div style={{ width: "100%" }} id="print">
         <Row
           style={{ marginBottom: 20, marginTop: 10 }}
           className="align-items-center"
@@ -93,7 +93,7 @@ const Component = () => {
           <Col size={11}>
             <h1>Rencana Anggaran Biaya Reparasi Kapal</h1>
           </Col>
-          <Col size={1}>
+          <Col size={1} className="no-print">
             <button
               type="button"
               className="btn btn-link my-2 my-sm-0"
@@ -184,7 +184,7 @@ const Component = () => {
             </table>
           </Col>
           {rabReparasiState.listPekerjaan.length > 0 && (
-            <Col size={2}>
+            <Col size={2} className="no-print">
               <button
                 type="button"
                 className="btn btn-primary"
@@ -204,7 +204,7 @@ const Component = () => {
                 <Col size={10}>
                   <h3>{e.name}</h3>
                 </Col>
-                <Col size={2}>
+                <Col size={2} className="no-print">
                   <Row justifyContent="end">
                     <Col size={3}>
                       <button
@@ -249,7 +249,9 @@ const Component = () => {
                         <th scope="col">Material Bantu</th>
                         <th scope="col">Overhead</th>
                         <th scope="col">Total</th>
-                        <th scope="col">Aksi</th>
+                        <th scope="col" className="no-print">
+                          Aksi
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -271,7 +273,7 @@ const Component = () => {
                             <td>{maskedMoney(item.material_bantu)}</td>
                             <td>{maskedMoney(item.overhead)}</td>
                             <td>{maskedMoney(item.total)}</td>
-                            <td>
+                            <td className="no-print">
                               <button
                                 type="button"
                                 className="btn btn-success"
@@ -309,6 +311,7 @@ const Component = () => {
         <Row
           justifyContent="center"
           style={{ marginBottom: 20, marginTop: 50 }}
+          className="no-print"
         >
           <Col size={2}>
             <button
