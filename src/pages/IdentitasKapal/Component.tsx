@@ -66,6 +66,7 @@ const Component = () => {
                 <th scope="col">No</th>
                 <th scope="col">Nama Kapal</th>
                 <th scope="col">Nama Perusahaan</th>
+                <th scope="col">Tahun</th>
                 <th scope="col">Aksi</th>
               </tr>
             </thead>
@@ -75,6 +76,7 @@ const Component = () => {
                   <th scope="row">{`${index + 1}.`}</th>
                   <td>{item.name}</td>
                   <td>{item.class}</td>
+                  <td>{item.tahun}</td>
                   <td>
                     <button
                       type="button"

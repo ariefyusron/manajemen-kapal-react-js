@@ -156,6 +156,18 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
           </div>
 
           <div className="form-group">
+            <label>Tahun</label>
+            <input
+              className="form-control"
+              type="text"
+              name="tahun"
+              placeholder="Tahun"
+              ref={register}
+              defaultValue={(data && data.tahun) || ""}
+            />
+          </div>
+
+          <div className="form-group">
             <label>Tipe Survey</label>
             {!kapalState.typeSurvey.isLoading ? (
               <select
