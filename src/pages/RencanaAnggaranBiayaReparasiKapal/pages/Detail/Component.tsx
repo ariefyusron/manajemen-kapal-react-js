@@ -19,6 +19,7 @@ const Component = () => {
   const history = useHistory();
   const { id } = useParams();
 
+  const [selectPekerjaan, setSelectPekerjaan] = useState("");
   const [modalEditPekerjaan, setModalEditPekerjaan] = useState({
     visible: false,
     index: 0,
@@ -81,6 +82,117 @@ const Component = () => {
     document.body.innerHTML = originalContents;
   };
 
+  const _renderTable = useCallback(
+    (e: any, i: number) => (
+      <Row style={{ marginBottom: 30 }} key={i}>
+        <Col>
+          <Row style={{ marginBottom: 10 }}>
+            <Col size={10}>
+              <h3>{e.name}</h3>
+            </Col>
+            <Col size={2} className="no-print">
+              <Row justifyContent="end">
+                <Col size={3}>
+                  <button
+                    type="button"
+                    className="btn btn-success"
+                    onClick={() =>
+                      setModalEditPekerjaan({
+                        visible: true,
+                        index: i,
+                        id: e.id
+                      })
+                    }
+                  >
+                    edit
+                  </button>
+                </Col>
+                <Col size={6}>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    style={{ marginLeft: 15 }}
+                    onClick={() => dispatch(deletePekerjaanRab(id!, e.id))}
+                  >
+                    delete
+                  </button>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <table className="table" style={{ textAlign: "center" }}>
+                <thead className="thead-light">
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama Pekerjaan</th>
+                    <th scope="col">Satuan</th>
+                    <th scope="col">DPS (Jasa Tenaga)</th>
+                    <th scope="col">SUB KONT (Jasa Tenaga)</th>
+                    <th scope="col">Jasa Peralatan</th>
+                    <th scope="col">Material</th>
+                    <th scope="col">Material Bantu</th>
+                    <th scope="col">Overhead</th>
+                    <th scope="col">Total</th>
+                    <th scope="col" className="no-print">
+                      Aksi
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rabReparasiState.list
+                    .filter(
+                      resFilter =>
+                        resFilter.id_pekerjaan.toString() === e.id.toString()
+                    )
+                    .map((item, index) => (
+                      <tr key={index}>
+                        <th scope="row">{`${index + 1}.`}</th>
+                        <td>{item.nama_pekerjaan}</td>
+                        <td>{item.satuan}</td>
+                        <td>{maskedMoney(item.dps)}</td>
+                        <td>{maskedMoney(item.sub_kont)}</td>
+                        <td>{maskedMoney(item.jasa_peralatan)}</td>
+                        <td>{maskedMoney(item.material)}</td>
+                        <td>{maskedMoney(item.material_bantu)}</td>
+                        <td>{maskedMoney(item.overhead)}</td>
+                        <td>{maskedMoney(item.total)}</td>
+                        <td className="no-print">
+                          <button
+                            type="button"
+                            className="btn btn-success"
+                            onClick={() =>
+                              setModalEdit({
+                                id: item.id,
+                                visible: true,
+                                index
+                              })
+                            }
+                          >
+                            edit
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-danger"
+                            style={{ marginLeft: 15 }}
+                            onClick={() => dispatch(deleteRab(id!, item.id))}
+                          >
+                            delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    ),
+    [dispatch, id, rabReparasiState.list]
+  );
+
   return (
     <Container
       isLoading={rabReparasiState.isLoading || kapalState.detailKapal.isLoading}
@@ -106,7 +218,7 @@ const Component = () => {
         </Row>
 
         <Row style={{ marginBottom: 40 }} className="align-items-end">
-          <Col size={10}>
+          <Col size={8}>
             <table style={{ width: "50%" }}>
               <tr>
                 <td>CLIENT</td>
@@ -184,129 +296,46 @@ const Component = () => {
             </table>
           </Col>
           {rabReparasiState.listPekerjaan.length > 0 && (
-            <Col size={2} className="no-print">
-              <button
-                type="button"
-                className="btn btn-primary"
-                style={{ width: "100%", marginBottom: 5 }}
-                onClick={() => setModalAdd(true)}
-              >
-                Add sub pekerjaan
-              </button>
+            <Col size={4} className="no-print">
+              <Row style={{ marginBottom: 10 }}>
+                <Col>
+                  <select
+                    className="form-control"
+                    defaultValue={selectPekerjaan}
+                    onChange={e => setSelectPekerjaan(e.target.value)}
+                  >
+                    <option value="">-- pilih --</option>
+                    {rabReparasiState.listPekerjaan.map((item, index) => (
+                      <option key={index} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </select>
+                </Col>
+              </Row>
+              <Row justifyContent="end">
+                <Col size={6}>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    style={{ width: "100%", marginBottom: 5 }}
+                    onClick={() => setModalAdd(true)}
+                  >
+                    Add sub pekerjaan
+                  </button>
+                </Col>
+              </Row>
             </Col>
           )}
         </Row>
 
-        {rabReparasiState.listPekerjaan.map((e, i) => (
-          <Row style={{ marginBottom: 30 }} key={i}>
-            <Col>
-              <Row style={{ marginBottom: 10 }}>
-                <Col size={10}>
-                  <h3>{e.name}</h3>
-                </Col>
-                <Col size={2} className="no-print">
-                  <Row justifyContent="end">
-                    <Col size={3}>
-                      <button
-                        type="button"
-                        className="btn btn-success"
-                        onClick={() =>
-                          setModalEditPekerjaan({
-                            visible: true,
-                            index: i,
-                            id: e.id
-                          })
-                        }
-                      >
-                        edit
-                      </button>
-                    </Col>
-                    <Col size={6}>
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        style={{ marginLeft: 15 }}
-                        onClick={() => dispatch(deletePekerjaanRab(id!, e.id))}
-                      >
-                        delete
-                      </button>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <table className="table" style={{ textAlign: "center" }}>
-                    <thead className="thead-light">
-                      <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Nama Pekerjaan</th>
-                        <th scope="col">Satuan</th>
-                        <th scope="col">DPS (Jasa Tenaga)</th>
-                        <th scope="col">SUB KONT (Jasa Tenaga)</th>
-                        <th scope="col">Jasa Peralatan</th>
-                        <th scope="col">Material</th>
-                        <th scope="col">Material Bantu</th>
-                        <th scope="col">Overhead</th>
-                        <th scope="col">Total</th>
-                        <th scope="col" className="no-print">
-                          Aksi
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {rabReparasiState.list
-                        .filter(
-                          resFilter =>
-                            resFilter.id_pekerjaan.toString() ===
-                            e.id.toString()
-                        )
-                        .map((item, index) => (
-                          <tr key={index}>
-                            <th scope="row">{`${index + 1}.`}</th>
-                            <td>{item.nama_pekerjaan}</td>
-                            <td>{item.satuan}</td>
-                            <td>{maskedMoney(item.dps)}</td>
-                            <td>{maskedMoney(item.sub_kont)}</td>
-                            <td>{maskedMoney(item.jasa_peralatan)}</td>
-                            <td>{maskedMoney(item.material)}</td>
-                            <td>{maskedMoney(item.material_bantu)}</td>
-                            <td>{maskedMoney(item.overhead)}</td>
-                            <td>{maskedMoney(item.total)}</td>
-                            <td className="no-print">
-                              <button
-                                type="button"
-                                className="btn btn-success"
-                                onClick={() =>
-                                  setModalEdit({
-                                    id: item.id,
-                                    visible: true,
-                                    index
-                                  })
-                                }
-                              >
-                                edit
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-danger"
-                                style={{ marginLeft: 15 }}
-                                onClick={() =>
-                                  dispatch(deleteRab(id!, item.id))
-                                }
-                              >
-                                delete
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        ))}
+        {selectPekerjaan === ""
+          ? rabReparasiState.listPekerjaan.map((e, i) => _renderTable(e, i))
+          : rabReparasiState.listPekerjaan.map(
+              (e, i) =>
+                e.id.toString() === selectPekerjaan.toString() &&
+                _renderTable(e, i)
+            )}
 
         <Row
           justifyContent="center"
