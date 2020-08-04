@@ -222,48 +222,48 @@ const Component = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {rabReparasiState.list.map(
-                      (item, index) =>
-                        item.id_pekerjaan.toString() === e.id.toString() && (
-                          <tr key={index}>
-                            <th scope="row">{`${index + 1}.`}</th>
-                            <td>{item.nama_pekerjaan}</td>
-                            <td>{item.satuan}</td>
-                            <td>{maskedMoney(item.dps)}</td>
-                            <td>{maskedMoney(item.sub_kont)}</td>
-                            <td>{maskedMoney(item.jasa_peralatan)}</td>
-                            <td>{maskedMoney(item.material)}</td>
-                            <td>{maskedMoney(item.material_bantu)}</td>
-                            <td>{maskedMoney(item.overhead)}</td>
-                            <td>{maskedMoney(item.total)}</td>
-                            <td>
-                              <button
-                                type="button"
-                                className="btn btn-success"
-                                onClick={() =>
-                                  setModalEdit({
-                                    id: item.id,
-                                    visible: true,
-                                    index
-                                  })
-                                }
-                              >
-                                edit
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-danger"
-                                style={{ marginLeft: 15 }}
-                                onClick={() =>
-                                  dispatch(deleteRab(id!, item.id))
-                                }
-                              >
-                                delete
-                              </button>
-                            </td>
-                          </tr>
-                        )
-                    )}
+                    {rabReparasiState.list
+                      .filter(
+                        resFilter =>
+                          resFilter.id_pekerjaan.toString() !== e.id.toString()
+                      )
+                      .map((item, index) => (
+                        <tr key={index}>
+                          <th scope="row">{`${index + 1}.`}</th>
+                          <td>{item.nama_pekerjaan}</td>
+                          <td>{item.satuan}</td>
+                          <td>{maskedMoney(item.dps)}</td>
+                          <td>{maskedMoney(item.sub_kont)}</td>
+                          <td>{maskedMoney(item.jasa_peralatan)}</td>
+                          <td>{maskedMoney(item.material)}</td>
+                          <td>{maskedMoney(item.material_bantu)}</td>
+                          <td>{maskedMoney(item.overhead)}</td>
+                          <td>{maskedMoney(item.total)}</td>
+                          <td>
+                            <button
+                              type="button"
+                              className="btn btn-success"
+                              onClick={() =>
+                                setModalEdit({
+                                  id: item.id,
+                                  visible: true,
+                                  index
+                                })
+                              }
+                            >
+                              edit
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              style={{ marginLeft: 15 }}
+                              onClick={() => dispatch(deleteRab(id!, item.id))}
+                            >
+                              delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </Col>
