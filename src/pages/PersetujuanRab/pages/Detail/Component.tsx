@@ -64,11 +64,10 @@ const Component = () => {
 
   const _exportPdf = () => {
     const printContents = document.getElementById("print")!.innerHTML;
-    const originalContents = document.body.innerHTML;
 
     document.body.innerHTML = printContents;
     window.print();
-    document.body.innerHTML = originalContents;
+    window.location.reload();
   };
 
   return (
