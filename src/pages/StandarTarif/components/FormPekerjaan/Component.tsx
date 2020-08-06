@@ -18,7 +18,7 @@ interface Props {
 
 const Component = ({ isShow, onHide, data, id, title }: Props) => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const _handleSubmit = useCallback(
     form => {
@@ -31,6 +31,12 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
     [dispatch, onHide, id, data]
   );
 
+  const _renderError = useCallback(
+    (isShowError: boolean, message: string) =>
+      isShowError && <div className="invalid-feedback">{message}</div>,
+    []
+  );
+
   return (
     <Modal show={isShow} onHide={onHide}>
       <Modal.Header closeButton>
@@ -41,13 +47,14 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
           <div className="form-group">
             <label>Nama Pekerjaan</label>
             <input
-              className="form-control"
+              className={`form-control${errors.name ? " is-invalid" : ""}`}
               type="text"
               name="name"
               placeholder="Nama Pekerjaan"
-              ref={register}
+              ref={register({ required: true })}
               defaultValue={(data && data.name) || ""}
             />
+            {_renderError(errors.name, "Nama Pekerjaan is required")}
           </div>
 
           <input type="submit" hidden />
