@@ -24,6 +24,11 @@ const api = {
       headers: { Authorization: token }
     }),
 
+  getDashboard: () =>
+    host.get("dashboard", {
+      headers: { Authorization: token }
+    }),
+
   getKapal: (id: string) =>
     host.get(`kapal/${id}`, {
       headers: { Authorization: token }

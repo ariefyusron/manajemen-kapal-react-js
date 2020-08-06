@@ -24,6 +24,7 @@ export interface Reducers {
   rabReparasi: RabReparasiState;
   standarTarif: StandarTarifState;
   persetujuanRab: PersetujuanRabState;
+  dashboard: DashboardState;
 }
 
 // reducers
@@ -85,4 +86,9 @@ export interface StandarTarifState {
 export interface PersetujuanRabState {
   isLoading: boolean;
   data: any;
+}
+
+export interface DashboardState {
+  isLoading: boolean;
+  list: any[];
 }
