@@ -7,7 +7,11 @@ const icons = {
   standarTarif: require("../assets/svgs/standarTarif.svg"),
   users: require("../assets/svgs/users.svg"),
   typeShip: require("../assets/svgs/typeShip.svg"),
-  survey: require("../assets/svgs/survey.svg")
+  survey: require("../assets/svgs/survey.svg"),
+  shipColor: require("../assets/svgs/shipColor.svg"),
+  typeShipColor: require("../assets/svgs/typeShipColor.svg"),
+  userColor: require("../assets/svgs/userColor.svg"),
+  rabColor: require("../assets/svgs/rabColor.svg")
 };
 
 export default icons;

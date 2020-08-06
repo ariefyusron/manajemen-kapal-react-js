@@ -1,7 +1,15 @@
 @import "../sass/color";
 
-.sidebar {
-  height: calc(100vh - 70px);
-  box-shadow: 0 .15rem 1.75rem 0 $shadow;
-  background-color: $white;
+.container-fluid {
+  .sidebar {
+    height: calc(100vh - 70px);
+    box-shadow: 0 .15rem 1.75rem 0 $shadow;
+    background-color: $white;
+  }
+
+  .content {
+    padding-left: 40px;
+    height: calc(100vh - 70px);
+    overflow: auto;
+  }
 }

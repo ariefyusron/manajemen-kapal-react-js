@@ -23,7 +23,7 @@ const App = () => {
             <Col size={2} className="sidebar">
               <Sidebar />
             </Col>
-            <Col size={10} style={{ paddingLeft: 40 }}>
+            <Col size={10} className="content">
               <Route path={`${match.path}`} exact>
                 <Dashboard />
               </Route>
