@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 
 import "./styles.scss";
@@ -14,11 +14,13 @@ import Dashboard from "../pages/Dashboard";
 
 const App = () => {
   const match = useRouteMatch();
+  const [show, setShow] = useState(false);
+
   return (
     <Switch>
       <>
-        <Topbar />
-        <div className="container-fluid">
+        <Topbar show={show} setShow={e => setShow(e)} />
+        <div className="container-fluid" onClick={() => setShow(false)}>
           <Row>
             <Col size={2} className="sidebar">
               <Sidebar />

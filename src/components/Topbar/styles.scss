@@ -17,4 +17,28 @@
     }
   }
 
+  img {
+    width: 26px;
+    height: 26px;
+  }
+
+  .wrap-modal {
+    position: absolute;
+    right: 20px;
+    top: 55px;
+    background-color: $white;
+    box-shadow: 0 .15rem 1.75rem 0 $shadow;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    align-items: center;
+
+    .img {
+      width: 18px;
+      height: 18px;
+      margin-left: 15px;
+    }
+  }
+
 }
