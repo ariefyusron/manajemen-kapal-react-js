@@ -29,6 +29,15 @@ code {
   }
 }
 
+.btn-outline-primary {
+  border-color: $button-primary;
+  color: $button-primary;
+
+  &:hover {
+    background-color: $button-primary-hover;
+  }
+}
+
 @media print {
 	.no-print  {
 		display: none;

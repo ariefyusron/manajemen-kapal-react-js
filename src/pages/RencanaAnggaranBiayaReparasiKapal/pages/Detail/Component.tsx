@@ -207,7 +207,7 @@ const Component = () => {
           <Col size={1} className="no-print">
             <button
               type="button"
-              className="btn btn-link my-2 my-sm-0"
+              className="btn btn-outline-primary my-2 my-sm-0"
               onClick={() => history.goBack()}
               style={{ textDecoration: "underline" }}
             >
