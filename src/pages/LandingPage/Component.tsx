@@ -2,8 +2,10 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 import "./styles.scss";
+import { documentTitle } from "../../utils";
 
 const Component = () => {
+  documentTitle("Selamat Datang");
   const history = useHistory();
 
   return (
