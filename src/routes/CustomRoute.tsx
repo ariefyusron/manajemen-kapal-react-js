@@ -17,7 +17,7 @@ const CustomRoute = ({
       ) : (
         <Redirect
           to={{
-            pathname: "/"
+            pathname: "/login"
           }}
         />
       );
@@ -28,7 +28,7 @@ const CustomRoute = ({
     ) : (
       <Redirect
         to={{
-          pathname: "/"
+          pathname: "/dashboard"
         }}
       />
     );

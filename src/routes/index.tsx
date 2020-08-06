@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import CustomRoute from "./CustomRoute";
 
@@ -7,17 +7,14 @@ import CustomRoute from "./CustomRoute";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Main from "./Main";
+import LandingPage from "../pages/LandingPage";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <Redirect
-            to={{
-              pathname: localStorage.getItem("token") ? "dashboard" : "login"
-            }}
-          />
+          <LandingPage />
         </Route>
         <CustomRoute path="/login" exact privateMode={false}>
           <Login />

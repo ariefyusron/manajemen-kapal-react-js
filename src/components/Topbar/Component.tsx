@@ -31,7 +31,7 @@ const Component = ({ show, setShow }: Props) => {
             size={2}
             className="left"
             style={{ height: "100%" }}
-            onClick={() => history.push("/")}
+            onClick={() => history.push("/dashboard")}
           >
             <span className="navbar-brand mb-0 h1">Home</span>
           </Col>
