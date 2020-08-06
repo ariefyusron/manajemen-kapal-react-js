@@ -16,7 +16,7 @@ interface Props {
 
 const Component = ({ isShow, onHide, data, id, title }: Props) => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const standarTarifState = useSelector(
     (state: Reducers) => state.standarTarif
@@ -33,6 +33,12 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
     [dispatch, onHide, id, data]
   );
 
+  const _renderError = useCallback(
+    (isShowError: boolean, message: string) =>
+      isShowError && <div className="invalid-feedback">{message}</div>,
+    []
+  );
+
   return (
     <Modal show={isShow} onHide={onHide}>
       <Modal.Header closeButton>
@@ -43,9 +49,11 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
           <div className="form-group">
             <label>Pekerjaan</label>
             <select
-              className="form-control"
+              className={`form-control${
+                errors.id_pekerjaan ? " is-invalid" : ""
+              }`}
               name="id_pekerjaan"
-              ref={register}
+              ref={register({ required: true })}
               defaultValue={(data && data.id_pekerjaan) || ""}
             >
               <option value="">--pilih--</option>
@@ -55,18 +63,22 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
                 </option>
               ))}
             </select>
+            {_renderError(errors.id_pekerjaan, "Pekerjaan is required")}
           </div>
 
           <div className="form-group">
             <label>Item Pekerjaan</label>
             <input
-              className="form-control"
+              className={`form-control${
+                errors.item_pekerjaan ? " is-invalid" : ""
+              }`}
               type="text"
               name="item_pekerjaan"
               placeholder="Item Pekerjaan"
-              ref={register}
+              ref={register({ required: true })}
               defaultValue={(data && data.item_pekerjaan) || ""}
             />
+            {_renderError(errors.item_pekerjaan, "Item Pekerjaan is required")}
           </div>
 
           <div className="form-group">

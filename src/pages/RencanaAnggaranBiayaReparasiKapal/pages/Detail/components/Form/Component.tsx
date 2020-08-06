@@ -17,7 +17,7 @@ interface Props {
 
 const Component = ({ isShow, onHide, data, idKapal, title, id }: Props) => {
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const rabReparasiState = useSelector((state: Reducers) => state.rabReparasi);
 
@@ -32,6 +32,12 @@ const Component = ({ isShow, onHide, data, idKapal, title, id }: Props) => {
     [dispatch, data, idKapal, onHide, id]
   );
 
+  const _renderError = useCallback(
+    (isShowError: boolean, message: string) =>
+      isShowError && <div className="invalid-feedback">{message}</div>,
+    []
+  );
+
   return (
     <Modal show={isShow} onHide={onHide}>
       <Modal.Header closeButton>
@@ -42,9 +48,11 @@ const Component = ({ isShow, onHide, data, idKapal, title, id }: Props) => {
           <div className="form-group">
             <label>Pekerjaan</label>
             <select
-              className="form-control"
+              className={`form-control${
+                errors.id_pekerjaan ? " is-invalid" : ""
+              }`}
               name="id_pekerjaan"
-              ref={register}
+              ref={register({ required: true })}
               defaultValue={(data && data.id_pekerjaan) || ""}
             >
               <option value="">--pilih--</option>
@@ -54,18 +62,22 @@ const Component = ({ isShow, onHide, data, idKapal, title, id }: Props) => {
                 </option>
               ))}
             </select>
+            {_renderError(errors.id_pekerjaan, "Pekerjaan is required")}
           </div>
 
           <div className="form-group">
             <label>Nama Pekerjaan</label>
             <input
-              className="form-control"
+              className={`form-control${
+                errors.nama_pekerjaan ? " is-invalid" : ""
+              }`}
               type="text"
               name="nama_pekerjaan"
               placeholder="Nama Pekerjaan"
-              ref={register}
+              ref={register({ required: true })}
               defaultValue={(data && data.nama_pekerjaan) || ""}
             />
+            {_renderError(errors.nama_pekerjaan, "Nama Pekerjaan is required")}
           </div>
 
           <div className="form-group">
