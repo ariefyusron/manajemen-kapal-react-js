@@ -46,6 +46,11 @@ export const SAVE_RAB_REPARASI_PENDING = "SAVE_RAB_REPARASI_PENDING";
 export const SAVE_RAB_REPARASI_SUCCESS = "SAVE_RAB_REPARASI_SUCCESS";
 export const SAVE_RAB_REPARASI_ERROR = "SAVE_RAB_REPARASI_ERROR";
 
+// get history
+export const GET_HISTORY_PENDING = "GET_HISTORY_PENDING";
+export const GET_HISTORY_SUCCESS = "GET_HISTORY_SUCCESS";
+export const GET_HISTORY_ERROR = "GET_HISTORY_ERROR";
+
 export const getAllRab = (idKapal: string) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: GET_ALL_RAB_PENDING });
@@ -247,6 +252,23 @@ export const saveRabReparasi = (idKapal: string, edit: boolean) => async (
       });
     } else {
       dispatch({ type: SAVE_RAB_REPARASI_ERROR });
+    }
+  }
+};
+
+export const getHistory = (idKapal: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch({ type: GET_HISTORY_PENDING });
+    const res = await API.getHistory(idKapal);
+    dispatch({ type: GET_HISTORY_SUCCESS, payload: { data: res.data } });
+  } catch (err) {
+    if (err.response) {
+      dispatch({
+        type: GET_HISTORY_ERROR,
+        payload: { data: err.response.data }
+      });
+    } else {
+      dispatch({ type: GET_HISTORY_ERROR });
     }
   }
 };

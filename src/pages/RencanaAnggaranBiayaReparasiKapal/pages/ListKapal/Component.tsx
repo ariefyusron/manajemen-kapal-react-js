@@ -34,6 +34,7 @@ const Component = () => {
                 <th scope="col">Nama Kapal</th>
                 <th scope="col">Tahun</th>
                 <th scope="col">Type Kapal</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -49,6 +50,20 @@ const Component = () => {
                   <td>{item.name}</td>
                   <td>{item.tahun}</td>
                   <td>{item.KapalType && item.KapalType.name}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-success"
+                      onClick={e => {
+                        e.stopPropagation();
+                        history.push(
+                          `${history.location.pathname}/history/${item.id}`
+                        );
+                      }}
+                    >
+                      History
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

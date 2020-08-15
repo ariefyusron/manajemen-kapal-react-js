@@ -11,6 +11,9 @@ import {
   GET_ALL_RAB_ERROR,
   GET_ALL_RAB_PENDING,
   GET_ALL_RAB_SUCCESS,
+  GET_HISTORY_ERROR,
+  GET_HISTORY_PENDING,
+  GET_HISTORY_SUCCESS,
   PATCH_PEKERJAAN_RAB_ERROR,
   PATCH_PEKERJAAN_RAB_PENDING,
   PATCH_PEKERJAAN_RAB_SUCCESS,
@@ -32,7 +35,8 @@ import { Action, RabReparasiState } from "../types";
 const initialState: RabReparasiState = {
   isLoading: false,
   list: [],
-  listPekerjaan: []
+  listPekerjaan: [],
+  listHistory: []
 };
 
 let result;
@@ -145,6 +149,14 @@ export default (state = initialState, { type, payload }: Action) => {
         listPekerjaan: result
       };
     case SAVE_RAB_REPARASI_ERROR:
+      return { ...state, isLoading: false };
+
+    // get history
+    case GET_HISTORY_PENDING:
+      return { ...state, isLoading: true };
+    case GET_HISTORY_SUCCESS:
+      return { ...state, isLoading: false, listHistory: payload.data };
+    case GET_HISTORY_ERROR:
       return { ...state, isLoading: false };
 
     default:

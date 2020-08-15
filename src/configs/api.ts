@@ -162,7 +162,11 @@ const api = {
       {
         headers: { Authorization: token }
       }
-    )
+    ),
+  getHistory: (idKapal: string) =>
+    host.get(`history/${idKapal}`, {
+      headers: { Authorization: token }
+    })
 };
 
 export default api;

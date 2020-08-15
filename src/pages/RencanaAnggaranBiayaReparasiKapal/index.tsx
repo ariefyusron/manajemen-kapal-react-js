@@ -6,6 +6,7 @@ import { documentTitle } from "../../utils";
 // screens
 import ListKapal from "./pages/ListKapal";
 import Detail from "./pages/Detail";
+import ListHistoy from "./pages/ListHistory";
 
 const App = () => {
   documentTitle("RAB Reparasai Kapal");
@@ -18,6 +19,9 @@ const App = () => {
       </Route>
       <Route path={`${match.path}/:id`} exact>
         <Detail />
+      </Route>
+      <Route path={`${match.path}/history/:id`} exact>
+        <ListHistoy />
       </Route>
     </Switch>
   );
