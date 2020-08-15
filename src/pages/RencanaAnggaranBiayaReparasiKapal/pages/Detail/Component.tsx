@@ -73,13 +73,21 @@ const Component = () => {
     totalBiayaOverhead +
     totalBiayaTidakLangsung;
 
-  const _exportPdf = () => {
+  const _exportPdf = useCallback(() => {
     const printContents = document.getElementById("print")!.innerHTML;
 
     document.body.innerHTML = printContents;
     window.print();
     window.location.reload();
-  };
+  }, []);
+
+  const _isEditable = useCallback(
+    () =>
+      rabReparasiState.listPekerjaan.length === 0 ||
+      (rabReparasiState.listPekerjaan.length > 0 &&
+        !rabReparasiState.listPekerjaan[0].is_save),
+    [rabReparasiState.listPekerjaan]
+  );
 
   const _renderTable = useCallback(
     (e: any, i: number) => (
@@ -89,35 +97,37 @@ const Component = () => {
             <Col size={10}>
               <h3>{e.name}</h3>
             </Col>
-            <Col size={2} className="no-print">
-              <Row justifyContent="end">
-                <Col size={3}>
-                  <button
-                    type="button"
-                    className="btn btn-success"
-                    onClick={() =>
-                      setModalEditPekerjaan({
-                        visible: true,
-                        index: i,
-                        id: e.id
-                      })
-                    }
-                  >
-                    edit
-                  </button>
-                </Col>
-                <Col size={6}>
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    style={{ marginLeft: 15 }}
-                    onClick={() => dispatch(deletePekerjaanRab(id!, e.id))}
-                  >
-                    delete
-                  </button>
-                </Col>
-              </Row>
-            </Col>
+            {_isEditable() && (
+              <Col size={2} className="no-print">
+                <Row justifyContent="end">
+                  <Col size={3}>
+                    <button
+                      type="button"
+                      className="btn btn-success"
+                      onClick={() =>
+                        setModalEditPekerjaan({
+                          visible: true,
+                          index: i,
+                          id: e.id
+                        })
+                      }
+                    >
+                      edit
+                    </button>
+                  </Col>
+                  <Col size={6}>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      style={{ marginLeft: 15 }}
+                      onClick={() => dispatch(deletePekerjaanRab(id!, e.id))}
+                    >
+                      delete
+                    </button>
+                  </Col>
+                </Row>
+              </Col>
+            )}
           </Row>
           <Row>
             <Col>
@@ -134,9 +144,11 @@ const Component = () => {
                     <th scope="col">Material Bantu</th>
                     <th scope="col">Overhead</th>
                     <th scope="col">Total</th>
-                    <th scope="col" className="no-print">
-                      Aksi
-                    </th>
+                    {_isEditable() && (
+                      <th scope="col" className="no-print">
+                        Aksi
+                      </th>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
@@ -157,29 +169,31 @@ const Component = () => {
                         <td>{maskedMoney(item.material_bantu)}</td>
                         <td>{maskedMoney(item.overhead)}</td>
                         <td>{maskedMoney(item.total)}</td>
-                        <td className="no-print">
-                          <button
-                            type="button"
-                            className="btn btn-success"
-                            onClick={() =>
-                              setModalEdit({
-                                id: item.id,
-                                visible: true,
-                                index
-                              })
-                            }
-                          >
-                            edit
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-danger"
-                            style={{ marginLeft: 15 }}
-                            onClick={() => dispatch(deleteRab(id!, item.id))}
-                          >
-                            delete
-                          </button>
-                        </td>
+                        {_isEditable() && (
+                          <td className="no-print">
+                            <button
+                              type="button"
+                              className="btn btn-success"
+                              onClick={() =>
+                                setModalEdit({
+                                  id: item.id,
+                                  visible: true,
+                                  index
+                                })
+                              }
+                            >
+                              edit
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              style={{ marginLeft: 15 }}
+                              onClick={() => dispatch(deleteRab(id!, item.id))}
+                            >
+                              delete
+                            </button>
+                          </td>
+                        )}
                       </tr>
                     ))}
                 </tbody>
@@ -189,7 +203,7 @@ const Component = () => {
         </Col>
       </Row>
     ),
-    [dispatch, id, rabReparasiState.list]
+    [dispatch, id, rabReparasiState.list, _isEditable]
   );
 
   return (
@@ -312,18 +326,20 @@ const Component = () => {
                   </select>
                 </Col>
               </Row>
-              <Row justifyContent="end">
-                <Col size={6}>
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    style={{ width: "100%", marginBottom: 5 }}
-                    onClick={() => setModalAdd(true)}
-                  >
-                    Add sub pekerjaan
-                  </button>
-                </Col>
-              </Row>
+              {_isEditable() && (
+                <Row justifyContent="end">
+                  <Col size={6}>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      style={{ width: "100%", marginBottom: 5 }}
+                      onClick={() => setModalAdd(true)}
+                    >
+                      Add sub pekerjaan
+                    </button>
+                  </Col>
+                </Row>
+              )}
             </Col>
           )}
         </Row>
@@ -336,22 +352,24 @@ const Component = () => {
                 _renderTable(e, i)
             )}
 
-        <Row
-          justifyContent="center"
-          style={{ marginBottom: 20, marginTop: 50 }}
-          className="no-print"
-        >
-          <Col size={2}>
-            <button
-              type="button"
-              className="btn btn-primary"
-              style={{ width: "100%", marginBottom: 5 }}
-              onClick={() => setModalAddPekerjaan(true)}
-            >
-              Add pekerjaan
-            </button>
-          </Col>
-        </Row>
+        {_isEditable() && (
+          <Row
+            justifyContent="center"
+            style={{ marginBottom: 20, marginTop: 50 }}
+            className="no-print"
+          >
+            <Col size={2}>
+              <button
+                type="button"
+                className="btn btn-primary"
+                style={{ width: "100%", marginBottom: 5 }}
+                onClick={() => setModalAddPekerjaan(true)}
+              >
+                Add pekerjaan
+              </button>
+            </Col>
+          </Row>
+        )}
 
         {rabReparasiState.listPekerjaan.length > 0 && (
           <Row style={{ marginBottom: 30 }}>
@@ -444,6 +462,25 @@ const Component = () => {
 
       {rabReparasiState.listPekerjaan.length > 0 && (
         <Row style={{ marginBottom: 60 }} justifyContent="end">
+          <Col size={1}>
+            {_isEditable() ? (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={_exportPdf}
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={_exportPdf}
+              >
+                Edit
+              </button>
+            )}
+          </Col>
           <Col size={2}>
             <button type="button" className="btn btn-dark" onClick={_exportPdf}>
               export to pdf

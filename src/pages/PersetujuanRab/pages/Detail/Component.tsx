@@ -62,13 +62,13 @@ const Component = () => {
     totalBiayaOverhead +
     totalBiayaTidakLangsung;
 
-  const _exportPdf = () => {
+  const _exportPdf = useCallback(() => {
     const printContents = document.getElementById("print")!.innerHTML;
 
     document.body.innerHTML = printContents;
     window.print();
     window.location.reload();
-  };
+  }, []);
 
   return (
     <Container
