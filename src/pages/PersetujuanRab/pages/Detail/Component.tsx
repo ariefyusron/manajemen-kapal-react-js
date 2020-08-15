@@ -4,7 +4,7 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import { Reducers } from "../../../../redux/types";
 import {
-  getAllRab,
+  getHistory,
   getKapal,
   getPersetujuanRab,
 } from "../../../../redux/actions";
@@ -28,7 +28,7 @@ const Component = () => {
   );
 
   useEffect(() => {
-    dispatch(getAllRab(id!, "history"));
+    dispatch(getHistory(id!, true));
     dispatch(getKapal(id!));
     dispatch(getPersetujuanRab(id!));
   }, [dispatch, id]);

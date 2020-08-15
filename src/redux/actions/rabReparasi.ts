@@ -265,11 +265,16 @@ export const saveRabReparasi = (idKapal: string, edit: boolean) => async (
   }
 };
 
-export const getHistory = (idKapal: string) => async (dispatch: Dispatch) => {
+export const getHistory = (idKapal: string, getAllRabParam = false) => async (
+  dispatch: Dispatch
+) => {
   try {
     dispatch({ type: GET_HISTORY_PENDING });
     const res = await API.getHistory(idKapal);
     dispatch({ type: GET_HISTORY_SUCCESS, payload: { data: res.data } });
+    if (getAllRabParam) {
+      dispatch(getAllRab(res.data[0].id, "history"));
+    }
   } catch (err) {
     if (err.response) {
       dispatch({

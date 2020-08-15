@@ -157,7 +157,7 @@ export default (state = initialState, { type, payload }: Action) => {
     case GET_HISTORY_SUCCESS:
       return { ...state, isLoading: false, listHistory: payload.data };
     case GET_HISTORY_ERROR:
-      return { ...state, isLoading: false };
+      return { ...state, isLoading: false, list: initialState.list };
 
     default:
       return state;
