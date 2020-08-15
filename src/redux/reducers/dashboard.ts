@@ -1,13 +1,13 @@
 import {
   GET_DASHBOARD_ERROR,
   GET_DASHBOARD_PENDING,
-  GET_DASHBOARD_SUCCESS
+  GET_DASHBOARD_SUCCESS,
 } from "../actions";
 import { Action, DashboardState } from "../types";
 
 const initialState: DashboardState = {
   isLoading: false,
-  list: []
+  list: [],
 };
 
 export default (state = initialState, { type, payload }: Action) => {

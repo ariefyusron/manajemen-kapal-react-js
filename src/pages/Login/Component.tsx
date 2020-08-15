@@ -15,7 +15,7 @@ const Component = () => {
   const authState = useSelector((state: Reducers) => state.auth);
 
   const _handleLogin = useCallback(
-    form => {
+    (form) => {
       dispatch(postLogin(form));
     },
     [dispatch]

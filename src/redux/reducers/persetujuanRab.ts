@@ -4,13 +4,13 @@ import {
   GET_PERSETUJUAN_RAB_SUCCESS,
   PATCH_PERSETUJUAN_RAB_ERROR,
   PATCH_PERSETUJUAN_RAB_PENDING,
-  PATCH_PERSETUJUAN_RAB_SUCCESS
+  PATCH_PERSETUJUAN_RAB_SUCCESS,
 } from "../actions";
 import { Action, PersetujuanRabState } from "../types";
 
 const initialState: PersetujuanRabState = {
   isLoading: false,
-  data: {}
+  data: {},
 };
 
 export default (state = initialState, { type, payload }: Action) => {

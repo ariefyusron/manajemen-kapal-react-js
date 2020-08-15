@@ -28,7 +28,7 @@ import {
   POST_RAB_SUCCESS,
   SAVE_RAB_REPARASI_ERROR,
   SAVE_RAB_REPARASI_PENDING,
-  SAVE_RAB_REPARASI_SUCCESS
+  SAVE_RAB_REPARASI_SUCCESS,
 } from "../actions";
 import { Action, RabReparasiState } from "../types";
 
@@ -36,7 +36,7 @@ const initialState: RabReparasiState = {
   isLoading: false,
   list: [],
   listPekerjaan: [],
-  listHistory: []
+  listHistory: [],
 };
 
 let result;
@@ -60,8 +60,8 @@ export default (state = initialState, { type, payload }: Action) => {
         ...state,
         isLoading: false,
         list: state.list.filter(
-          e => e.id.toString() !== payload.data.toString()
-        )
+          (e) => e.id.toString() !== payload.data.toString()
+        ),
       };
     case DELETE_RAB_ERROR:
       return { ...state, isLoading: false };
@@ -73,7 +73,7 @@ export default (state = initialState, { type, payload }: Action) => {
       return {
         ...state,
         isLoading: false,
-        list: [payload.data, ...state.list]
+        list: [payload.data, ...state.list],
       };
     case POST_RAB_ERROR:
       return { ...state, isLoading: false };
@@ -83,7 +83,7 @@ export default (state = initialState, { type, payload }: Action) => {
       return { ...state, isLoading: true };
     case PATCH_RAB_SUCCESS:
       result = [...state.list];
-      index = state.list.findIndex(item => item.id === payload.id);
+      index = state.list.findIndex((item) => item.id === payload.id);
       result[index] = { id: payload.id, ...payload.data };
 
       return { ...state, isLoading: false, list: result };
@@ -105,7 +105,7 @@ export default (state = initialState, { type, payload }: Action) => {
       return {
         ...state,
         isLoading: false,
-        listPekerjaan: [...state.listPekerjaan, payload.data]
+        listPekerjaan: [...state.listPekerjaan, payload.data],
       };
     case POST_PEKERJAAN_RAB_ERROR:
       return { ...state, isLoading: false };
@@ -115,7 +115,7 @@ export default (state = initialState, { type, payload }: Action) => {
       return { ...state, isLoading: true };
     case PATCH_PEKERJAAN_RAB_SUCCESS:
       result = [...state.listPekerjaan];
-      index = state.listPekerjaan.findIndex(item => item.id === payload.id);
+      index = state.listPekerjaan.findIndex((item) => item.id === payload.id);
       result[index] = { id: payload.id, ...payload.data };
 
       return { ...state, isLoading: false, listPekerjaan: result };
@@ -130,8 +130,8 @@ export default (state = initialState, { type, payload }: Action) => {
         ...state,
         isLoading: false,
         listPekerjaan: state.listPekerjaan.filter(
-          e => e.id.toString() !== payload.data.toString()
-        )
+          (e) => e.id.toString() !== payload.data.toString()
+        ),
       };
     case DELETE_PEKERJAAN_RAB_ERROR:
       return { ...state, isLoading: false };
@@ -146,7 +146,7 @@ export default (state = initialState, { type, payload }: Action) => {
       return {
         ...state,
         isLoading: false,
-        listPekerjaan: result
+        listPekerjaan: result,
       };
     case SAVE_RAB_REPARASI_ERROR:
       return { ...state, isLoading: false };

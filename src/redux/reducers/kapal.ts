@@ -31,36 +31,36 @@ import {
   POST_TYPE_KAPAL_SUCCESS,
   POST_TYPE_SURVEY_ERROR,
   POST_TYPE_SURVEY_PENDING,
-  POST_TYPE_SURVEY_SUCCESS
+  POST_TYPE_SURVEY_SUCCESS,
 } from "../actions";
 import { Action, KapalState } from "../types";
 
 const initialState: KapalState = {
   kapal: {
     isLoading: false,
-    list: []
+    list: [],
   },
   detailKapal: {
     isLoading: false,
-    data: {}
+    data: {},
   },
   addKapal: {
-    isLoading: false
+    isLoading: false,
   },
   patchKapal: {
-    isLoading: false
+    isLoading: false,
   },
   deleteKapal: {
-    isLoading: false
+    isLoading: false,
   },
   typeKapal: {
     isLoading: false,
-    list: []
+    list: [],
   },
   typeSurvey: {
     isLoading: false,
-    list: []
-  }
+    list: [],
+  },
 };
 
 let result;
@@ -72,7 +72,7 @@ export default (state = initialState, { type, payload }: Action) => {
     case GET_KAPAL_PENDING:
       return {
         ...state,
-        detailKapal: { ...state.detailKapal, isLoading: true }
+        detailKapal: { ...state.detailKapal, isLoading: true },
       };
     case GET_KAPAL_SUCCESS:
       return {
@@ -80,77 +80,77 @@ export default (state = initialState, { type, payload }: Action) => {
         detailKapal: {
           ...state.detailKapal,
           isLoading: false,
-          data: payload.data
-        }
+          data: payload.data,
+        },
       };
     case GET_KAPAL_ERROR:
       return {
         ...state,
-        detailKapal: { ...state.detailKapal, isLoading: false }
+        detailKapal: { ...state.detailKapal, isLoading: false },
       };
 
     // get all kapal
     case GET_ALL_KAPAL_PENDING:
       return {
         ...state,
-        kapal: { ...state.kapal, isLoading: true }
+        kapal: { ...state.kapal, isLoading: true },
       };
     case GET_ALL_KAPAL_SUCCESS:
       return {
         ...state,
-        kapal: { ...state.kapal, isLoading: false, list: payload.data }
+        kapal: { ...state.kapal, isLoading: false, list: payload.data },
       };
     case GET_ALL_KAPAL_ERROR:
       return {
         ...state,
-        kapal: { ...state.kapal, isLoading: false }
+        kapal: { ...state.kapal, isLoading: false },
       };
 
     // post kapal
     case POST_KAPAL_PENDING:
       return {
         ...state,
-        addKapal: { ...state.addKapal, isLoading: true }
+        addKapal: { ...state.addKapal, isLoading: true },
       };
     case POST_KAPAL_SUCCESS:
       return {
         ...state,
         addKapal: { ...state.addKapal, isLoading: false },
-        kapal: { ...state.kapal, list: [payload.data, ...state.kapal.list] }
+        kapal: { ...state.kapal, list: [payload.data, ...state.kapal.list] },
       };
     case POST_KAPAL_ERROR:
       return {
         ...state,
-        addKapal: { ...state.addKapal, isLoading: false }
+        addKapal: { ...state.addKapal, isLoading: false },
       };
 
     // patch kapal
     case PATCH_KAPAL_PENDING:
       return {
         ...state,
-        patchKapal: { ...state.patchKapal, isLoading: true }
+        patchKapal: { ...state.patchKapal, isLoading: true },
       };
     case PATCH_KAPAL_SUCCESS:
       result = [...state.kapal.list];
-      index = state.kapal.list.findIndex(item => item.id === payload.id);
+      index = state.kapal.list.findIndex((item) => item.id === payload.id);
       result[index] = { id: payload.id, ...payload.data };
 
       return {
         ...state,
         patchKapal: { ...state.patchKapal, isLoading: false },
-        kapal: { ...state.kapal, list: result }
+        kapal: { ...state.kapal, list: result },
       };
     case PATCH_KAPAL_ERROR:
       return {
         ...state,
-        patchKapal: { ...state.patchKapal, isLoading: false }
+        patchKapal: { ...state.patchKapal, isLoading: false },
       };
 
     // delete kapal
     case DELETE_KAPAL_PENDING:
       return {
         ...state,
-        deleteKapal: { ...state.deleteKapal, isLoading: true }
+        deleteKapal: { ...state.deleteKapal, isLoading: true },
       };
     case DELETE_KAPAL_SUCCESS:
       return {
@@ -158,37 +158,37 @@ export default (state = initialState, { type, payload }: Action) => {
         deleteKapal: { ...state.deleteKapal, isLoading: false },
         kapal: {
           ...state.kapal,
-          list: state.kapal.list.filter(item => item.id !== payload.data)
-        }
+          list: state.kapal.list.filter((item) => item.id !== payload.data),
+        },
       };
     case DELETE_KAPAL_ERROR:
       return {
         ...state,
-        deleteKapal: { ...state.deleteKapal, isLoading: false }
+        deleteKapal: { ...state.deleteKapal, isLoading: false },
       };
 
     // get type kapal
     case GET_TYPE_KAPAL_PENDING:
       return {
         ...state,
-        typeKapal: { ...state.typeKapal, isLoading: true }
+        typeKapal: { ...state.typeKapal, isLoading: true },
       };
     case GET_TYPE_KAPAL_SUCCESS:
       return {
         ...state,
-        typeKapal: { ...state.typeKapal, isLoading: false, list: payload.data }
+        typeKapal: { ...state.typeKapal, isLoading: false, list: payload.data },
       };
     case GET_TYPE_KAPAL_ERROR:
       return {
         ...state,
-        typeKapal: { ...state.typeKapal, isLoading: false }
+        typeKapal: { ...state.typeKapal, isLoading: false },
       };
 
     // post type kapal
     case POST_TYPE_KAPAL_PENDING:
       return {
         ...state,
-        typeKapal: { ...state.typeKapal, isLoading: true }
+        typeKapal: { ...state.typeKapal, isLoading: true },
       };
     case POST_TYPE_KAPAL_SUCCESS:
       return {
@@ -196,20 +196,20 @@ export default (state = initialState, { type, payload }: Action) => {
         typeKapal: {
           ...state.typeKapal,
           isLoading: false,
-          list: [payload.data, ...state.typeKapal.list]
-        }
+          list: [payload.data, ...state.typeKapal.list],
+        },
       };
     case POST_TYPE_KAPAL_ERROR:
       return {
         ...state,
-        typeKapal: { ...state.typeKapal, isLoading: false }
+        typeKapal: { ...state.typeKapal, isLoading: false },
       };
 
     // delete type kapal
     case DELETE_TYPE_KAPAL_PENDING:
       return {
         ...state,
-        typeKapal: { ...state.typeKapal, isLoading: true }
+        typeKapal: { ...state.typeKapal, isLoading: true },
       };
     case DELETE_TYPE_KAPAL_SUCCESS:
       return {
@@ -217,20 +217,20 @@ export default (state = initialState, { type, payload }: Action) => {
         typeKapal: {
           ...state.typeKapal,
           isLoading: false,
-          list: state.typeKapal.list.filter(item => item.id !== payload.id)
-        }
+          list: state.typeKapal.list.filter((item) => item.id !== payload.id),
+        },
       };
     case DELETE_TYPE_KAPAL_ERROR:
       return {
         ...state,
-        typeKapal: { ...state.typeKapal, isLoading: false }
+        typeKapal: { ...state.typeKapal, isLoading: false },
       };
 
     // get type survey
     case GET_TYPE_SURVEY_PENDING:
       return {
         ...state,
-        typeSurvey: { ...state.typeSurvey, isLoading: true }
+        typeSurvey: { ...state.typeSurvey, isLoading: true },
       };
     case GET_TYPE_SURVEY_SUCCESS:
       return {
@@ -238,20 +238,20 @@ export default (state = initialState, { type, payload }: Action) => {
         typeSurvey: {
           ...state.typeSurvey,
           isLoading: false,
-          list: payload.data
-        }
+          list: payload.data,
+        },
       };
     case GET_TYPE_SURVEY_ERROR:
       return {
         ...state,
-        typeSurvey: { ...state.typeSurvey, isLoading: false }
+        typeSurvey: { ...state.typeSurvey, isLoading: false },
       };
 
     // post type survey
     case POST_TYPE_SURVEY_PENDING:
       return {
         ...state,
-        typeSurvey: { ...state.typeSurvey, isLoading: true }
+        typeSurvey: { ...state.typeSurvey, isLoading: true },
       };
     case POST_TYPE_SURVEY_SUCCESS:
       return {
@@ -259,20 +259,20 @@ export default (state = initialState, { type, payload }: Action) => {
         typeSurvey: {
           ...state.typeSurvey,
           isLoading: false,
-          list: [payload.data, ...state.typeSurvey.list]
-        }
+          list: [payload.data, ...state.typeSurvey.list],
+        },
       };
     case POST_TYPE_SURVEY_ERROR:
       return {
         ...state,
-        typeSurvey: { ...state.typeSurvey, isLoading: false }
+        typeSurvey: { ...state.typeSurvey, isLoading: false },
       };
 
     // delete type survey
     case DELETE_TYPE_SURVEY_PENDING:
       return {
         ...state,
-        typeSurvey: { ...state.typeSurvey, isLoading: true }
+        typeSurvey: { ...state.typeSurvey, isLoading: true },
       };
     case DELETE_TYPE_SURVEY_SUCCESS:
       return {
@@ -280,13 +280,13 @@ export default (state = initialState, { type, payload }: Action) => {
         typeSurvey: {
           ...state.typeSurvey,
           isLoading: false,
-          list: state.typeSurvey.list.filter(item => item.id !== payload.id)
-        }
+          list: state.typeSurvey.list.filter((item) => item.id !== payload.id),
+        },
       };
     case DELETE_TYPE_SURVEY_ERROR:
       return {
         ...state,
-        typeSurvey: { ...state.typeSurvey, isLoading: false }
+        typeSurvey: { ...state.typeSurvey, isLoading: false },
       };
 
     default:

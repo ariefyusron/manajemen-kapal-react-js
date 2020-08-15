@@ -17,7 +17,7 @@ const Component = ({ isShow, onHide, title, type }: Props) => {
   const { register, handleSubmit, errors } = useForm();
 
   const _handleSubmit = useCallback(
-    form => {
+    (form) => {
       if (type === "kapal") {
         dispatch(postTypeKapal(form, onHide!));
       } else {

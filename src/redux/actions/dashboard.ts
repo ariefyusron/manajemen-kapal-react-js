@@ -12,13 +12,13 @@ export const getDashboard = () => async (dispatch: Dispatch) => {
     const res = await API.getDashboard();
     dispatch({
       type: GET_DASHBOARD_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: GET_DASHBOARD_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: GET_DASHBOARD_ERROR });

@@ -9,7 +9,7 @@ import {
   getAllPekerjaanRab,
   getAllRab,
   getKapal,
-  saveRabReparasi
+  saveRabReparasi,
 } from "../../../../redux/actions";
 import { maskedMoney } from "../../../../utils";
 import { Col, Container, Row } from "../../../../components";
@@ -24,19 +24,19 @@ const Component = () => {
   const [modalEditPekerjaan, setModalEditPekerjaan] = useState({
     visible: false,
     index: 0,
-    id: 0
+    id: 0,
   });
   const [modalAddPekerjaan, setModalAddPekerjaan] = useState(false);
   const [modalEdit, setModalEdit] = useState({
     visible: false,
     index: 0,
-    id: 0
+    id: 0,
   });
   const [modalAdd, setModalAdd] = useState(false);
   const { rabReparasiState, kapalState } = useSelector(
     (state: Reducers) => ({
       rabReparasiState: state.rabReparasi,
-      kapalState: state.kapal
+      kapalState: state.kapal,
     }),
     shallowEqual
   );
@@ -116,7 +116,7 @@ const Component = () => {
                         setModalEditPekerjaan({
                           visible: true,
                           index: i,
-                          id: e.id
+                          id: e.id,
                         })
                       }
                     >
@@ -162,7 +162,7 @@ const Component = () => {
                 <tbody>
                   {rabReparasiState.list
                     .filter(
-                      resFilter =>
+                      (resFilter) =>
                         resFilter.id_pekerjaan.toString() === e.id.toString()
                     )
                     .map((item, index) => (
@@ -186,7 +186,7 @@ const Component = () => {
                                 setModalEdit({
                                   id: item.id,
                                   visible: true,
-                                  index
+                                  index,
                                 })
                               }
                             >
@@ -323,7 +323,7 @@ const Component = () => {
                   <select
                     className="form-control"
                     defaultValue={selectPekerjaan}
-                    onChange={e => setSelectPekerjaan(e.target.value)}
+                    onChange={(e) => setSelectPekerjaan(e.target.value)}
                   >
                     <option value="">-- pilih --</option>
                     {rabReparasiState.listPekerjaan.map((item, index) => (

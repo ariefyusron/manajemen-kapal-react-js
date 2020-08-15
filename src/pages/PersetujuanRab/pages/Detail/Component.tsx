@@ -7,7 +7,7 @@ import {
   getAllPekerjaanRab,
   getAllRab,
   getKapal,
-  getPersetujuanRab
+  getPersetujuanRab,
 } from "../../../../redux/actions";
 import { maskedMoney } from "../../../../utils";
 import { Col, Container, Row } from "../../../../components";
@@ -23,7 +23,7 @@ const Component = () => {
     (state: Reducers) => ({
       rabReparasiState: state.rabReparasi,
       kapalState: state.kapal,
-      persetujuanRab: state.persetujuanRab
+      persetujuanRab: state.persetujuanRab,
     }),
     shallowEqual
   );

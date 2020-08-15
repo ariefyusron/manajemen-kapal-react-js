@@ -54,7 +54,7 @@ const Component = () => {
                     <button
                       type="button"
                       className="btn btn-success"
-                      onClick={e => {
+                      onClick={(e) => {
                         e.stopPropagation();
                         history.push(
                           `${history.location.pathname}/history/${item.id}`

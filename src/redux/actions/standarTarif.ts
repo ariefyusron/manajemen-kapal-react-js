@@ -59,13 +59,13 @@ export const getStandarTarif = () => async (dispatch: Dispatch) => {
     const res = await API.getStandarTarif();
     dispatch({
       type: GET_STANDAR_TARIF_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: GET_STANDAR_TARIF_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: GET_STANDAR_TARIF_ERROR });
@@ -81,13 +81,13 @@ export const deleteStandarTarif = (id: string) => async (
     await API.deleteStandarTarif(id);
     dispatch({
       type: DELETE_STANDAR_TARIF_SUCCESS,
-      payload: { data: id }
+      payload: { data: id },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: DELETE_STANDAR_TARIF_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: DELETE_STANDAR_TARIF_ERROR });
@@ -104,13 +104,13 @@ export const postStandarTarif = (form: any, cb?: () => void) => async (
     cb && cb();
     dispatch({
       type: POST_STANDAR_TARIF_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: POST_STANDAR_TARIF_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: POST_STANDAR_TARIF_ERROR });
@@ -129,13 +129,13 @@ export const patchStandarTarif = (
     cb && cb();
     dispatch({
       type: PATCH_STANDAR_TARIF_SUCCESS,
-      payload: { data: res.data, id }
+      payload: { data: res.data, id },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: PATCH_STANDAR_TARIF_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: PATCH_STANDAR_TARIF_ERROR });
@@ -152,13 +152,13 @@ export const postPekerjaanStandarTarif = (form: any, cb?: () => void) => async (
     cb && cb();
     dispatch({
       type: POST_PEKERJAAN_STANDAR_TARIF_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: POST_PEKERJAAN_STANDAR_TARIF_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: POST_PEKERJAAN_STANDAR_TARIF_ERROR });
@@ -172,13 +172,13 @@ export const getPekerjaanStandarTarif = () => async (dispatch: Dispatch) => {
     const res = await API.getPekerjaanStandarTarif();
     dispatch({
       type: GET_PEKERJAAN_STANDAR_TARIF_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: GET_PEKERJAAN_STANDAR_TARIF_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: GET_PEKERJAAN_STANDAR_TARIF_ERROR });
@@ -197,13 +197,13 @@ export const patchPekerjaanStandarTarif = (
     cb && cb();
     dispatch({
       type: PATCH_PEKERJAAN_STANDAR_TARIF_SUCCESS,
-      payload: { data: res.data, id }
+      payload: { data: res.data, id },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: PATCH_PEKERJAAN_STANDAR_TARIF_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: PATCH_PEKERJAAN_STANDAR_TARIF_ERROR });
@@ -219,13 +219,13 @@ export const deletePekerjaanStandarTarif = (id: string) => async (
     await API.deletePekerjaanStandarTarif(id);
     dispatch({
       type: DELETE_PEKERJAAN_STANDAR_TARIF_SUCCESS,
-      payload: { data: id }
+      payload: { data: id },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: DELETE_PEKERJAAN_STANDAR_TARIF_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: DELETE_PEKERJAAN_STANDAR_TARIF_ERROR });

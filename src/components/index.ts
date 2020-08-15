@@ -17,5 +17,5 @@ export {
   Card,
   Topbar,
   FormType,
-  Loading
+  Loading,
 };

@@ -18,7 +18,7 @@ const Component = ({ isShow, onHide, data, idKapal, title }: Props) => {
   const { register, handleSubmit } = useForm();
 
   const _handleSubmit = useCallback(
-    form => {
+    (form) => {
       dispatch(patchPersetujuanRab(form, idKapal, onHide));
     },
     [idKapal, dispatch, onHide]

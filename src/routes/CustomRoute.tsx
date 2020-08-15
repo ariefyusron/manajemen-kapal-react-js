@@ -17,7 +17,7 @@ const CustomRoute = ({
       ) : (
         <Redirect
           to={{
-            pathname: "/login"
+            pathname: "/login",
           }}
         />
       );
@@ -28,7 +28,7 @@ const CustomRoute = ({
     ) : (
       <Redirect
         to={{
-          pathname: "/dashboard"
+          pathname: "/dashboard",
         }}
       />
     );
@@ -38,7 +38,7 @@ const CustomRoute = ({
 };
 
 CustomRoute.defaultProps = {
-  privateMode: true
+  privateMode: true,
 };
 
 export default CustomRoute;

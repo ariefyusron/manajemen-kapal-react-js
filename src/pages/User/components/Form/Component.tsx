@@ -19,7 +19,7 @@ const Component = ({ isShow, onHide }: Props) => {
   const authState = useSelector((state: Reducers) => state.auth);
 
   const _handleSubmit = useCallback(
-    form => {
+    (form) => {
       dispatch(postRegister(form, onHide!, true));
     },
     [dispatch, onHide]
@@ -81,7 +81,7 @@ const Component = ({ isShow, onHide }: Props) => {
               ref={register({
                 required: true,
                 minLength: 8,
-                validate: value => value === getValues("password")
+                validate: (value) => value === getValues("password"),
               })}
             />
             {_renderError(errors.password_confirm, "Password invalid")}

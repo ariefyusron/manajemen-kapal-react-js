@@ -23,7 +23,7 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
   );
 
   const _handleSubmit = useCallback(
-    form => {
+    (form) => {
       if (data) {
         dispatch(patchStandarTarif(form, id!, onHide!));
       } else {

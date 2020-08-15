@@ -10,23 +10,23 @@ import {
   POST_LOGIN_SUCCESS,
   POST_REGISTER_ERROR,
   POST_REGISTER_PENDING,
-  POST_REGISTER_SUCCESS
+  POST_REGISTER_SUCCESS,
 } from "../actions";
 import { Action, AuthState } from "../types";
 
 const initialState: AuthState = {
   login: {
     isLoading: false,
-    error: ""
+    error: "",
   },
   register: {
     isLoading: false,
-    error: ""
+    error: "",
   },
   user: {
     isLoading: false,
-    list: []
-  }
+    list: [],
+  },
 };
 
 export default (state = initialState, { type, payload }: Action) => {
@@ -35,27 +35,27 @@ export default (state = initialState, { type, payload }: Action) => {
     case POST_LOGIN_PENDING:
       return {
         ...state,
-        login: { ...state.login, isLoading: true, error: "" }
+        login: { ...state.login, isLoading: true, error: "" },
       };
     case POST_LOGIN_SUCCESS:
       return { ...state, login: { ...state.login, isLoading: false } };
     case POST_LOGIN_ERROR:
       return {
         ...state,
-        login: { ...state.login, isLoading: false, error: payload.data || "" }
+        login: { ...state.login, isLoading: false, error: payload.data || "" },
       };
 
     // post register
     case POST_REGISTER_PENDING:
       return {
         ...state,
-        register: { ...state.register, isLoading: true, error: "" }
+        register: { ...state.register, isLoading: true, error: "" },
       };
     case POST_REGISTER_SUCCESS:
       return {
         ...state,
         register: { ...state.register, isLoading: false },
-        user: { ...state.user, list: [payload.data, ...state.user.list] }
+        user: { ...state.user, list: [payload.data, ...state.user.list] },
       };
     case POST_REGISTER_ERROR:
       return {
@@ -63,8 +63,8 @@ export default (state = initialState, { type, payload }: Action) => {
         register: {
           ...state.register,
           isLoading: false,
-          error: payload.data || ""
-        }
+          error: payload.data || "",
+        },
       };
 
     // get all user
@@ -73,7 +73,7 @@ export default (state = initialState, { type, payload }: Action) => {
     case GET_ALL_USER_SUCCESS:
       return {
         ...state,
-        user: { ...state.user, isLoading: false, list: payload.data }
+        user: { ...state.user, isLoading: false, list: payload.data },
       };
     case GET_ALL_USER_ERROR:
       return { ...state, user: { ...state.user, isLoading: false } };
@@ -87,8 +87,8 @@ export default (state = initialState, { type, payload }: Action) => {
         user: {
           ...state.user,
           isLoading: false,
-          list: state.user.list.filter(item => item.id !== payload.id)
-        }
+          list: state.user.list.filter((item) => item.id !== payload.id),
+        },
       };
     case DELETE_USER_ERROR:
       return { ...state, user: { ...state.user, isLoading: false } };

@@ -21,7 +21,7 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
   const kapalState = useSelector((state: Reducers) => state.kapal);
 
   const _handleSubmit = useCallback(
-    form => {
+    (form) => {
       if (data) {
         dispatch(patchKapal(form, id!, onHide!));
       } else {

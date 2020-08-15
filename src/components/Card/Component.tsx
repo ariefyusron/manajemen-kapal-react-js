@@ -27,7 +27,7 @@ const Component = ({ children, title }: Props) => (
 );
 
 Component.defaultProps = {
-  title: ""
+  title: "",
 };
 
 export default memo(Component);

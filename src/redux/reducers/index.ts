@@ -13,5 +13,5 @@ export default combineReducers({
   rabReparasi,
   standarTarif,
   persetujuanRab,
-  dashboard
+  dashboard,
 });

@@ -12,41 +12,41 @@ const Component = () => {
     {
       title: "Standar tarif",
       pathname: "/dashboard/standar-tarif",
-      icon: ICONS.standarTarif
+      icon: ICONS.standarTarif,
     },
     {
       title: "Identitas Kapal",
       pathname: "/dashboard/identitas-kapal",
-      icon: ICONS.ship
+      icon: ICONS.ship,
     },
     {
       title: "Rencana Anggaran Biaya Reparasi Kapal",
       pathname: "/dashboard/rab-reparasi-kapal",
-      icon: ICONS.rab
+      icon: ICONS.rab,
     },
     {
       title: "Persetujuan RAB",
       pathname: "/dashboard/persetujuan-rab",
-      icon: ICONS.persetujuan
-    }
+      icon: ICONS.persetujuan,
+    },
   ];
 
   const listMenuAdmin = [
     {
       title: "User",
       pathname: "/dashboard/admin/user",
-      icon: ICONS.users
+      icon: ICONS.users,
     },
     {
       title: "Type Kapal",
       pathname: "/dashboard/admin/kapal",
-      icon: ICONS.typeShip
+      icon: ICONS.typeShip,
     },
     {
       title: "Type Survey",
       pathname: "/dashboard/admin/survey",
-      icon: ICONS.survey
-    }
+      icon: ICONS.survey,
+    },
   ];
 
   return (

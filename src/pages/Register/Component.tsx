@@ -15,7 +15,7 @@ const Component = () => {
   const authState = useSelector((state: Reducers) => state.auth);
 
   const _handleRegister = useCallback(
-    form => {
+    (form) => {
       dispatch(
         postRegister(
           { username: form.username, password: form.password, is_admin: true },
@@ -86,7 +86,8 @@ const Component = () => {
                           ref={register({
                             required: true,
                             minLength: 8,
-                            validate: value => value === getValues("password")
+                            validate: (value) =>
+                              value === getValues("password"),
                           })}
                         />
                         {_renderError(

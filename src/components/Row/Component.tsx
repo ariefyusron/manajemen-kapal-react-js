@@ -18,7 +18,7 @@ const Component = ({ children, className, justifyContent, style }: Props) => (
 
 Component.defaultProps = {
   justifyContent: "start",
-  className: ""
+  className: "",
 };
 
 export default memo(Component);

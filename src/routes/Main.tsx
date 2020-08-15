@@ -19,7 +19,7 @@ const App = () => {
   return (
     <Switch>
       <>
-        <Topbar show={show} setShow={e => setShow(e)} />
+        <Topbar show={show} setShow={(e) => setShow(e)} />
         <div className="container-fluid" onClick={() => setShow(false)}>
           <Row>
             <Col size={2} className="sidebar">

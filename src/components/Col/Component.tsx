@@ -12,7 +12,7 @@ const Component = ({ children, size, className, style, onClick }: Props) => (
   <div
     className={`col-md-${size} ${className}`}
     style={style}
-    onClick={e => onClick && onClick(e)}
+    onClick={(e) => onClick && onClick(e)}
   >
     {children}
   </div>
@@ -20,7 +20,7 @@ const Component = ({ children, size, className, style, onClick }: Props) => (
 
 Component.defaultProps = {
   size: 12,
-  className: ""
+  className: "",
 };
 
 export default memo(Component);

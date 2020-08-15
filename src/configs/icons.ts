@@ -12,7 +12,7 @@ const icons = {
   typeShipColor: require("../assets/svgs/typeShipColor.svg"),
   userColor: require("../assets/svgs/userColor.svg"),
   rabColor: require("../assets/svgs/rabColor.svg"),
-  logout: require("../assets/svgs/logout.svg")
+  logout: require("../assets/svgs/logout.svg"),
 };
 
 export default icons;

@@ -57,13 +57,13 @@ export const getAllRab = (idKapal: string) => async (dispatch: Dispatch) => {
     const res = await API.getAllRab(idKapal);
     dispatch({
       type: GET_ALL_RAB_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: GET_ALL_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: GET_ALL_RAB_ERROR });
@@ -79,13 +79,13 @@ export const deleteRab = (idKapal: string, id: string) => async (
     await API.deleteRab(idKapal, id);
     dispatch({
       type: DELETE_RAB_SUCCESS,
-      payload: { data: id }
+      payload: { data: id },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: DELETE_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: DELETE_RAB_ERROR });
@@ -102,13 +102,13 @@ export const postRab = (form: any, idKapal: string, cb?: () => void) => async (
     cb && cb();
     dispatch({
       type: POST_RAB_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: POST_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: POST_RAB_ERROR });
@@ -128,13 +128,13 @@ export const patchRab = (
     cb && cb();
     dispatch({
       type: PATCH_RAB_SUCCESS,
-      payload: { data: res.data, id }
+      payload: { data: res.data, id },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: PATCH_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: PATCH_RAB_ERROR });
@@ -150,13 +150,13 @@ export const getAllPekerjaanRab = (idKapal: string) => async (
     const res = await API.getAllPekerjaanRab(idKapal);
     dispatch({
       type: GET_ALL_PEKERJAAN_RAB_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: GET_ALL_PEKERJAAN_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: GET_ALL_PEKERJAAN_RAB_ERROR });
@@ -172,13 +172,13 @@ export const deletePekerjaanRab = (idKapal: string, id: string) => async (
     await API.deletePekerjaanRab(idKapal, id);
     dispatch({
       type: DELETE_PEKERJAAN_RAB_SUCCESS,
-      payload: { data: id }
+      payload: { data: id },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: DELETE_PEKERJAAN_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: DELETE_PEKERJAAN_RAB_ERROR });
@@ -197,13 +197,13 @@ export const postPekerjaanRab = (
     cb && cb();
     dispatch({
       type: POST_PEKERJAAN_RAB_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: POST_PEKERJAAN_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: POST_PEKERJAAN_RAB_ERROR });
@@ -223,13 +223,13 @@ export const patchPekerjaanRab = (
     cb && cb();
     dispatch({
       type: PATCH_PEKERJAAN_RAB_SUCCESS,
-      payload: { data: res.data, id }
+      payload: { data: res.data, id },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: PATCH_PEKERJAAN_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: PATCH_PEKERJAAN_RAB_ERROR });
@@ -248,7 +248,7 @@ export const saveRabReparasi = (idKapal: string, edit: boolean) => async (
     if (err.response) {
       dispatch({
         type: SAVE_RAB_REPARASI_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: SAVE_RAB_REPARASI_ERROR });
@@ -265,7 +265,7 @@ export const getHistory = (idKapal: string) => async (dispatch: Dispatch) => {
     if (err.response) {
       dispatch({
         type: GET_HISTORY_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: GET_HISTORY_ERROR });

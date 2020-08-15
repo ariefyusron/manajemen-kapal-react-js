@@ -22,7 +22,7 @@ const Component = ({ isShow, onHide, data, idKapal, title, id }: Props) => {
   const rabReparasiState = useSelector((state: Reducers) => state.rabReparasi);
 
   const _handleSubmit = useCallback(
-    form => {
+    (form) => {
       if (data) {
         dispatch(patchRab(form, idKapal, id!, onHide));
       } else {
@@ -184,7 +184,7 @@ const Component = ({ isShow, onHide, data, idKapal, title, id }: Props) => {
 };
 
 Component.defaultProps = {
-  type: "pengedokan"
+  type: "pengedokan",
 };
 
 export default memo(Component);

@@ -6,7 +6,7 @@ import {
   deleteKapal,
   getAllKapal,
   getTypeKapal,
-  getTypeSurvey
+  getTypeSurvey,
 } from "../../redux/actions";
 import { documentTitle } from "../../utils";
 import { Col, Container, Row } from "../../components";
@@ -21,7 +21,7 @@ const Component = () => {
   const [modalEdit, setModalEdit] = useState({
     show: false,
     index: 0,
-    id: 0
+    id: 0,
   });
 
   useEffect(() => {

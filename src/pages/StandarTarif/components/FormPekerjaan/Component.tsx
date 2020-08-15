@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 import {
   patchPekerjaanStandarTarif,
-  postPekerjaanStandarTarif
+  postPekerjaanStandarTarif,
 } from "../../../../redux/actions";
 
 interface Props {
@@ -21,7 +21,7 @@ const Component = ({ isShow, onHide, data, id, title }: Props) => {
   const { register, handleSubmit, errors } = useForm();
 
   const _handleSubmit = useCallback(
-    form => {
+    (form) => {
       if (data) {
         dispatch(patchPekerjaanStandarTarif(form, id!, onHide!));
       } else {

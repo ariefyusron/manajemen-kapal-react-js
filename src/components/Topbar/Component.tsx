@@ -39,7 +39,7 @@ const Component = ({ show, setShow }: Props) => {
             <Row justifyContent="end">
               <div
                 style={{ paddingLeft: 20, paddingRight: 20 }}
-                onClick={e => {
+                onClick={(e) => {
                   e.stopPropagation();
                   setShow(!show);
                 }}

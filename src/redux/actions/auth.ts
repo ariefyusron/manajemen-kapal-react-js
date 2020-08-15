@@ -32,7 +32,7 @@ export const postLogin = (form: {
     const res = await API.postLogin(form);
     dispatch({
       type: POST_LOGIN_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("is_admin", res.data.is_admin);
@@ -41,7 +41,7 @@ export const postLogin = (form: {
     if (err.response) {
       dispatch({
         type: POST_LOGIN_ERROR,
-        payload: { data: err.response.data.message }
+        payload: { data: err.response.data.message },
       });
     } else {
       dispatch({ type: POST_LOGIN_ERROR });
@@ -63,7 +63,7 @@ export const postRegister = (
     const res = await API.postRegister(form);
     dispatch({
       type: POST_REGISTER_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
     if (!fromAdmin) {
       dispatch(postLogin(form));
@@ -74,7 +74,7 @@ export const postRegister = (
     if (err.response) {
       dispatch({
         type: POST_REGISTER_ERROR,
-        payload: { data: err.response.data.message }
+        payload: { data: err.response.data.message },
       });
     } else {
       dispatch({ type: POST_REGISTER_ERROR });
@@ -95,13 +95,13 @@ export const getAllUser = () => async (dispatch: Dispatch) => {
     const res = await API.getAllUser();
     dispatch({
       type: GET_ALL_USER_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: GET_ALL_USER_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: GET_ALL_USER_ERROR });
@@ -115,13 +115,13 @@ export const deleteUser = (id: string) => async (dispatch: Dispatch) => {
     await API.deleteUser(id);
     dispatch({
       type: DELETE_USER_SUCCESS,
-      payload: { id }
+      payload: { id },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: DELETE_USER_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: DELETE_USER_ERROR });

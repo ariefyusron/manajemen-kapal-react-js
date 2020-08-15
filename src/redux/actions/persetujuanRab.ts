@@ -19,13 +19,13 @@ export const getPersetujuanRab = (idKapal: string) => async (
     const res = await API.getPersetujuanRab(idKapal);
     dispatch({
       type: GET_PERSETUJUAN_RAB_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: GET_PERSETUJUAN_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: GET_PERSETUJUAN_RAB_ERROR });
@@ -44,13 +44,13 @@ export const patchPersetujuanRab = (
     cb && cb();
     dispatch({
       type: PATCH_PERSETUJUAN_RAB_SUCCESS,
-      payload: { data: res.data }
+      payload: { data: res.data },
     });
   } catch (err) {
     if (err.response) {
       dispatch({
         type: PATCH_PERSETUJUAN_RAB_ERROR,
-        payload: { data: err.response.data }
+        payload: { data: err.response.data },
       });
     } else {
       dispatch({ type: PATCH_PERSETUJUAN_RAB_ERROR });

@@ -6,7 +6,7 @@ import {
   deletePekerjaanStandarTarif,
   deleteStandarTarif,
   getPekerjaanStandarTarif,
-  getStandarTarif
+  getStandarTarif,
 } from "../../redux/actions";
 import { documentTitle, maskedMoney } from "../../utils";
 import { Col, Container, Row } from "../../components";
@@ -21,13 +21,13 @@ const Component = () => {
   const [modalEditPekerjaan, setModalEditPekerjaan] = useState({
     visible: false,
     index: 0,
-    id: 0
+    id: 0,
   });
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState({
     visible: false,
     index: 0,
-    id: 0
+    id: 0,
   });
   const standarTarifState = useSelector(
     (state: Reducers) => state.standarTarif
@@ -57,7 +57,7 @@ const Component = () => {
                         setModalEditPekerjaan({
                           visible: true,
                           index: i,
-                          id: e.id
+                          id: e.id,
                         })
                       }
                     >
@@ -104,7 +104,7 @@ const Component = () => {
                 <tbody>
                   {standarTarifState.list
                     .filter(
-                      resFilter =>
+                      (resFilter) =>
                         resFilter.id_pekerjaan.toString() === e.id.toString()
                     )
                     .map((item, index) => (
@@ -129,7 +129,7 @@ const Component = () => {
                                 setModalEdit({
                                   visible: true,
                                   index,
-                                  id: item.id
+                                  id: item.id,
                                 })
                               }
                             >
@@ -175,7 +175,7 @@ const Component = () => {
                 <select
                   className="form-control"
                   defaultValue={selectPekerjaan}
-                  onChange={e => setSelectPekerjaan(e.target.value)}
+                  onChange={(e) => setSelectPekerjaan(e.target.value)}
                 >
                   <option value="">-- pilih --</option>
                   {standarTarifState.listPekerjaan.map((item, index) => (

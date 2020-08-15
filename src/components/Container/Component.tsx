@@ -17,7 +17,7 @@ const Component = ({ children, className, isLoading }: Props) => (
 
 Component.defaultProps = {
   className: "",
-  isLoading: false
+  isLoading: false,
 };
 
 export default memo(Component);
