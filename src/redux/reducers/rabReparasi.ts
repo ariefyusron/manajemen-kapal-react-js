@@ -22,7 +22,10 @@ import {
   POST_PEKERJAAN_RAB_SUCCESS,
   POST_RAB_ERROR,
   POST_RAB_PENDING,
-  POST_RAB_SUCCESS
+  POST_RAB_SUCCESS,
+  SAVE_RAB_REPARASI_ERROR,
+  SAVE_RAB_REPARASI_PENDING,
+  SAVE_RAB_REPARASI_SUCCESS
 } from "../actions";
 import { Action, RabReparasiState } from "../types";
 
@@ -127,6 +130,21 @@ export default (state = initialState, { type, payload }: Action) => {
         )
       };
     case DELETE_PEKERJAAN_RAB_ERROR:
+      return { ...state, isLoading: false };
+
+    // save rab reparasi
+    case SAVE_RAB_REPARASI_PENDING:
+      return { ...state, isLoading: true };
+    case SAVE_RAB_REPARASI_SUCCESS:
+      result = [...state.listPekerjaan];
+      result[0].is_save = !payload.data;
+
+      return {
+        ...state,
+        isLoading: false,
+        listPekerjaan: result
+      };
+    case SAVE_RAB_REPARASI_ERROR:
       return { ...state, isLoading: false };
 
     default:

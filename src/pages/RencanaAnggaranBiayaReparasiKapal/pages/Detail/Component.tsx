@@ -8,7 +8,8 @@ import {
   deleteRab,
   getAllPekerjaanRab,
   getAllRab,
-  getKapal
+  getKapal,
+  saveRabReparasi
 } from "../../../../redux/actions";
 import { maskedMoney } from "../../../../utils";
 import { Col, Container, Row } from "../../../../components";
@@ -87,6 +88,13 @@ const Component = () => {
       (rabReparasiState.listPekerjaan.length > 0 &&
         !rabReparasiState.listPekerjaan[0].is_save),
     [rabReparasiState.listPekerjaan]
+  );
+
+  const _saveRab = useCallback(
+    (edit = false) => {
+      dispatch(saveRabReparasi(id!, edit));
+    },
+    [dispatch, id]
   );
 
   const _renderTable = useCallback(
@@ -467,7 +475,7 @@ const Component = () => {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={_exportPdf}
+                onClick={_saveRab}
               >
                 Save
               </button>
@@ -475,7 +483,7 @@ const Component = () => {
               <button
                 type="button"
                 className="btn btn-success"
-                onClick={_exportPdf}
+                onClick={() => _saveRab(true)}
               >
                 Edit
               </button>

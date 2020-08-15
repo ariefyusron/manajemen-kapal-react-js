@@ -41,6 +41,11 @@ export const PATCH_PEKERJAAN_RAB_PENDING = "PATCH_PEKERJAAN_RAB_PENDING";
 export const PATCH_PEKERJAAN_RAB_SUCCESS = "PATCH_PEKERJAAN_RAB_SUCCESS";
 export const PATCH_PEKERJAAN_RAB_ERROR = "PATCH_PEKERJAAN_RAB_ERROR";
 
+// save rab reparasi
+export const SAVE_RAB_REPARASI_PENDING = "SAVE_RAB_REPARASI_PENDING";
+export const SAVE_RAB_REPARASI_SUCCESS = "SAVE_RAB_REPARASI_SUCCESS";
+export const SAVE_RAB_REPARASI_ERROR = "SAVE_RAB_REPARASI_ERROR";
+
 export const getAllRab = (idKapal: string) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: GET_ALL_RAB_PENDING });
@@ -223,6 +228,25 @@ export const patchPekerjaanRab = (
       });
     } else {
       dispatch({ type: PATCH_PEKERJAAN_RAB_ERROR });
+    }
+  }
+};
+
+export const saveRabReparasi = (idKapal: string, edit: boolean) => async (
+  dispatch: Dispatch
+) => {
+  try {
+    dispatch({ type: SAVE_RAB_REPARASI_PENDING });
+    await API.saveRabReparasi(idKapal, edit);
+    dispatch({ type: SAVE_RAB_REPARASI_SUCCESS, payload: { data: edit } });
+  } catch (err) {
+    if (err.response) {
+      dispatch({
+        type: SAVE_RAB_REPARASI_ERROR,
+        payload: { data: err.response.data }
+      });
+    } else {
+      dispatch({ type: SAVE_RAB_REPARASI_ERROR });
     }
   }
 };

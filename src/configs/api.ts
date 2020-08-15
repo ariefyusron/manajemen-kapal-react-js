@@ -153,7 +153,16 @@ const api = {
   patchPersetujuanRab: (form: any, idKapal: string) =>
     host.patch(`persetujuan-rab/${idKapal}`, form, {
       headers: { Authorization: token }
-    })
+    }),
+
+  saveRabReparasi: (idKapal: string, edit: boolean) =>
+    host.post(
+      `history/${edit ? `is-edit/${idKapal}` : idKapal}`,
+      {},
+      {
+        headers: { Authorization: token }
+      }
+    )
 };
 
 export default api;
