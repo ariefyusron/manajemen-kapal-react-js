@@ -24,7 +24,7 @@ const App = () => {
         <ListHistoy />
       </Route>
       <Route path={`${match.path}/history/detail/:id`} exact>
-        <Detail />
+        <Detail type="history" />
       </Route>
     </Switch>
   );

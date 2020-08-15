@@ -51,10 +51,15 @@ export const GET_HISTORY_PENDING = "GET_HISTORY_PENDING";
 export const GET_HISTORY_SUCCESS = "GET_HISTORY_SUCCESS";
 export const GET_HISTORY_ERROR = "GET_HISTORY_ERROR";
 
-export const getAllRab = (idKapal: string) => async (dispatch: Dispatch) => {
+export const getAllRab = (id: string, type: "default" | "history") => async (
+  dispatch: Dispatch
+) => {
   try {
     dispatch({ type: GET_ALL_RAB_PENDING });
-    const res = await API.getAllRab(idKapal);
+    const res =
+      type === "default"
+        ? await API.getAllRab(id)
+        : await API.getHistoryRab(id);
     dispatch({
       type: GET_ALL_RAB_SUCCESS,
       payload: { data: res.data },
@@ -142,12 +147,16 @@ export const patchRab = (
   }
 };
 
-export const getAllPekerjaanRab = (idKapal: string) => async (
-  dispatch: Dispatch
-) => {
+export const getAllPekerjaanRab = (
+  id: string,
+  type: "default" | "history"
+) => async (dispatch: Dispatch) => {
   try {
     dispatch({ type: GET_ALL_PEKERJAAN_RAB_PENDING });
-    const res = await API.getAllPekerjaanRab(idKapal);
+    const res =
+      type === "default"
+        ? await API.getAllPekerjaanRab(id)
+        : await API.getHistoryPekerjaan(id);
     dispatch({
       type: GET_ALL_PEKERJAAN_RAB_SUCCESS,
       payload: { data: res.data },

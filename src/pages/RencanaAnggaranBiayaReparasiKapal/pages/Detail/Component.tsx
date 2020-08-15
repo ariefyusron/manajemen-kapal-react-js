@@ -11,14 +11,22 @@ import {
   getKapal,
   saveRabReparasi,
 } from "../../../../redux/actions";
-import { maskedMoney } from "../../../../utils";
+import { maskedMoney, queryString } from "../../../../utils";
 import { Col, Container, Row } from "../../../../components";
 import { Form, FormPekerjaan } from "./components";
 
-const Component = () => {
+interface Props {
+  type: "default" | "history";
+}
+
+const Component = ({ type }: Props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
+
+  const params = history.location.search
+    ? queryString(history.location.search)
+    : { id_history: "" };
 
   const [selectPekerjaan, setSelectPekerjaan] = useState("");
   const [modalEditPekerjaan, setModalEditPekerjaan] = useState({
@@ -42,10 +50,12 @@ const Component = () => {
   );
 
   useEffect(() => {
-    dispatch(getAllPekerjaanRab(id!));
-    dispatch(getAllRab(id!));
+    dispatch(
+      getAllPekerjaanRab(type === "default" ? id! : params.id_history, type)
+    );
+    dispatch(getAllRab(type === "default" ? id! : params.id_history, type));
     dispatch(getKapal(id!));
-  }, [dispatch, id]);
+  }, [dispatch, id, type, params.id_history]);
 
   const _sum = useCallback(
     (item: any[], key: string) =>
@@ -84,14 +94,15 @@ const Component = () => {
 
   const _isEditable = useCallback(
     () =>
-      rabReparasiState.listPekerjaan.length === 0 ||
-      (rabReparasiState.listPekerjaan.length > 0 &&
-        !rabReparasiState.listPekerjaan[0].is_save),
-    [rabReparasiState.listPekerjaan]
+      type === "default" &&
+      (rabReparasiState.listPekerjaan.length === 0 ||
+        (rabReparasiState.listPekerjaan.length > 0 &&
+          !rabReparasiState.listPekerjaan[0].is_save)),
+    [rabReparasiState.listPekerjaan, type]
   );
 
   const _saveRab = useCallback(
-    (edit = false) => {
+    (edit: boolean) => {
       dispatch(saveRabReparasi(id!, edit));
     },
     [dispatch, id]
@@ -161,9 +172,13 @@ const Component = () => {
                 </thead>
                 <tbody>
                   {rabReparasiState.list
-                    .filter(
-                      (resFilter) =>
-                        resFilter.id_pekerjaan.toString() === e.id.toString()
+                    .filter((resFilter) =>
+                      type === "default"
+                        ? resFilter.id_pekerjaan &&
+                          resFilter.id_pekerjaan.toString() === e.id.toString()
+                        : resFilter.id_history_pekerjaan &&
+                          resFilter.id_history_pekerjaan.toString() ===
+                            (e.id_pekerjaan && e.id_pekerjaan.toString())
                     )
                     .map((item, index) => (
                       <tr key={index}>
@@ -211,7 +226,7 @@ const Component = () => {
         </Col>
       </Row>
     ),
-    [dispatch, id, rabReparasiState.list, _isEditable]
+    [dispatch, id, rabReparasiState.list, _isEditable, type]
   );
 
   return (
@@ -471,23 +486,24 @@ const Component = () => {
       {rabReparasiState.listPekerjaan.length > 0 && (
         <Row style={{ marginBottom: 60 }} justifyContent="end">
           <Col size={1}>
-            {_isEditable() ? (
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={_saveRab}
-              >
-                Save
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-success"
-                onClick={() => _saveRab(true)}
-              >
-                Edit
-              </button>
-            )}
+            {type === "default" &&
+              (_isEditable() ? (
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => _saveRab(false)}
+                >
+                  Save
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  onClick={() => _saveRab(true)}
+                >
+                  Edit
+                </button>
+              ))}
           </Col>
           <Col size={2}>
             <button type="button" className="btn btn-dark" onClick={_exportPdf}>
@@ -532,6 +548,10 @@ const Component = () => {
       />
     </Container>
   );
+};
+
+Component.defaultProps = {
+  type: "default",
 };
 
 export default Component;

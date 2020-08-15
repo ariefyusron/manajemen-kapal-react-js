@@ -28,7 +28,7 @@ const Component = () => {
   );
 
   useEffect(() => {
-    dispatch(getAllRab(id!));
+    dispatch(getAllRab(id!, "history"));
     dispatch(getKapal(id!));
     dispatch(getPersetujuanRab(id!));
   }, [dispatch, id]);
