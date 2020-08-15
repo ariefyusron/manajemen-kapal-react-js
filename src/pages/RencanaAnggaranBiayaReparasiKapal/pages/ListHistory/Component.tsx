@@ -22,8 +22,18 @@ const Component = () => {
   return (
     <Container isLoading={rabReparasiState.isLoading}>
       <Row style={{ marginBottom: 40, marginTop: 10 }}>
-        <Col>
+        <Col size={11}>
           <h1>History</h1>
+        </Col>
+        <Col size={1}>
+          <button
+            type="button"
+            className="btn btn-outline-primary my-2 my-sm-0"
+            onClick={() => history.goBack()}
+            style={{ textDecoration: "underline" }}
+          >
+            Back
+          </button>
         </Col>
       </Row>
 
@@ -42,7 +52,11 @@ const Component = () => {
                 <tr
                   key={index}
                   onClick={() =>
-                    history.push(`${history.location.pathname}/${item.id}`)
+                    history.push(
+                      `/dashboard/rab-reparasi-kapal/history/detail/${id!}?id_history=${
+                        item.id
+                      }`
+                    )
                   }
                 >
                   <th scope="row">{`${index + 1}.`}</th>

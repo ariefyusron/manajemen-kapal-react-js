@@ -4,7 +4,6 @@ import { shallowEqual, useDispatch, useSelector } from "react-redux";
 
 import { Reducers } from "../../../../redux/types";
 import {
-  getAllPekerjaanRab,
   getAllRab,
   getKapal,
   getPersetujuanRab,
@@ -29,7 +28,6 @@ const Component = () => {
   );
 
   useEffect(() => {
-    dispatch(getAllPekerjaanRab(id!));
     dispatch(getAllRab(id!));
     dispatch(getKapal(id!));
     dispatch(getPersetujuanRab(id!));

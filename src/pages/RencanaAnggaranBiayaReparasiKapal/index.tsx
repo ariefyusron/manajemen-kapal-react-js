@@ -23,6 +23,9 @@ const App = () => {
       <Route path={`${match.path}/history/:id`} exact>
         <ListHistoy />
       </Route>
+      <Route path={`${match.path}/history/detail/:id`} exact>
+        <Detail />
+      </Route>
     </Switch>
   );
 };
